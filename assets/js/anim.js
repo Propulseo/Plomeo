@@ -34,4 +34,45 @@
     revIO.unobserve(el);
   }), { threshold: 0.18 });
   document.querySelectorAll('[data-reveal]').forEach(el => revIO.observe(el));
+
+  /* ---------- Smooth-scroll Lenis (desktop) ---------- */
+  let lenis = null;
+  if (fine && window.Lenis) {
+    root.style.scrollBehavior = 'auto';
+    lenis = new Lenis({ duration: 1.1, smoothWheel: true });
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', ev => {
+        const t = document.querySelector(a.getAttribute('href'));
+        if (!t) return;
+        ev.preventDefault();
+        lenis.scrollTo(t, { offset: -8 });
+      });
+    });
+  }
+
+  /* ---------- Parallaxe scroll (positions en cache, pas de feedback) ---------- */
+  const para = [...document.querySelectorAll('[data-parallax]')].map(el => ({
+    el, f: parseFloat(el.dataset.parallax) || 0, top: 0, h: 0
+  }));
+  function measurePara() {
+    para.forEach(p => { p.el.style.transform = ''; });
+    para.forEach(p => { const r = p.el.getBoundingClientRect(); p.top = r.top + scrollY; p.h = r.height; });
+  }
+  measurePara();
+  addEventListener('resize', measurePara, { passive: true });
+
+  /* ---------- Boucle rAF unique : Lenis + progression + parallaxe ---------- */
+  const bar = document.querySelector('.scrollbar');
+  function frame(time) {
+    if (lenis) lenis.raf(time);
+    const max = root.scrollHeight - innerHeight;
+    if (bar) bar.style.setProperty('--sp', (max > 0 ? scrollY / max : 0).toFixed(4));
+    const mid = scrollY + innerHeight / 2;
+    para.forEach(p => {
+      const off = (p.top + p.h / 2) - mid;
+      p.el.style.transform = `translate3d(0, ${(-off * p.f).toFixed(1)}px, 0)`;
+    });
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
 })();
