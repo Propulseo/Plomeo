@@ -1,0 +1,12 @@
+/* ===== Accessibilité : mouvement réduit ===== */
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+  .intro{display:none!important}
+  .hero__video{display:none}
+  .hero__title .ltr,.hero__eyebrow,.hero__accent,.hero__lead,.hero__cta{opacity:1!important;transform:none!important}
+  .sb__shutter{display:none!important}
+  .about__photo{clip-path:none!important}
+  .about__text>*,.about__media::before,.about__badge,.about__caption{opacity:1!important;transform:none!important}
+  .vmap-out{stroke-dashoffset:0!important}
+  .vmap-ping{display:none}
+}

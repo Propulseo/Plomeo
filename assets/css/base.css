@@ -1,0 +1,12 @@
+/* ============ BASE — tokens, reset, typographie ============ */
+:root{
+  --blue:#3232FF; --navy:#00006D; --orange:#FF5A1E; --sky:#A5E2EA; --cream:#FFE191;
+  --bg:#f4f4f7; --ink:#1a1a1a; --muted:#6b6b72; --border:rgba(0,0,40,.1);
+  --font-display:'Gabarito',sans-serif; --font-body:'Albert Sans',sans-serif; --font-serif:'Libre Baskerville',serif;
+  --ease:cubic-bezier(0.16,1,0.3,1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-body);color:var(--ink);background:var(--bg);line-height:1.6;overflow-x:hidden}
+h1,h2,h3{font-family:var(--font-display);font-weight:800;line-height:1.05}
+img{display:block;max-width:100%}

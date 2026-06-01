@@ -1,0 +1,29 @@
+/* ============ INTRO (volets de couleur) ============ */
+.intro{position:fixed;inset:0;z-index:9999;background:#fff;overflow:hidden}
+.intro.done{animation:introOut .6s var(--ease) forwards}
+@keyframes introOut{to{opacity:0;visibility:hidden}}
+.ibar{position:absolute;top:0;height:100%;width:25%;transform:scaleY(0);transform-origin:top}
+.ib1{left:0;background:var(--blue)}.ib2{left:25%;background:var(--orange)}.ib3{left:50%;background:var(--sky)}.ib4{left:75%;background:var(--navy)}
+.intro .ib1{animation:ibar .5s .15s cubic-bezier(.7,0,.3,1) forwards,ibarOut .65s 2.4s cubic-bezier(.7,0,.3,1) forwards}
+.intro .ib2{animation:ibar .5s .32s cubic-bezier(.7,0,.3,1) forwards,ibarOut .65s 2.52s cubic-bezier(.7,0,.3,1) forwards}
+.intro .ib3{animation:ibar .5s .49s cubic-bezier(.7,0,.3,1) forwards,ibarOut .65s 2.64s cubic-bezier(.7,0,.3,1) forwards}
+.intro .ib4{animation:ibar .5s .66s cubic-bezier(.7,0,.3,1) forwards,ibarOut .65s 2.76s cubic-bezier(.7,0,.3,1) forwards}
+@keyframes ibar{to{transform:scaleY(1)}}
+@keyframes ibarOut{to{transform:scaleY(0);transform-origin:bottom}}
+.iic{position:absolute;top:50%;transform:translateY(-50%) scale(.5);width:140px;margin-left:-70px;opacity:0;display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center}
+.iic img{width:78px;height:78px;filter:drop-shadow(0 3px 10px rgba(0,0,40,.3))}
+.iic__l{font-family:var(--font-display);font-weight:700;color:#fff;font-size:15px;letter-spacing:.02em}
+.ii3 .iic__l{color:var(--navy)}
+.ii1{left:12.5%}.ii2{left:37.5%}.ii3{left:62.5%}.ii4{left:87.5%}
+@media(max-width:600px){.iic{width:90px;margin-left:-45px}.iic img{width:54px;height:54px}.iic__l{font-size:11px}}
+.intro .ii1{animation:iicio 2.1s .55s forwards}.intro .ii2{animation:iicio 2.1s .72s forwards}
+.intro .ii3{animation:iicio 2.1s .89s forwards}.intro .ii4{animation:iicio 2.1s 1.06s forwards}
+@keyframes iicio{0%{opacity:0;transform:translateY(-50%) scale(.5)}20%{opacity:1;transform:translateY(-50%) scale(1)}78%{opacity:1;transform:translateY(-50%) scale(1)}100%{opacity:0;transform:translateY(-50%) scale(.7)}}
+.intro__logo{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0}
+.intro__logo img{width:min(46%,420px)}
+.intro .intro__logo{animation:ilogo 1.5s 2.7s forwards}
+@keyframes ilogo{0%{opacity:0;transform:scale(.82);filter:blur(8px)}45%{opacity:1;transform:scale(1.04);filter:blur(0)}65%{transform:scale(1)}100%{opacity:1;transform:scale(1)}}
+.intro__skip{position:absolute;bottom:24px;right:24px;z-index:2;background:rgba(0,0,109,.08);color:var(--navy);border:none;
+  font-family:var(--font-display);font-weight:600;font-size:13px;padding:9px 18px;border-radius:30px;cursor:pointer;transition:.2s}
+.intro__skip:hover{background:rgba(0,0,109,.16)}
+

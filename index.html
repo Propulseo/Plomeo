@@ -1,766 +1,499 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Ploméo - Artisanat premium en plomberie, chauffage et climatisation. Excellence, précision et savoir-faire pour vos projets haut de gamme en Var (83).">
-    <meta name="keywords" content="plomberie premium Var, chauffage haut de gamme Toulon, climatisation luxe PACA, artisan qualifié 83, plombier Fréjus, Ayoub Berkane">
-    <meta name="author" content="Ploméo">
-    <meta name="robots" content="index, follow">
-    <meta name="theme-color" content="#0a0f1a">
-
-    <title>Ploméo | Artisanat Premium — Plomberie, Chauffage & Climatisation</title>
-
-    <!-- Open Graph -->
-    <meta property="og:title" content="Ploméo | Excellence en Plomberie, Chauffage & Climatisation">
-    <meta property="og:description" content="Artisanat premium pour vos projets haut de gamme. Qualité, expertise et exigence absolue.">
-    <meta property="og:type" content="website">
-    <meta property="og:locale" content="fr_FR">
-
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@300;400;500;600;700&family=Gabarito:wght@400;500;600;700;800;900&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="animations.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Ploméo, artisan plombier dans le Var (83) : plomberie, chauffage, climatisation et piscine, du dépannage à la construction neuve. Travail soigné, résultat fiable.">
+<meta name="keywords" content="plombier Var 83, plomberie chauffage climatisation piscine Var, dépannage plomberie Var, rénovation salle de bain Var, artisan plombier Toulon Fréjus, Ploméo, Ayoub Berkane">
+<meta name="author" content="Ploméo">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#3232FF">
+<title>Ploméo | Plomberie, chauffage, climatisation & piscine dans le Var (83)</title>
+<meta property="og:title" content="Ploméo | Le plombier qu'il vous faut dans le Var">
+<meta property="og:description" content="Plomberie, chauffage, climatisation et piscine dans le Var : du dépannage à la construction neuve. Artisan local, finitions soignées.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:image" content="assets/photos/sdb-premium.jpg">
+<link rel="icon" type="image/png" href="assets/logos/bleu.png">
+<link rel="apple-touch-icon" href="assets/logos/bleu.png">
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"Plumber",
+  "name":"Ploméo",
+  "image":"assets/logos/bleu.png",
+  "description":"Artisan plombier dans le Var (83) : plomberie, chauffage, climatisation et piscine, du dépannage à la construction neuve.",
+  "founder":"Ayoub Berkane",
+  "foundingDate":"2023",
+  "telephone":"+33695165889",
+  "email":"contact@plomeo.fr",
+  "areaServed":{"@type":"AdministrativeArea","name":"Var (83)"},
+  "address":{"@type":"PostalAddress","addressRegion":"Var","addressCountry":"FR"},
+  "knowsAbout":["Plomberie","Chauffage","Climatisation","Piscine"],
+  "sameAs":["https://www.instagram.com/sarl_plomeo"],
+  "aggregateRating":{"@type":"AggregateRating","ratingValue":"4.9","reviewCount":"19"}
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@400;500;600;700&family=Gabarito:wght@500;600;700;800;900&family=Libre+Baskerville:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/base.css">
+<link rel="stylesheet" href="/assets/css/intro.css">
+<link rel="stylesheet" href="/assets/css/header.css">
+<link rel="stylesheet" href="/assets/css/hero.css">
+<link rel="stylesheet" href="/assets/css/reassurance.css">
+<link rel="stylesheet" href="/assets/css/pillars.css">
+<link rel="stylesheet" href="/assets/css/about.css">
+<link rel="stylesheet" href="/assets/css/realisations.css">
+<link rel="stylesheet" href="/assets/css/conseils.css">
+<link rel="stylesheet" href="/assets/css/contact.css">
+<link rel="stylesheet" href="/assets/css/footer.css">
+<link rel="stylesheet" href="/assets/css/process.css">
+<link rel="stylesheet" href="/assets/css/zone.css">
+<link rel="stylesheet" href="/assets/css/faq.css">
+<link rel="stylesheet" href="/assets/css/a11y.css">
 </head>
 <body>
-    <!-- Noise Overlay -->
-    <div class="noise-overlay"></div>
 
-    <!-- Custom Cursor -->
-    <div class="cursor" id="cursor">
-        <div class="cursor__dot"></div>
-        <div class="cursor__ring"></div>
+<!-- INTRO -->
+<div class="intro" id="intro">
+  <span class="ibar ib1"></span><span class="ibar ib2"></span><span class="ibar ib3"></span><span class="ibar ib4"></span>
+  <span class="iic ii1"><img src="Elements/Pictogramme%20services/plomberie-icone.svg" alt=""><span class="iic__l">Plomberie</span></span>
+  <span class="iic ii2"><img src="Elements/Pictogramme%20services/chauffage-icone.svg" alt=""><span class="iic__l">Chauffage</span></span>
+  <span class="iic ii3"><img src="Elements/Pictogramme%20services/climatisation-icone.svg" alt=""><span class="iic__l">Climatisation</span></span>
+  <span class="iic ii4"><img src="Elements/Pictogramme%20services/piscine-icone.svg" alt=""><span class="iic__l">Piscine</span></span>
+  <div class="intro__logo"><img src="assets/logos/bleu.png" alt="Ploméo"></div>
+  <button class="intro__skip" id="introSkip">Passer ›</button>
+</div>
+
+
+<!-- HEADER (repris de la LP de base) -->
+<header class="lhead" id="lhead">
+  <a href="#hero" class="lhead__logo"><img src="Elements/Logo/bleu_blanc-removebg-preview.png" alt="Ploméo"></a>
+  <nav class="lhead__nav">
+    <a href="#hero" class="active">Accueil</a>
+    <a href="#about">À propos</a>
+    <a href="#pil">Prestations</a>
+    <a href="#work">Réalisations</a>
+    <a href="#blog">Conseils</a>
+  </nav>
+  <div class="lhead__actions">
+    <a href="tel:+33695165889" class="lhead__tel">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      06 95 16 58 89
+    </a>
+    <a href="#contact" class="lhead__cta">Contact
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+    </a>
+    <button class="lhead__burger" id="burger" aria-label="Ouvrir le menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<!-- Menu mobile -->
+<div class="mnav" id="mnav">
+  <nav class="mnav__links">
+    <a href="#hero">Accueil</a>
+    <a href="#about">À propos</a>
+    <a href="#pil">Prestations</a>
+    <a href="#work">Réalisations</a>
+    <a href="#blog">Conseils</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <div class="mnav__foot">
+    <a href="tel:+33695165889">06 95 16 58 89</a>
+    <a href="mailto:contact@plomeo.fr">contact@plomeo.fr</a>
+  </div>
+</div>
+
+<!-- Barre d'action mobile -->
+<div class="mobilecta">
+  <a href="tel:+33695165889" class="mobilecta__btn mobilecta__call">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+    Appeler
+  </a>
+  <a href="#contact" class="mobilecta__btn mobilecta__devis">Demander un devis</a>
+</div>
+
+<!-- HERO -->
+<section class="hero play" id="hero" data-variant="cinetique">
+  <video class="hero__video" autoplay muted loop playsinline preload="auto">
+    <source src="assets/video/hero.mp4" type="video/mp4">
+  </video>
+  <div class="hero__veil"></div>
+  <div class="hero__map" aria-hidden="true">
+    <svg viewBox="0 0 1000 845" role="img" aria-label="Zone d'intervention de Ploméo dans le Var (83)">
+      <path class="vmap-fill" d="M76.4 88.5 L98.1 55.1 L131.2 63 L151.2 93.2 L176.8 89.3 L195.4 72.6 L199 57.8 L212.5 61 L223.6 72.5 L235.2 94.1 L257.9 100 L273.2 128.2 L286.3 149.2 L297.5 121.3 L329.8 106.5 L349.8 75.9 L370.8 76 L390 68 L416.8 32.9 L438.9 7.8 L468.2 6.8 L475 26.8 L524.6 64.5 L560.4 68.8 L577.9 65.2 L593.6 16.4 L612.7 9.7 L636.5 8.7 L667.9 6.5 L679.9 0.4 L696.3 26.4 L718.2 15.4 L738.4 3.5 L760.7 16.4 L768.4 27.8 L769.6 40.5 L784.7 62.7 L803.6 52.6 L832.3 73.9 L861.3 83.2 L870 102.4 L875.3 122.1 L864.7 151.1 L890.6 180.4 L908.9 191.8 L925.7 208.1 L964.2 214.8 L979.9 223.8 L972.4 242.6 L975.9 260.7 L957.6 292.4 L970.8 301.3 L961.3 327.8 L989.8 349.8 L992.3 361.8 L987.7 386.8 L968.8 399.3 L953.7 409.7 L940 405.4 L938.4 426 L916.3 419.6 L887.3 429.4 L856.7 415.8 L840.2 441.2 L828.3 472.9 L824.9 498 L792.8 510.5 L778.3 536 L755.5 550.3 L731 564.9 L727.9 584.3 L757.2 583.3 L787.4 583.8 L793.9 571.4 L814.9 583.2 L798.6 605.8 L788.6 612.8 L799.1 656.8 L771.7 671.3 L757.3 691.1 L739.2 672.5 L707.2 666 L687.2 683.1 L678.4 691.1 L655.5 707.4 L632.5 699.5 L617 712.5 L586.3 708.7 L566.9 720 L550.8 740.1 L557.5 759.1 L542.6 774.2 L523.9 766.5 L511.3 752.5 L494.8 746.2 L476.9 738.8 L432.1 743.8 L413.2 752.3 L394.3 773.9 L386.6 819.8 L385 840.2 L374.1 830.2 L359.3 831.6 L341.1 829.6 L360.6 827 L372.8 805.1 L358.5 779.1 L316.9 781.2 L286.1 784.9 L287.6 767.1 L250.6 753.3 L223.3 753.2 L217.9 741.5 L182.4 750.7 L191.8 757.2 L186.9 781.2 L204.4 776.8 L220.5 778.1 L225.3 797.7 L213.4 792 L189.8 785.7 L164.2 804.7 L134.4 815 L108.1 795.1 L121 769.8 L118.2 744.6 L103.9 743.9 L92.1 735.3 L90.2 719.6 L54.7 722.1 L30.5 714.5 L30.4 688.2 L22.4 675.2 L15.3 667.3 L17.2 632.4 L38 608.9 L50.8 593 L83.7 565.7 L63.8 544.4 L27.5 532.1 L26.5 516.4 L30.2 497.3 L30.2 476.6 L21 439.2 L53.6 428.7 L94.2 428.6 L103.6 416.4 L75 401.3 L46.2 355.1 L35.9 340.2 L44.5 317.5 L48.4 289.4 L41.8 271.3 L10.4 260.8 L0 247.1 L21.1 221.5 L34.6 177.8 L52.6 169.3 L88.2 157.9 L113.6 145.9 L107.1 123.1 L101.3 100.5 L76.4 88.5 Z"/>
+      <path class="vmap-out" pathLength="1" d="M76.4 88.5 L98.1 55.1 L131.2 63 L151.2 93.2 L176.8 89.3 L195.4 72.6 L199 57.8 L212.5 61 L223.6 72.5 L235.2 94.1 L257.9 100 L273.2 128.2 L286.3 149.2 L297.5 121.3 L329.8 106.5 L349.8 75.9 L370.8 76 L390 68 L416.8 32.9 L438.9 7.8 L468.2 6.8 L475 26.8 L524.6 64.5 L560.4 68.8 L577.9 65.2 L593.6 16.4 L612.7 9.7 L636.5 8.7 L667.9 6.5 L679.9 0.4 L696.3 26.4 L718.2 15.4 L738.4 3.5 L760.7 16.4 L768.4 27.8 L769.6 40.5 L784.7 62.7 L803.6 52.6 L832.3 73.9 L861.3 83.2 L870 102.4 L875.3 122.1 L864.7 151.1 L890.6 180.4 L908.9 191.8 L925.7 208.1 L964.2 214.8 L979.9 223.8 L972.4 242.6 L975.9 260.7 L957.6 292.4 L970.8 301.3 L961.3 327.8 L989.8 349.8 L992.3 361.8 L987.7 386.8 L968.8 399.3 L953.7 409.7 L940 405.4 L938.4 426 L916.3 419.6 L887.3 429.4 L856.7 415.8 L840.2 441.2 L828.3 472.9 L824.9 498 L792.8 510.5 L778.3 536 L755.5 550.3 L731 564.9 L727.9 584.3 L757.2 583.3 L787.4 583.8 L793.9 571.4 L814.9 583.2 L798.6 605.8 L788.6 612.8 L799.1 656.8 L771.7 671.3 L757.3 691.1 L739.2 672.5 L707.2 666 L687.2 683.1 L678.4 691.1 L655.5 707.4 L632.5 699.5 L617 712.5 L586.3 708.7 L566.9 720 L550.8 740.1 L557.5 759.1 L542.6 774.2 L523.9 766.5 L511.3 752.5 L494.8 746.2 L476.9 738.8 L432.1 743.8 L413.2 752.3 L394.3 773.9 L386.6 819.8 L385 840.2 L374.1 830.2 L359.3 831.6 L341.1 829.6 L360.6 827 L372.8 805.1 L358.5 779.1 L316.9 781.2 L286.1 784.9 L287.6 767.1 L250.6 753.3 L223.3 753.2 L217.9 741.5 L182.4 750.7 L191.8 757.2 L186.9 781.2 L204.4 776.8 L220.5 778.1 L225.3 797.7 L213.4 792 L189.8 785.7 L164.2 804.7 L134.4 815 L108.1 795.1 L121 769.8 L118.2 744.6 L103.9 743.9 L92.1 735.3 L90.2 719.6 L54.7 722.1 L30.5 714.5 L30.4 688.2 L22.4 675.2 L15.3 667.3 L17.2 632.4 L38 608.9 L50.8 593 L83.7 565.7 L63.8 544.4 L27.5 532.1 L26.5 516.4 L30.2 497.3 L30.2 476.6 L21 439.2 L53.6 428.7 L94.2 428.6 L103.6 416.4 L75 401.3 L46.2 355.1 L35.9 340.2 L44.5 317.5 L48.4 289.4 L41.8 271.3 L10.4 260.8 L0 247.1 L21.1 221.5 L34.6 177.8 L52.6 169.3 L88.2 157.9 L113.6 145.9 L107.1 123.1 L101.3 100.5 L76.4 88.5 Z"/>
+      <g>
+        <circle class="vmap-ping" cx="212.9" cy="735.4" r="9"/><circle class="vmap-dotMain" cx="212.9" cy="735.4" r="8"/><text class="vmap-label" x="228.9" y="741.4">Toulon</text>
+        <circle class="vmap-dot" cx="177.7" cy="761.5" r="6.5"/><text class="vmap-label" x="163.7" y="783.5" text-anchor="end">La Seyne</text>
+        <circle class="vmap-ping" cx="369.9" cy="739.3" r="9"/><circle class="vmap-dot" cx="369.9" cy="739.3" r="6.5"/><text class="vmap-label" x="385.9" y="757.3">Hyères</text>
+        <circle class="vmap-dot" cx="317.7" cy="432.3" r="6.5"/><text class="vmap-label" x="333.7" y="438.3">Brignoles</text>
+        <circle class="vmap-ping" cx="634.3" cy="287.1" r="9"/><circle class="vmap-dot" cx="634.3" cy="287.1" r="6.5"/><text class="vmap-label" x="650.3" y="293.1">Draguignan</text>
+        <circle class="vmap-dot" cx="846" cy="402.7" r="6.5"/><text class="vmap-label" x="862" y="408.7">Fréjus</text>
+      </g>
+    </svg>
+  </div>
+  <div class="hero__aurora"><span class="a1"></span><span class="a2"></span><span class="a3"></span></div>
+  <div class="hero__inner">
+    <p class="hero__eyebrow">Ploméo,</p>
+    <h1 class="hero__title" id="heroTitle">L'ARTISAN<span class="u"></span></h1>
+    <p class="hero__accent">qu'il vous faut !</p>
+    <p class="hero__lead">Votre artisan plombier dans le Var. Plomberie, chauffage, climatisation et piscine, du dépannage à la construction neuve.</p>
+    <div class="hero__cta">
+      <a href="#contact" class="hbtn hbtn--orange">Demander un devis</a>
+      <a href="#work" class="hbtn hbtn--ghost">Voir les réalisations</a>
     </div>
+  </div>
+</section>
 
-    <!-- Loading Screen -->
-    <div class="loader" id="loader">
-        <div class="loader__content">
-            <div class="loader__logo">
-                <img src="Elements/Logo%20/rouge-removebg-preview.png" alt="Ploméo" class="loader__logo-img">
-            </div>
-            <div class="loader__bar">
-                <div class="loader__progress"></div>
-            </div>
-            <div class="loader__text">Chargement de l'excellence...</div>
-        </div>
+<!-- REASSURANCE -->
+<section class="rea" id="rea" data-variant="combo">
+  <div class="rea__inner">
+    <div class="rea__bar">
+      <div class="rea__cell"><div class="rea__num"><span class="star">★</span> <span data-count="4.9" data-dec="1">0</span>/5</div><a class="rea__cap" href="https://www.google.com/search?q=Plom%C3%A9o+plombier+Var+avis" target="_blank" rel="noopener" style="text-decoration:none;color:var(--blue);font-weight:700">Avis Google ↗</a></div>
+      <div class="rea__cell"><div class="rea__num"><span data-count="19">0</span></div><div class="rea__cap">Avis clients</div></div>
+      <div class="rea__cell"><div class="rea__num"><span data-count="4">0</span></div><div class="rea__cap">Métiers</div></div>
+      <div class="rea__cell"><div class="rea__num">Var<span style="font-size:.6em"> 83</span></div><div class="rea__cap">Zone d'intervention</div></div>
+      <div class="rea__cell"><div class="rea__num">Gratuit</div><div class="rea__cap">Devis sans engagement</div></div>
     </div>
+  </div>
+  <div class="rea__marquee">
+    <div class="rea__track" id="reaTrack"></div>
+  </div>
+  <div class="rea__badges">
+    <div class="rea__badges-photo"><img src="assets/photos/salle-de-bain.jpg" alt=""></div>
+    <span class="pill p1"><span class="star">★</span> 4,9/5 Google</span>
+    <span class="pill p2">📍 Intervention dans le Var</span>
+    <span class="pill p3">Devis gratuit</span>
+  </div>
+</section>
 
-    <!-- Navigation -->
-    <header class="header" id="header">
-        <a href="#hero" class="header__logo" data-magnetic>
-            <img src="Elements/Logo%20/rouge-removebg-preview.png" alt="Ploméo" class="header__logo-img">
-        </a>
-        <nav class="nav" role="navigation" aria-label="Navigation principale">
-            <div class="nav__container">
-                <ul class="nav__menu" id="navMenu" role="menubar">
-                    <li role="none">
-                        <a href="#hero" class="nav__link nav__link--active" data-nav="accueil" role="menuitem" aria-current="page">
-                            <span class="nav__link-dot"></span>
-                            <span class="nav__link-text">ACCUEIL</span>
-                        </a>
-                    </li>
-                    <li role="none">
-                        <a href="#vision" class="nav__link" data-nav="apropos" role="menuitem">
-                            <span class="nav__link-dot"></span>
-                            <span class="nav__link-text">À PROPOS</span>
-                        </a>
-                    </li>
-                    <li role="none">
-                        <a href="#services" class="nav__link" data-nav="prestations" role="menuitem">
-                            <span class="nav__link-dot"></span>
-                            <span class="nav__link-text">PRESTATIONS</span>
-                        </a>
-                    </li>
-                    <li role="none">
-                        <a href="#realisations" class="nav__link" data-nav="realisations" role="menuitem">
-                            <span class="nav__link-dot"></span>
-                            <span class="nav__link-text">RÉALISATIONS</span>
-                        </a>
-                    </li>
-                    <li role="none">
-                        <a href="#expertise" class="nav__link" data-nav="blog" role="menuitem">
-                            <span class="nav__link-dot"></span>
-                            <span class="nav__link-text">BLOG</span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-            <button class="nav__burger" id="navBurger" aria-label="Menu" aria-expanded="false">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-        </nav>
-        <a href="#contact" class="header__cta" data-magnetic>
-            <span class="header__cta-text">Contact</span>
-            <span class="header__cta-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
-                </svg>
-            </span>
-        </a>
-    </header>
-
-    <!-- Mobile Menu -->
-    <div class="mobile-menu" id="mobileMenu">
-        <div class="mobile-menu__bg"></div>
-        <div class="mobile-menu__content">
-            <nav class="mobile-menu__nav">
-                <a href="#hero" class="mobile-menu__link"><span data-text="Accueil">Accueil</span></a>
-                <a href="#vision" class="mobile-menu__link"><span data-text="À propos">À propos</span></a>
-                <a href="#services" class="mobile-menu__link"><span data-text="Prestations">Prestations</span></a>
-                <a href="#realisations" class="mobile-menu__link"><span data-text="Réalisations">Réalisations</span></a>
-                <a href="#expertise" class="mobile-menu__link"><span data-text="Blog">Blog</span></a>
-            </nav>
-            <div class="mobile-menu__footer">
-                <p>contact@plomeo.com</p>
-                <p>+33 6 95 16 58 89</p>
-            </div>
-        </div>
+<!-- ABOUT (Ayoub) -->
+<section class="about" id="about" data-v="frame">
+  <span class="about__wm" aria-hidden="true">Ayoub</span>
+  <div class="about__inner">
+    <div class="about__media">
+      <div class="about__photo"><img loading="lazy" src="https://i.pravatar.cc/800?img=68" alt="Portrait (placeholder) — Ayoub Berkane"></div>
+      <div class="about__badge"><b>2023</b><span>Création de Ploméo</span></div>
+      <div class="about__caption"><b>Ayoub Berkane</b><span>Fondateur &amp; dirigeant</span></div>
     </div>
-
-    <main>
-        <!-- Hero Section -->
-        <section class="hero" id="hero">
-            <!-- Background Layer -->
-            <div class="hero__canvas">
-                <div class="hero__photo">
-                    <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=2053&q=80" alt="Architecture intérieure luxe">
-                </div>
-                <div class="hero__photo-frame"></div>
-            </div>
-
-            <!-- Main Title -->
-            <div class="hero__headline">
-                <span class="hero__headline-sub">L'art du</span>
-                <h1 class="hero__headline-main">Confort</h1>
-                <span class="hero__headline-accent">maîtrisé</span>
-            </div>
-        </section>
-
-        <!-- Vision Section -->
-        <section class="vision" id="vision">
-            <div class="vision__container">
-                <div class="vision__header">
-                    <span class="section-label reveal--fade">01 — Notre Vision</span>
-                    <h2 class="vision__title reveal--up" data-delay="100">
-                        Une exigence<br>
-                        <em>sans compromis</em>
-                    </h2>
-                </div>
-
-                <div class="vision__content">
-                    <div class="vision__image reveal--scale" data-parallax="0.1">
-                        <div class="vision__image-wrapper">
-                            <img src="https://images.pexels.com/photos/35556927/pexels-photo-35556927.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Ayoub Berkane - Fondateur & Dirigeant Ploméo" class="vision__image-img">
-                            <div class="vision__image-overlay"></div>
-                        </div>
-                        <div class="vision__image-caption">
-                            <span class="vision__image-name">Ayoub Berkane</span>
-                            <span class="vision__image-role">Fondateur & Dirigeant</span>
-                        </div>
-                    </div>
-
-                    <div class="vision__text">
-                        <blockquote class="vision__quote reveal--fade" data-delay="150">
-                            <span class="vision__quote-mark">"</span>
-                            <p>Chez Ploméo, nous croyons que chaque installation mérite une attention absolue. La qualité n'est pas une option — c'est notre signature.</p>
-                        </blockquote>
-
-                        <div class="vision__bio reveal--up-small" data-delay="200">
-                            <p>
-                                Fort d'un parcours de <strong>plus de 15 ans</strong> dans les métiers du bâtiment, Ayoub Berkane a fondé Ploméo avec une vision claire : élever les standards de la plomberie, du chauffage et de la climatisation au niveau de l'excellence.
-                            </p>
-                            <p>
-                                Diplômé et certifié dans chaque domaine d'expertise, notre équipe perpétue une tradition d'artisanat où <strong>précision technique</strong> et <strong>sens du détail</strong> se conjuguent pour créer des installations durables et performantes.
-                            </p>
-                        </div>
-
-                        <div class="vision__values reveal--stagger" data-delay="300">
-                            <div class="vision__value">
-                                <div class="vision__value-number">01</div>
-                                <div class="vision__value-content">
-                                    <h4>Excellence</h4>
-                                    <p>Chaque détail compte dans notre quête de perfection</p>
-                                </div>
-                            </div>
-                            <div class="vision__value">
-                                <div class="vision__value-number">02</div>
-                                <div class="vision__value-content">
-                                    <h4>Fiabilité</h4>
-                                    <p>Des engagements tenus et une transparence totale</p>
-                                </div>
-                            </div>
-                            <div class="vision__value">
-                                <div class="vision__value-number">03</div>
-                                <div class="vision__value-content">
-                                    <h4>Durabilité</h4>
-                                    <p>Des installations conçues pour traverser le temps</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="vision__bg-text" aria-hidden="true">VISION</div>
-        </section>
-
-        <!-- Services Section -->
-        <section class="services-showcase" id="services">
-            <div class="services-showcase__header">
-                <span class="section-label section-label--light reveal--fade">02 — Nos Expertises</span>
-                <h2 class="services-showcase__title reveal--up" data-delay="100">
-                    Trois piliers,<br><em>une même excellence</em>
-                </h2>
-                <p class="services-showcase__subtitle reveal--fade" data-delay="200">
-                    Chaque domaine bénéficie de notre savoir-faire complet et de notre engagement qualité absolu.
-                </p>
-            </div>
-
-            <!-- Plomberie - Image à gauche -->
-            <article class="service-block" data-service="plomberie">
-                <div class="service-block__image reveal--left">
-                    <div class="service-block__image-wrapper">
-                        <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1200&q=80" alt="Salle de bain design premium" class="service-block__img">
-                        <div class="service-block__image-overlay"></div>
-                    </div>
-                    <div class="service-block__image-accent"></div>
-                    <div class="service-block__image-number">01</div>
-                </div>
-                <div class="service-block__content reveal--right" data-delay="150">
-                    <div class="service-block__icon">
-                        <img src="assets/icons/plomberie.png" alt="Icône plomberie">
-                    </div>
-                    <h3 class="service-block__title">Plomberie</h3>
-                    <p class="service-block__desc">
-                        De l'installation complète à la rénovation sur-mesure, nous concevons des réseaux de plomberie performants et esthétiques. Chaque détail est pensé pour allier fonctionnalité et élégance.
-                    </p>
-                    <ul class="service-block__list">
-                        <li>
-                            <span class="service-block__list-icon"></span>
-                            <span>Installation sanitaire complète</span>
-                        </li>
-                        <li>
-                            <span class="service-block__list-icon"></span>
-                            <span>Rénovation salle de bain premium</span>
-                        </li>
-                        <li>
-                            <span class="service-block__list-icon"></span>
-                            <span>Traitement de l'eau</span>
-                        </li>
-                        <li>
-                            <span class="service-block__list-icon"></span>
-                            <span>Solutions anti-fuites avancées</span>
-                        </li>
-                    </ul>
-                    <a href="#contact" class="service-block__link" data-magnetic>
-                        <span>En savoir plus</span>
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M5 12h14M12 5l7 7-7 7"/>
-                        </svg>
-                    </a>
-                </div>
-            </article>
-
-            <!-- Chauffage - Image à droite -->
-            <article class="service-block service-block--reverse" data-service="chauffage">
-                <div class="service-block__image reveal--right">
-                    <div class="service-block__image-wrapper">
-                        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=1200&q=80" alt="Système de chauffage moderne" class="service-block__img">
-                        <div class="service-block__image-overlay"></div>
-                    </div>
-                    <div class="service-block__image-accent"></div>
-                    <div class="service-block__image-number">02</div>
-                </div>
-                <div class="service-block__content reveal--left" data-delay="150">
-                    <div class="service-block__icon">
-                        <img src="assets/icons/chauffage.png" alt="Icône chauffage">
-                    </div>
-                    <h3 class="service-block__title">Chauffage</h3>
-                    <p class="service-block__desc">
-                        Systèmes de chauffage haute performance et économes en énergie pour un confort thermique idéal. Nous sélectionnons les technologies les plus avancées pour votre bien-être.
-                    </p>
-                    <ul class="service-block__list">
-                        <li>
-                            <span class="service-block__list-icon"></span>
-                            <span>Chaudières nouvelle génération</span>
-                        </li>
-                        <li>
-                            <span class="service-block__list-icon"></span>
-                            <span>Pompes à chaleur</span>
-                        </li>
-                        <li>
-                            <span class="service-block__list-icon"></span>
-                            <span>Plancher chauffant</span>
-                        </li>
-                        <li>
-                            <span class="service-block__list-icon"></span>
-                            <span>Optimisation énergétique</span>
-                        </li>
-                    </ul>
-                    <a href="#contact" class="service-block__link" data-magnetic>
-                        <span>En savoir plus</span>
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M5 12h14M12 5l7 7-7 7"/>
-                        </svg>
-                    </a>
-                </div>
-            </article>
-
-            <!-- Climatisation - Image à gauche -->
-            <article class="service-block" data-service="climatisation">
-                <div class="service-block__image reveal--left">
-                    <div class="service-block__image-wrapper">
-                        <img src="https://images.unsplash.com/photo-1585771724684-38269d6639fd?auto=format&fit=crop&w=1200&q=80" alt="Climatisation intégrée design" class="service-block__img">
-                        <div class="service-block__image-overlay"></div>
-                    </div>
-                    <div class="service-block__image-accent"></div>
-                    <div class="service-block__image-number">03</div>
-                </div>
-                <div class="service-block__content reveal--right" data-delay="150">
-                    <div class="service-block__icon">
-                        <img src="assets/icons/climatisation.png" alt="Icône climatisation">
-                    </div>
-                    <h3 class="service-block__title">Climatisation</h3>
-                    <p class="service-block__desc">
-                        Solutions silencieuses et efficientes pour maîtriser votre environnement avec discrétion. L'alliance parfaite entre performance technique et intégration architecturale.
-                    </p>
-                    <ul class="service-block__list">
-                        <li>
-                            <span class="service-block__list-icon"></span>
-                            <span>Climatisation réversible</span>
-                        </li>
-                        <li>
-                            <span class="service-block__list-icon"></span>
-                            <span>Systèmes gainables</span>
-                        </li>
-                        <li>
-                            <span class="service-block__list-icon"></span>
-                            <span>Ventilation double flux</span>
-                        </li>
-                        <li>
-                            <span class="service-block__list-icon"></span>
-                            <span>Maintenance préventive</span>
-                        </li>
-                    </ul>
-                    <a href="#contact" class="service-block__link" data-magnetic>
-                        <span>En savoir plus</span>
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M5 12h14M12 5l7 7-7 7"/>
-                        </svg>
-                    </a>
-                </div>
-            </article>
-
-            <div class="services-showcase__cta reveal--up" data-delay="100">
-                <a href="#contact" class="btn btn--primary btn--large" data-magnetic>
-                    <span class="btn__text">Discutons de votre projet</span>
-                    <span class="btn__icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M5 12h14M12 5l7 7-7 7"/>
-                        </svg>
-                    </span>
-                </a>
-            </div>
-        </section>
-
-        <!-- Réalisations Section -->
-        <section class="portfolio" id="realisations">
-            <div class="portfolio__header">
-                <span class="section-label reveal--fade">03 — Portfolio</span>
-                <h2 class="portfolio__title reveal--up" data-delay="100">
-                    Nos <em>réalisations</em>
-                </h2>
-                <p class="portfolio__subtitle reveal--fade" data-delay="200">
-                    Chaque projet est une démonstration de notre savoir-faire et de notre engagement qualité.
-                </p>
-            </div>
-
-            <div class="portfolio__filters reveal--up-small" data-delay="250">
-                <button class="portfolio__filter portfolio__filter--active" data-filter="all">Tous</button>
-                <button class="portfolio__filter" data-filter="plomberie">Plomberie</button>
-                <button class="portfolio__filter" data-filter="chauffage">Chauffage</button>
-                <button class="portfolio__filter" data-filter="climatisation">Climatisation</button>
-            </div>
-
-            <div class="portfolio__grid reveal--stagger" data-delay="300">
-                <article class="project" data-category="plomberie" data-project="1">
-                    <div class="project__image">
-                        <img src="https://images.pexels.com/photos/35618224/pexels-photo-35618224.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Salle de bain contemporaine" class="project__img">
-                        <div class="project__overlay">
-                            <span class="project__view">Voir le projet</span>
-                        </div>
-                    </div>
-                    <div class="project__info">
-                        <span class="project__tag">Plomberie</span>
-                        <h3 class="project__title">Salle de bain contemporaine</h3>
-                        <p class="project__location">Villa privée — Saint-Tropez</p>
-                    </div>
-                </article>
-
-                <article class="project" data-category="chauffage" data-project="2">
-                    <div class="project__image">
-                        <img src="https://images.unsplash.com/photo-1655039353512-ab38d6a37a92?crop=entropy&cs=tinysrgb&w=1200" alt="Système géothermique" class="project__img">
-                        <div class="project__overlay">
-                            <span class="project__view">Voir le projet</span>
-                        </div>
-                    </div>
-                    <div class="project__info">
-                        <span class="project__tag">Chauffage</span>
-                        <h3 class="project__title">Système géothermique</h3>
-                        <p class="project__location">Maison d'architecte — Hyères</p>
-                    </div>
-                </article>
-
-                <article class="project" data-category="climatisation" data-project="3">
-                    <div class="project__image">
-                        <img src="https://images.unsplash.com/photo-1760537760008-5fd5b1f872d4?crop=entropy&cs=tinysrgb&w=1200" alt="Climatisation gainable" class="project__img">
-                        <div class="project__overlay">
-                            <span class="project__view">Voir le projet</span>
-                        </div>
-                    </div>
-                    <div class="project__info">
-                        <span class="project__tag">Climatisation</span>
-                        <h3 class="project__title">Climatisation gainable</h3>
-                        <p class="project__location">Appartement de standing — Toulon</p>
-                    </div>
-                </article>
-
-                <article class="project" data-category="plomberie" data-project="4">
-                    <div class="project__image">
-                        <img src="https://images.pexels.com/photos/8629127/pexels-photo-8629127.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Cuisine professionnelle" class="project__img">
-                        <div class="project__overlay">
-                            <span class="project__view">Voir le projet</span>
-                        </div>
-                    </div>
-                    <div class="project__info">
-                        <span class="project__tag">Plomberie</span>
-                        <h3 class="project__title">Cuisine professionnelle</h3>
-                        <p class="project__location">Restaurant gastronomique — Fréjus</p>
-                    </div>
-                </article>
-
-                <article class="project" data-category="chauffage" data-project="5">
-                    <div class="project__image">
-                        <img src="https://images.pexels.com/photos/6045338/pexels-photo-6045338.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Plancher chauffant intégral" class="project__img">
-                        <div class="project__overlay">
-                            <span class="project__view">Voir le projet</span>
-                        </div>
-                    </div>
-                    <div class="project__info">
-                        <span class="project__tag">Chauffage</span>
-                        <h3 class="project__title">Plancher chauffant intégral</h3>
-                        <p class="project__location">Loft rénové — Draguignan</p>
-                    </div>
-                </article>
-
-                <article class="project" data-category="climatisation" data-project="6">
-                    <div class="project__image">
-                        <img src="https://images.unsplash.com/photo-1635604866833-70844856de75?crop=entropy&cs=tinysrgb&w=1200" alt="VMC double flux" class="project__img">
-                        <div class="project__overlay">
-                            <span class="project__view">Voir le projet</span>
-                        </div>
-                    </div>
-                    <div class="project__info">
-                        <span class="project__tag">Climatisation</span>
-                        <h3 class="project__title">VMC double flux</h3>
-                        <p class="project__location">Bureaux design — La Seyne-sur-Mer</p>
-                    </div>
-                </article>
-            </div>
-        </section>
-
-        <!-- Journal Section -->
-        <section class="journal" id="expertise">
-            <div class="journal__header">
-                <span class="section-label reveal--fade">04 — Journal</span>
-                <h2 class="journal__title reveal--up" data-delay="100">
-                    Ressources &<br><em>conseils d'experts</em>
-                </h2>
-            </div>
-
-            <div class="journal__list reveal--stagger" data-delay="200">
-                <a href="article-1.html" class="journal__item">
-                    <div class="journal__number">01</div>
-                    <div class="journal__body">
-                        <span class="journal__cat">Plomberie</span>
-                        <h3 class="journal__headline">Plomberie haut de gamme : investir dans la qualité pour votre habitat</h3>
-                        <p class="journal__excerpt">Découvrez pourquoi une installation premium représente un investissement durable pour votre patrimoine immobilier.</p>
-                    </div>
-                    <div class="journal__meta">
-                        <time>15 Jan 2026</time>
-                        <span>5 min de lecture</span>
-                    </div>
-                    <div class="journal__visual">
-                        <img src="https://images.pexels.com/photos/7227624/pexels-photo-7227624.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Plomberie haut de gamme">
-                    </div>
-                    <div class="journal__arrow">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M7 17L17 7M17 7H7M17 7V17"/>
-                        </svg>
-                    </div>
-                </a>
-
-                <a href="article-2.html" class="journal__item">
-                    <div class="journal__number">02</div>
-                    <div class="journal__body">
-                        <span class="journal__cat">Chauffage</span>
-                        <h3 class="journal__headline">Confort thermique optimal : les solutions modernes de chauffage</h3>
-                        <p class="journal__excerpt">Pompes à chaleur, planchers chauffants... Tour d'horizon des technologies pour un confort thermique idéal.</p>
-                    </div>
-                    <div class="journal__meta">
-                        <time>8 Jan 2026</time>
-                        <span>7 min de lecture</span>
-                    </div>
-                    <div class="journal__visual">
-                        <img src="https://images.pexels.com/photos/7937300/pexels-photo-7937300.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Confort thermique">
-                    </div>
-                    <div class="journal__arrow">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M7 17L17 7M17 7H7M17 7V17"/>
-                        </svg>
-                    </div>
-                </a>
-
-                <a href="article-3.html" class="journal__item">
-                    <div class="journal__number">03</div>
-                    <div class="journal__body">
-                        <span class="journal__cat">Climatisation</span>
-                        <h3 class="journal__headline">Climatisation invisible : intégration architecturale et performance</h3>
-                        <p class="journal__excerpt">Comment concilier puissance de refroidissement et esthétique avec les solutions gainables modernes.</p>
-                    </div>
-                    <div class="journal__meta">
-                        <time>2 Jan 2026</time>
-                        <span>6 min de lecture</span>
-                    </div>
-                    <div class="journal__visual">
-                        <img src="https://images.unsplash.com/photo-1759807107127-6d91d188a6a9?crop=entropy&cs=tinysrgb&w=800" alt="Climatisation invisible">
-                    </div>
-                    <div class="journal__arrow">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M7 17L17 7M17 7H7M17 7V17"/>
-                        </svg>
-                    </div>
-                </a>
-            </div>
-        </section>
-
-        <!-- Contact Section -->
-        <section class="contact" id="contact">
-            <div class="contact__container">
-                <div class="contact__left">
-                    <span class="section-label reveal--fade">05 — Contact</span>
-                    <h2 class="contact__title reveal--up" data-delay="100">
-                        Démarrons votre<br><em>projet ensemble</em>
-                    </h2>
-                    <p class="contact__desc reveal--fade" data-delay="200">
-                        Que vous ayez un projet précis ou simplement une vision, nous sommes là pour vous accompagner avec expertise et engagement.
-                    </p>
-
-                    <div class="contact__info reveal--stagger" data-delay="250">
-                        <div class="contact__info-item">
-                            <span class="contact__info-label">Email</span>
-                            <a href="mailto:contact@plomeo.com" class="contact__info-value">contact@plomeo.com</a>
-                        </div>
-                        <div class="contact__info-item">
-                            <span class="contact__info-label">Téléphone</span>
-                            <a href="tel:+33695165889" class="contact__info-value">+33 6 95 16 58 89</a>
-                        </div>
-                        <div class="contact__info-item">
-                            <span class="contact__info-label">Zone</span>
-                            <span class="contact__info-value">Var (83)</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="contact__right reveal--up" data-delay="150">
-                    <form class="contact__form" id="contactForm">
-                        <div class="form__row">
-                            <div class="form__group">
-                                <label for="firstName">Prénom</label>
-                                <input type="text" id="firstName" name="firstName" required placeholder="Jean">
-                            </div>
-                            <div class="form__group">
-                                <label for="lastName">Nom</label>
-                                <input type="text" id="lastName" name="lastName" required placeholder="Dupont">
-                            </div>
-                        </div>
-                        <div class="form__row">
-                            <div class="form__group">
-                                <label for="email">Email</label>
-                                <input type="email" id="email" name="email" required placeholder="jean@exemple.fr">
-                            </div>
-                            <div class="form__group">
-                                <label for="phone">Téléphone</label>
-                                <input type="tel" id="phone" name="phone" placeholder="06 00 00 00 00">
-                            </div>
-                        </div>
-                        <div class="form__group">
-                            <label for="projectType">Type de projet</label>
-                            <select id="projectType" name="projectType" required>
-                                <option value="" disabled selected>Sélectionnez</option>
-                                <option value="plomberie">Plomberie</option>
-                                <option value="chauffage">Chauffage</option>
-                                <option value="climatisation">Climatisation</option>
-                                <option value="multi">Projet multi-services</option>
-                            </select>
-                        </div>
-                        <div class="form__group">
-                            <label for="message">Votre projet</label>
-                            <textarea id="message" name="message" rows="4" required placeholder="Décrivez votre projet, vos attentes..."></textarea>
-                        </div>
-                        <button type="submit" class="btn btn--primary btn--full" data-magnetic>
-                            <span class="btn__text">Envoyer ma demande</span>
-                            <span class="btn__icon">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
-                                </svg>
-                            </span>
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <!-- Footer CTA Banner -->
-        <div class="footer__cta-banner">
-            <div class="footer__cta-container">
-                <div class="footer__cta-content">
-                    <span class="footer__cta-label">Prêt à démarrer ?</span>
-                    <h2 class="footer__cta-title">Donnons vie à votre <em>projet</em></h2>
-                </div>
-                <a href="#contact" class="footer__cta-btn" data-magnetic>
-                    <span class="footer__cta-btn-text">Nous contacter</span>
-                    <span class="footer__cta-btn-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M7 17L17 7M17 7H7M17 7V17"/>
-                        </svg>
-                    </span>
-                </a>
-            </div>
-            <div class="footer__cta-bg-text" aria-hidden="true">PLOMÉO</div>
-        </div>
-
-        <div class="footer__container">
-            <div class="footer__main">
-                <div class="footer__brand">
-                    <a href="#hero" class="footer__logo">
-                        <img src="Elements/Logo%20/rouge-removebg-preview.png" alt="Ploméo" class="footer__logo-img">
-                    </a>
-                    <p class="footer__tagline">L'art du confort maîtrisé</p>
-                    <p class="footer__desc">Excellence, précision et savoir-faire pour vos projets de plomberie, chauffage et climatisation en Var (83).</p>
-                    <div class="footer__social-links">
-                        <a href="https://www.instagram.com/sarl_plomeo?igsh=MjN2cnc1bGRpdDBr" target="_blank" rel="noopener noreferrer" class="footer__social-link" aria-label="Suivez-nous sur Instagram">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-                            </svg>
-                            <span>@sarl_plomeo</span>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="footer__nav">
-                    <div class="footer__col">
-                        <h4 class="footer__col-title">
-                            <span class="footer__col-number">01</span>
-                            Navigation
-                        </h4>
-                        <ul class="footer__list">
-                            <li><a href="#vision">À propos</a></li>
-                            <li><a href="#services">Expertises</a></li>
-                            <li><a href="#realisations">Réalisations</a></li>
-                            <li><a href="#expertise">Journal</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer__col">
-                        <h4 class="footer__col-title">
-                            <span class="footer__col-number">02</span>
-                            Services
-                        </h4>
-                        <ul class="footer__list">
-                            <li><a href="#services">Plomberie</a></li>
-                            <li><a href="#services">Chauffage</a></li>
-                            <li><a href="#services">Climatisation</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer__col">
-                        <h4 class="footer__col-title">
-                            <span class="footer__col-number">03</span>
-                            Contact
-                        </h4>
-                        <ul class="footer__list footer__list--contact">
-                            <li>
-                                <span class="footer__contact-label">Téléphone</span>
-                                <a href="tel:+33695165889">+33 6 95 16 58 89</a>
-                            </li>
-                            <li>
-                                <span class="footer__contact-label">Email</span>
-                                <a href="mailto:contact@plomeo.com">contact@plomeo.com</a>
-                            </li>
-                            <li>
-                                <span class="footer__contact-label">Zone</span>
-                                <span class="footer__contact-value">Var (83)</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <div class="footer__bottom">
-                <div class="footer__copyright">
-                    <p>&copy; 2026 Ploméo. Tous droits réservés.</p>
-                </div>
-                <div class="footer__credit">
-                    <span>Fait avec passion par</span>
-                    <a href="https://propulseo-site.com" target="_blank" rel="noopener noreferrer">Propul'SEO</a>
-                </div>
-                <div class="footer__legal">
-                    <a href="#">Mentions légales</a>
-                    <span class="footer__legal-divider"></span>
-                    <a href="#">Confidentialité</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="footer__accent-line"></div>
-    </footer>
-
-    <!-- Project Modal -->
-    <div class="modal" id="projectModal">
-        <div class="modal__backdrop"></div>
-        <div class="modal__container">
-            <button class="modal__close" aria-label="Fermer">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M18 6L6 18M6 6l12 12"/>
-                </svg>
-            </button>
-            <div class="modal__content" id="projectModalContent"></div>
-        </div>
+    <div class="about__text">
+      <p class="about__eyebrow">Le fondateur</p>
+      <h2 class="about__title">Ayoub Berkane,<br><em>artisan de terrain</em></h2>
+      <blockquote class="about__quote">« Je préfère un chantier bien fait et bien expliqué à une belle promesse. Le reste suit tout seul. »</blockquote>
+      <div class="about__bio">
+        <p><strong>Cinq ans d'apprentissage en alternance</strong>, un double CAP et un BP en génie climatique : Ayoub a appris le métier sur le terrain avant de fonder Ploméo en 2023, dans le Var.</p>
+        <p>Plomberie, chauffage, climatisation et piscine, <strong>du dépannage à la construction neuve</strong> : un même objectif à chaque intervention, propre, clair et fiable.</p>
+      </div>
+      <div class="about__facts">
+        <span class="about__chip">Double CAP + BP génie climatique</span>
+        <span class="about__chip">Basé dans le Var (83)</span>
+        <span class="about__chip">Partenaire Mitsubishi (clim)</span>
+      </div>
+      <div class="about__values">
+        <div class="about__val"><div class="n">01</div><h4>Finitions soignées</h4><p>Le détail compte, visible ou non.</p></div>
+        <div class="about__val"><div class="n">02</div><h4>Fiabilité</h4><p>Délais tenus, devis clair.</p></div>
+        <div class="about__val"><div class="n">03</div><h4>Proximité</h4><p>Un interlocuteur unique, local.</p></div>
+      </div>
+      <div class="about__timeline">
+        <div class="tl"><span class="tl__y">Alternance</span><span class="tl__t">5 ans sur le terrain</span></div>
+        <div class="tl"><span class="tl__y">Diplômes</span><span class="tl__t">Double CAP + BP génie climatique</span></div>
+        <div class="tl"><span class="tl__y">2023</span><span class="tl__t">Création de Ploméo</span></div>
+        <div class="tl"><span class="tl__y">Aujourd'hui</span><span class="tl__t">4 métiers, partout dans le Var</span></div>
+      </div>
     </div>
+  </div>
+</section>
 
-    <!-- Article Modal -->
-    <div class="modal modal--article" id="articleModal">
-        <div class="modal__backdrop"></div>
-        <div class="modal__container modal__container--wide">
-            <button class="modal__close" aria-label="Fermer">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M18 6L6 18M6 6l12 12"/>
-                </svg>
-            </button>
-            <div class="modal__content" id="articleModalContent"></div>
-        </div>
+<!-- PILLARS (volet métier) -->
+<section class="pil" id="pil">
+  <div class="pil__head">
+    <p class="pil__eyebrow">Nos expertises</p>
+    <h2>Quatre piliers, <em>une même exigence</em></h2>
+    <p>Du simple dépannage au chantier neuf. On vous explique tout simplement, et on soigne chaque finition.</p>
+  </div>
+
+  <article class="sb" data-m="plomberie">
+    <div class="sb__media">
+      <div class="sb__imgwrap"><img loading="lazy" src="assets/photos/sdb-jacuzzi.jpg" alt="Plomberie"></div>
+      <span class="sb__shutter"></span>
+      <span class="sb__num">01</span>
     </div>
+    <div class="sb__body">
+      <div class="sb__ico"><img src="Elements/Pictogramme%20services/plomberie-icone.svg" alt=""></div>
+      <h3>Plomberie</h3>
+      <p>De l'installation complète à la rénovation, des réseaux propres et fiables, jusque dans les détails qu'on ne voit plus une fois le chantier fini.</p>
+      <ul class="sb__list"><li>Installation sanitaire complète</li><li>Rénovation de salle de bain</li><li>Dépannage &amp; recherche de fuite</li></ul>
+      <a class="sb__link" href="#">En savoir plus</a>
+    </div>
+  </article>
 
-    <script src="/scroll-animations.js"></script>
-    <script src="/script.js"></script>
+  <article class="sb" data-m="chauffage">
+    <div class="sb__media">
+      <div class="sb__imgwrap"><img loading="lazy" src="assets/photos/pompe-a-chaleur.jpg" alt="Chauffage"></div>
+      <span class="sb__shutter"></span>
+      <span class="sb__num">02</span>
+    </div>
+    <div class="sb__body">
+      <div class="sb__ico"><img src="Elements/Pictogramme%20services/chauffage-icone.svg" alt=""></div>
+      <h3>Chauffage</h3>
+      <p>Pompes à chaleur, chaudières et plancher chauffant, dimensionnés selon votre logement, avec une régulation simple à piloter au quotidien.</p>
+      <ul class="sb__list"><li>Pompes à chaleur</li><li>Plancher chauffant</li><li>Mise en service &amp; entretien</li></ul>
+      <a class="sb__link" href="#">En savoir plus</a>
+    </div>
+  </article>
+
+  <article class="sb" data-m="climatisation">
+    <div class="sb__media">
+      <div class="sb__imgwrap"><img loading="lazy" src="assets/photos/climatisation.jpg" alt="Climatisation"></div>
+      <span class="sb__shutter"></span>
+      <span class="sb__num">03</span>
+    </div>
+    <div class="sb__body">
+      <div class="sb__ico"><img src="Elements/Pictogramme%20services/climatisation-icone.svg" alt=""></div>
+      <h3>Climatisation</h3>
+      <p>Gainable ou split, discret et silencieux. Partenaire Mitsubishi pour la climatisation. On vous explique le fonctionnement et l'entretien.</p>
+      <ul class="sb__list"><li>Climatisation réversible</li><li>Systèmes gainables</li><li>Entretien préventif</li></ul>
+      <a class="sb__link" href="#">En savoir plus</a>
+    </div>
+  </article>
+
+  <article class="sb" data-m="piscine">
+    <div class="sb__media">
+      <div class="sb__imgwrap"><img loading="lazy" src="assets/photos/piscine-2.jpg" alt="Piscine"></div>
+      <span class="sb__shutter"></span>
+      <span class="sb__num">04</span>
+    </div>
+    <div class="sb__body">
+      <div class="sb__ico"><img src="Elements/Pictogramme%20services/piscine-icone.svg" alt=""></div>
+      <h3>Piscine</h3>
+      <p>Local technique, raccordements et mise en service de la partie hydraulique, avec des réglages clairs pour un entretien facile au fil des saisons.</p>
+      <ul class="sb__list"><li>Local technique &amp; raccordements</li><li>Mise en service</li><li>Contrôle &amp; entretien</li></ul>
+      <a class="sb__link" href="#">En savoir plus</a>
+    </div>
+  </article>
+</section>
+
+<!-- PROCESS -->
+<section class="process" id="process">
+  <div class="process__head">
+    <p class="process__eyebrow">Comment ça se passe</p>
+    <h2>Simple, <em>du premier appel à la fin du chantier</em></h2>
+  </div>
+  <div class="process__grid">
+    <div class="pstep">
+      <div class="pstep__n">1</div>
+      <h3>On échange</h3>
+      <p>Vous décrivez votre besoin par téléphone ou via le formulaire. On vous rappelle avec une première orientation claire.</p>
+    </div>
+    <div class="pstep">
+      <div class="pstep__n">2</div>
+      <h3>Devis gratuit</h3>
+      <p>On évalue le chantier sur place si besoin, puis on vous remet un devis détaillé et sans surprise.</p>
+    </div>
+    <div class="pstep">
+      <div class="pstep__n">3</div>
+      <h3>Intervention soignée</h3>
+      <p>On réalise le travail proprement, dans les délais convenus, et on vous explique tout avant de partir.</p>
+    </div>
+  </div>
+</section>
+
+<!-- RÉALISATIONS -->
+<section class="work" id="work" data-v="grid">
+  <div class="work__head">
+    <p class="work__eyebrow">Réalisations</p>
+    <h2>Des chantiers <em>qui parlent d'eux-mêmes</em></h2>
+  </div>
+  <div class="work__filters" id="wfilters">
+    <button class="wfilter active" data-f="all">Tous</button>
+    <button class="wfilter" data-f="plomberie">Plomberie</button>
+    <button class="wfilter" data-f="chauffage">Chauffage</button>
+    <button class="wfilter" data-f="climatisation">Climatisation</button>
+    <button class="wfilter" data-f="piscine">Piscine</button>
+  </div>
+  <div class="work__grid" id="wgrid">
+    <article class="proj" data-m="plomberie"><img loading="lazy" src="assets/photos/douche-avant-apres.jpg" alt=""><div class="proj__ov"><span class="proj__tag">Plomberie</span><h3>Rénovation de douche</h3><span class="proj__loc">Var (83)</span></div></article>
+    <article class="proj" data-m="plomberie"><img loading="lazy" src="assets/photos/salle-de-bain.jpg" alt=""><div class="proj__ov"><span class="proj__tag">Plomberie</span><h3>Salle de bain complète</h3><span class="proj__loc">Var (83)</span></div></article>
+    <article class="proj" data-m="piscine"><img loading="lazy" src="assets/photos/piscine.jpg" alt=""><div class="proj__ov"><span class="proj__tag">Piscine</span><h3>Piscine &amp; local technique</h3><span class="proj__loc">Var (83)</span></div></article>
+    <article class="proj" data-m="chauffage"><img loading="lazy" src="assets/photos/pompe-a-chaleur.jpg" alt=""><div class="proj__ov"><span class="proj__tag">Chauffage</span><h3>Pompe à chaleur</h3><span class="proj__loc">Var (83)</span></div></article>
+    <article class="proj" data-m="climatisation"><img loading="lazy" src="assets/photos/climatisation.jpg" alt=""><div class="proj__ov"><span class="proj__tag">Climatisation</span><h3>Climatisation gainable</h3><span class="proj__loc">Var (83)</span></div></article>
+    <article class="proj" data-m="plomberie"><img loading="lazy" src="assets/photos/sdb-jacuzzi.jpg" alt=""><div class="proj__ov"><span class="proj__tag">Plomberie</span><h3>Salle de bain travertin</h3><span class="proj__loc">Var (83)</span></div></article>
+  </div>
+</section>
+
+<!-- ZONE D'INTERVENTION -->
+<section class="zone" id="zone">
+  <div class="zone__inner">
+    <p class="zone__eyebrow">Zone d'intervention</p>
+    <h2>Ploméo intervient <em>partout dans le Var</em></h2>
+    <p>Du littoral à l'arrière-pays, on se déplace dans tout le département (83) pour vos dépannages comme pour vos chantiers neufs.</p>
+    <div class="zone__communes">
+      <span class="zone__chip">Toulon</span>
+      <span class="zone__chip">La Seyne-sur-Mer</span>
+      <span class="zone__chip">Hyères</span>
+      <span class="zone__chip">Fréjus</span>
+      <span class="zone__chip">Draguignan</span>
+      <span class="zone__chip">Brignoles</span>
+      <span class="zone__chip">La Valette</span>
+      <span class="zone__chip">Six-Fours</span>
+    </div>
+    <p class="zone__cta">Votre commune n'est pas dans la liste ? <a href="#contact">Contactez-nous</a>, on vous dira tout de suite si on peut intervenir.</p>
+  </div>
+</section>
+
+<!-- CONSEILS -->
+<section class="blog" id="blog" data-v="index">
+  <div class="blog__head">
+    <p class="blog__eyebrow">Conseils</p>
+    <h2>Pour <em>y voir clair</em> avant de se lancer</h2>
+  </div>
+  <div class="blog__list">
+    <a href="#blog" class="bitem" data-m="plomberie" data-a="1">
+      <div class="bitem__img"><img loading="lazy" src="https://images.pexels.com/photos/7227624/pexels-photo-7227624.jpeg?auto=compress&cs=tinysrgb&w=800" alt=""></div>
+      <span class="bitem__n">01</span>
+      <div class="bitem__body">
+        <span class="bitem__cat">Plomberie</span>
+        <h3>Pourquoi une installation bien faite dure vraiment plus longtemps</h3>
+        <p>Matériel, pose, finitions : ce qui fait la différence entre une réparation qui tient et une intervention à refaire.</p>
+        <span class="bitem__meta">5 min de lecture</span>
+      </div>
+      <span class="bitem__arrow">↗</span>
+    </a>
+    <a href="#blog" class="bitem" data-m="chauffage" data-a="2">
+      <div class="bitem__img"><img loading="lazy" src="assets/photos/pompe-a-chaleur.jpg" alt=""></div>
+      <span class="bitem__n">02</span>
+      <div class="bitem__body">
+        <span class="bitem__cat">Chauffage</span>
+        <h3>Bien choisir entre pompe à chaleur, chaudière et plancher chauffant</h3>
+        <p>Un comparatif simple pour choisir la solution adaptée à votre logement et votre budget.</p>
+        <span class="bitem__meta">7 min de lecture</span>
+      </div>
+      <span class="bitem__arrow">↗</span>
+    </a>
+    <a href="#blog" class="bitem" data-m="climatisation" data-a="3">
+      <div class="bitem__img"><img loading="lazy" src="assets/photos/climatisation.jpg" alt=""></div>
+      <span class="bitem__n">03</span>
+      <div class="bitem__body">
+        <span class="bitem__cat">Climatisation</span>
+        <h3>Gainable ou split : comment bien rafraîchir sa maison</h3>
+        <p>Les options pour rester au frais l'été, discrètement, sans faire exploser sa facture.</p>
+        <span class="bitem__meta">6 min de lecture</span>
+      </div>
+      <span class="bitem__arrow">↗</span>
+    </a>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq" id="faq">
+  <div class="faq__head">
+    <p class="faq__eyebrow">Questions fréquentes</p>
+    <h2>Vous vous demandez <em>peut-être…</em></h2>
+  </div>
+  <div class="faq__list">
+    <div class="faqitem">
+      <button class="faqitem__q">Intervenez-vous en urgence ?</button>
+      <div class="faqitem__a"><p>Oui, selon nos disponibilités et votre commune. Le téléphone reste le plus rapide pour une urgence : appelez-nous directement au 06 95 16 58 89.</p></div>
+    </div>
+    <div class="faqitem">
+      <button class="faqitem__q">Vous faites du neuf ou de la rénovation ?</button>
+      <div class="faqitem__a"><p>Les deux. Du simple dépannage à la construction neuve, en passant par la rénovation complète de salle de bain.</p></div>
+    </div>
+    <div class="faqitem">
+      <button class="faqitem__q">Le devis est-il vraiment gratuit ?</button>
+      <div class="faqitem__a"><p>Oui, le devis est gratuit et sans engagement. On évalue votre projet et on vous remet un prix clair avant tout démarrage.</p></div>
+    </div>
+    <div class="faqitem">
+      <button class="faqitem__q">Dans quelle zone intervenez-vous ?</button>
+      <div class="faqitem__a"><p>Partout dans le Var (83), du littoral à l'arrière-pays. Si vous avez un doute pour votre commune, contactez-nous.</p></div>
+    </div>
+    <div class="faqitem">
+      <button class="faqitem__q">Travaillez-vous sur les 4 métiers ?</button>
+      <div class="faqitem__a"><p>Oui : plomberie, chauffage, climatisation et piscine. Un seul interlocuteur pour l'ensemble de votre projet.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact" data-v="split">
+  <div class="contact__inner">
+    <div>
+      <p class="contact__eyebrow">Contact</p>
+      <h2>Parlons de <em>votre projet</em></h2>
+      <p class="contact__desc">Un projet précis ou juste une question ? Décrivez votre besoin : on revient vers vous avec une première orientation claire, sans engagement.</p>
+      <div class="cinfo"><span>Téléphone</span><a href="tel:+33695165889">06 95 16 58 89</a></div>
+      <div class="cinfo"><span>Email</span><a href="mailto:contact@plomeo.fr">contact@plomeo.fr</a></div>
+      <div class="cinfo"><span>Zone</span><b>Var (83)</b></div>
+      <div class="cinfo"><span>Instagram</span><a href="#">@sarl_plomeo</a></div>
+    </div>
+    <form class="cform" action="https://formsubmit.co/contact@plomeo.fr" method="POST">
+      <input type="hidden" name="_subject" value="Nouvelle demande de devis — site Ploméo">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_template" value="table">
+      <input type="text" name="_honey" style="display:none">
+      <div class="cform__row">
+        <div class="cfield"><label for="f-prenom">Prénom</label><input id="f-prenom" name="Prénom" type="text" placeholder="Jean" required></div>
+        <div class="cfield"><label for="f-nom">Nom</label><input id="f-nom" name="Nom" type="text" placeholder="Dupont" required></div>
+      </div>
+      <div class="cform__row">
+        <div class="cfield"><label for="f-email">Email</label><input id="f-email" name="Email" type="email" placeholder="jean@exemple.fr" required></div>
+        <div class="cfield"><label for="f-tel">Téléphone</label><input id="f-tel" name="Téléphone" type="tel" placeholder="06 00 00 00 00" required></div>
+      </div>
+      <div class="cfield"><label for="f-type">Type de projet</label>
+        <select id="f-type" name="Type de projet" required><option value="" disabled selected>Sélectionnez</option><option>Plomberie</option><option>Chauffage</option><option>Climatisation</option><option>Piscine</option><option>Projet multi-services</option></select>
+      </div>
+      <div class="cfield"><label for="f-msg">Votre projet</label><textarea id="f-msg" name="Message" rows="3" placeholder="Décrivez votre besoin…" required></textarea></div>
+      <button class="cbtn" type="submit">Demander un devis gratuit</button>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="foot">
+  <div class="foot__inner">
+    <div class="foot__brand">
+      <div class="foot__logo">Ploméo</div>
+      <p>Plomberie, chauffage, climatisation et piscine : du dépannage à la construction neuve, partout dans le Var (83).</p>
+      <a href="#">Instagram · @sarl_plomeo</a>
+    </div>
+    <div class="foot__col"><h4>Navigation</h4><a href="#about">À propos</a><a href="#pil">Expertises</a><a href="#work">Réalisations</a><a href="#blog">Conseils</a></div>
+    <div class="foot__col"><h4>Services</h4><a href="#pil">Plomberie</a><a href="#pil">Chauffage</a><a href="#pil">Climatisation</a><a href="#pil">Piscine</a></div>
+    <div class="foot__col"><h4>Contact</h4><a href="tel:+33695165889">06 95 16 58 89</a><a href="mailto:contact@plomeo.fr">contact@plomeo.fr</a><a href="#contact">Var (83)</a></div>
+  </div>
+  <div class="foot__bottom">
+    <span>© 2026 Ploméo. Tous droits réservés.</span>
+    <span><a href="mentions-legales.html">Mentions légales</a> · <a href="confidentialite.html">Confidentialité</a></span>
+  </div>
+</footer>
+
+<!-- Modal Réalisations -->
+<!-- Modal Article -->
+<div class="amodal" id="amodal">
+  <div class="amodal__backdrop"></div>
+  <div class="amodal__box">
+    <button class="amodal__close" aria-label="Fermer">×</button>
+    <span class="amodal__cat" id="amCat"></span>
+    <h2 id="amTitle"></h2>
+    <div class="amodal__body" id="amBody"></div>
+  </div>
+</div>
+
+<div class="pmodal" id="pmodal">
+  <div class="pmodal__backdrop"></div>
+  <div class="pmodal__box">
+    <button class="pmodal__close" aria-label="Fermer">×</button>
+    <div class="pmodal__img"><img id="pmImg" src="" alt=""></div>
+    <div class="pmodal__body">
+      <span class="pmodal__tag" id="pmTag"></span>
+      <h3 id="pmTitle"></h3>
+      <p class="pmodal__loc" id="pmLoc"></p>
+      <p class="pmodal__desc" id="pmDesc"></p>
+    </div>
+  </div>
+</div>
+
+<script src="/assets/js/main.js"></script>
 </body>
 </html>

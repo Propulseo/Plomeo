@@ -1,0 +1,40 @@
+/* ============ PILLARS (volet métier + photos) ============ */
+.pil{padding:clamp(3rem,7vw,5.5rem) 0;background:var(--bg)}
+.pil__head{max-width:1180px;margin:0 auto clamp(2rem,5vw,3.5rem);padding:0 clamp(1.2rem,5vw,3rem)}
+.pil__eyebrow{font-family:var(--font-serif);font-style:italic;color:var(--blue);font-size:1.05rem}
+.pil__head h2{font-size:clamp(2rem,4.5vw,3.2rem);color:var(--navy);margin:.3rem 0}
+.pil__head h2 em{font-style:italic;font-family:var(--font-serif);font-weight:400;color:var(--blue)}
+.pil__head p{color:var(--muted);max-width:56ch}
+.sb{--c:var(--blue);--ca:var(--blue);max-width:1180px;margin:0 auto;padding:clamp(1.5rem,4vw,3rem) clamp(1.2rem,5vw,3rem);
+  display:grid;grid-template-columns:1fr 1fr;gap:clamp(1.5rem,4vw,4rem);align-items:center}
+.sb[data-m="plomberie"]{--c:var(--blue);--ca:var(--blue)}
+.sb[data-m="chauffage"]{--c:var(--orange);--ca:var(--orange)}
+.sb[data-m="climatisation"]{--c:var(--sky);--ca:var(--navy)}
+.sb[data-m="piscine"]{--c:var(--navy);--ca:var(--navy)}
+.sb:nth-child(even) .sb__media{order:2}
+.sb__media{position:relative;border-radius:18px}
+.sb__imgwrap{position:relative;border-radius:18px;overflow:hidden;aspect-ratio:4/3}
+.sb__imgwrap img{width:100%;height:100%;object-fit:cover;transform:scale(1.08);transition:transform 1.6s var(--ease)}
+.sb.in .sb__imgwrap img{transform:scale(1)}
+.sb__num{position:absolute;font-family:var(--font-display);font-weight:900;font-size:clamp(4rem,8vw,8rem);color:var(--c);
+  line-height:1;left:-.1em;bottom:-.25em;opacity:.14;pointer-events:none}
+.sb:nth-child(even) .sb__num{left:auto;right:-.1em}
+.sb__shutter{display:flex;align-items:center;justify-content:center;position:absolute;inset:0;background:var(--c);z-index:3;
+  transform-origin:right;border-radius:18px;overflow:hidden;transition:transform 1.5s var(--ease) .15s}
+.sb.in .sb__shutter{transform:scaleX(0)}
+.sb__shutter img{width:34%;max-width:150px}
+.sb__shutter .pic-label{position:absolute;bottom:16%;font-family:var(--font-display);font-weight:700;color:#fff;font-size:1.1rem;letter-spacing:.04em}
+.sb[data-m="climatisation"] .sb__shutter .pic-label{color:var(--navy)}
+.sb__body{position:relative}
+.sb__ico{width:66px;height:66px;margin-bottom:18px;filter:drop-shadow(0 8px 18px rgba(0,0,40,.18));transition:.4s var(--ease)}
+.sb__ico img{width:100%;height:100%}
+.sb__body h3{font-size:clamp(1.6rem,3vw,2.2rem);color:var(--navy);margin-bottom:12px}
+.sb__body>p{color:var(--muted);max-width:46ch;margin-bottom:18px}
+.sb__list{list-style:none;display:flex;flex-direction:column;gap:9px;margin-bottom:22px}
+.sb__list li{display:flex;align-items:center;gap:11px;font-size:14.5px}
+.sb__list li::before{content:'';width:8px;height:8px;border-radius:50%;background:var(--ca);flex-shrink:0}
+.sb__link{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-display);font-weight:600;color:var(--ca);text-decoration:none}
+.sb__link::after{content:'→';transition:transform .3s var(--ease)}
+.sb__link:hover::after{transform:translateX(5px)}
+@media(max-width:780px){.sb{grid-template-columns:1fr}.sb:nth-child(even) .sb__media{order:0}}
+
