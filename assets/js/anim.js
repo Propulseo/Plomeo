@@ -61,6 +61,42 @@
   measurePara();
   addEventListener('resize', measurePara, { passive: true });
 
+  /* ---------- Souris : curseur, parallaxe, magnétique, tilt (desktop) ---------- */
+  const dot = document.querySelector('.cursordot');
+  const ring = document.querySelector('.cursorring');
+  let mx = innerWidth / 2, my = innerHeight / 2, rx = mx, ry = my;
+  if (fine) {
+    body.classList.add('cursor-on');
+    const mouseEls = [...document.querySelectorAll('[data-mouse]')].map(el => ({ el, f: parseFloat(el.dataset.mouse) || 0 }));
+    addEventListener('mousemove', e => {
+      mx = e.clientX; my = e.clientY;
+      if (dot) { dot.style.left = mx + 'px'; dot.style.top = my + 'px'; }
+      const cx = innerWidth / 2, cy = innerHeight / 2;
+      mouseEls.forEach(({ el, f }) => {
+        el.style.transform = `translate3d(${((mx - cx) * f).toFixed(1)}px, ${((my - cy) * f).toFixed(1)}px, 0)`;
+      });
+    }, { passive: true });
+    document.querySelectorAll('a, button, .tilt, input, select, textarea').forEach(el => {
+      el.addEventListener('mouseenter', () => ring && ring.classList.add('hot'));
+      el.addEventListener('mouseleave', () => ring && ring.classList.remove('hot'));
+    });
+    document.querySelectorAll('.magnetic').forEach(el => {
+      el.addEventListener('mousemove', e => {
+        const r = el.getBoundingClientRect();
+        el.style.transform = `translate(${((e.clientX - (r.left + r.width / 2)) * 0.35).toFixed(1)}px, ${((e.clientY - (r.top + r.height / 2)) * 0.35).toFixed(1)}px)`;
+      });
+      el.addEventListener('mouseleave', () => { el.style.transform = ''; });
+    });
+    document.querySelectorAll('.tilt').forEach(el => {
+      el.addEventListener('mousemove', e => {
+        const r = el.getBoundingClientRect();
+        const px = (e.clientX - r.left) / r.width - 0.5, py = (e.clientY - r.top) / r.height - 0.5;
+        el.style.transform = `perspective(800px) rotateY(${(px * 8).toFixed(2)}deg) rotateX(${(-py * 8).toFixed(2)}deg)`;
+      });
+      el.addEventListener('mouseleave', () => { el.style.transform = ''; });
+    });
+  }
+
   /* ---------- Boucle rAF unique : Lenis + progression + parallaxe ---------- */
   const bar = document.querySelector('.scrollbar');
   function frame(time) {
@@ -72,6 +108,7 @@
       const off = (p.top + p.h / 2) - mid;
       p.el.style.transform = `translate3d(0, ${(-off * p.f).toFixed(1)}px, 0)`;
     });
+    if (fine && ring) { rx += (mx - rx) * 0.18; ry += (my - ry) * 0.18; ring.style.left = rx + 'px'; ring.style.top = ry + 'px'; }
     requestAnimationFrame(frame);
   }
   requestAnimationFrame(frame);
