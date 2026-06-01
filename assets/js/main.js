@@ -114,12 +114,14 @@ document.querySelectorAll('.faqitem__q').forEach(q=>q.addEventListener('click',(
 // ---- Intro (1re visite de la session seulement) ----
 const intro=document.getElementById('intro');
 function endIntro(){if(intro.classList.contains('done'))return;intro.classList.add('done');replayHero();setTimeout(()=>intro.style.display='none',650);}
-// MODE TEST : l'intro se joue à chaque rechargement.
-// Pour la prod (1re visite par session seulement), remplacer par :
-//   if(sessionStorage.getItem('plomeo_intro')){intro.style.display='none'}
-//   else{sessionStorage.setItem('plomeo_intro','1'); setTimeout(endIntro,3500); document.getElementById('introSkip').addEventListener('click',endIntro);}
-setTimeout(endIntro,3500);
-document.getElementById('introSkip').addEventListener('click',endIntro);
+// 1re visite de la session : on joue l'intro. Visites suivantes : on la masque.
+if(sessionStorage.getItem('plomeo_intro')){
+  intro.style.display='none';
+}else{
+  sessionStorage.setItem('plomeo_intro','1');
+  setTimeout(endIntro,3500);
+  document.getElementById('introSkip').addEventListener('click',endIntro);
+}
 
 // ---- Formulaire contact : envoi AJAX (le visiteur reste sur le site) ----
 const cform=document.querySelector('.cform');
