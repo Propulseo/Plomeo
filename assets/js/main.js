@@ -120,3 +120,33 @@ function endIntro(){if(intro.classList.contains('done'))return;intro.classList.a
 //   else{sessionStorage.setItem('plomeo_intro','1'); setTimeout(endIntro,3500); document.getElementById('introSkip').addEventListener('click',endIntro);}
 setTimeout(endIntro,3500);
 document.getElementById('introSkip').addEventListener('click',endIntro);
+
+// ---- Formulaire contact : envoi AJAX (le visiteur reste sur le site) ----
+const cform=document.querySelector('.cform');
+if(cform){
+  const status=document.getElementById('cformStatus');
+  const btn=cform.querySelector('.cbtn');
+  cform.addEventListener('submit',async e=>{
+    e.preventDefault();
+    if(cform._honey&&cform._honey.value)return; // honeypot rempli = bot
+    const label=btn.textContent;
+    btn.disabled=true;btn.textContent='Envoi…';
+    status.hidden=true;status.className='cform__status';
+    try{
+      const res=await fetch('https://formsubmit.co/ajax/contact@plomeo.fr',{
+        method:'POST',headers:{'Accept':'application/json'},body:new FormData(cform)
+      });
+      const data=await res.json();
+      if(res.ok&&(data.success==='true'||data.success===true)){
+        cform.reset();
+        status.textContent="Merci ! Votre demande a bien été envoyée, on revient vers vous rapidement.";
+        status.classList.add('ok');
+      }else throw new Error(data.message||'Erreur');
+    }catch(err){
+      status.textContent="Oups, l'envoi a échoué. Réessayez ou appelez-nous au 06 95 16 58 89.";
+      status.classList.add('err');
+    }finally{
+      status.hidden=false;btn.disabled=false;btn.textContent=label;
+    }
+  });
+}
