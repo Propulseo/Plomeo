@@ -5,15 +5,17 @@ function splitHero(w){heroTitle.innerHTML=[...w].map((c,i)=>`<span class="ltr" s
 splitHero(heroTitle.textContent.trim());
 function replayHero(){const h=document.getElementById('hero');h.classList.remove('play');void h.offsetWidth;h.classList.add('play');}
 
-// ---- Counters ----
-function runCounters(){
-  document.querySelectorAll('[data-count]').forEach(el=>{
-    const end=parseFloat(el.dataset.count),dec=+el.dataset.dec||0;let t0=null;
-    const step=ts=>{t0??=ts;const p=Math.min((ts-t0)/900,1);el.textContent=(end*p).toFixed(dec).replace('.',',');if(p<1)requestAnimationFrame(step);};
-    requestAnimationFrame(step);
-  });
+// ---- Counters (déclenchés à l'entrée dans le viewport) ----
+const reduceCounters=matchMedia('(prefers-reduced-motion: reduce)').matches;
+function runCounter(el){
+  const end=parseFloat(el.dataset.count),dec=+el.dataset.dec||0;
+  if(reduceCounters){el.textContent=end.toFixed(dec).replace('.',',');return;}
+  let t0=null;
+  const step=ts=>{t0??=ts;const p=Math.min((ts-t0)/900,1);el.textContent=(end*p).toFixed(dec).replace('.',',');if(p<1)requestAnimationFrame(step);};
+  requestAnimationFrame(step);
 }
-runCounters();
+const countIO=new IntersectionObserver((es,obs)=>es.forEach(e=>{if(e.isIntersecting){runCounter(e.target);obs.unobserve(e.target);}}),{threshold:.5});
+document.querySelectorAll('[data-count]').forEach(el=>countIO.observe(el));
 
 // ---- Marquee reviews ----
 const reviews=[
