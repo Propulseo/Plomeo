@@ -1,0 +1,47 @@
+/* ============ ANIMATIONS — système immersif (additif) ============
+   Vars (--blue, --orange, --ease…) viennent de base.css, chargé avant. */
+
+/* ---- Reveals : état caché UNIQUEMENT si JS actif (.js-anim sur <html>) ---- */
+.js-anim [data-reveal]{opacity:0;transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.js-anim [data-reveal="up"]{transform:translateY(46px)}
+.js-anim [data-reveal="scale"]{transform:translateY(46px) scale(.92)}
+.js-anim [data-reveal="fade"]{transform:none}
+[data-reveal].is-in{opacity:1;transform:none}
+
+/* ---- Barre de progression scroll ---- */
+.scrollbar{position:fixed;top:0;left:0;height:5px;width:100%;transform:scaleX(var(--sp,0));transform-origin:left;
+  background:linear-gradient(90deg,var(--blue),var(--orange));z-index:1200;pointer-events:none}
+
+/* ---- Curseur custom (desktop, activé via body.cursor-on) ---- */
+.cursordot,.cursorring{position:fixed;top:0;left:0;border-radius:50%;pointer-events:none;z-index:1300;
+  transform:translate(-50%,-50%);opacity:0;transition:opacity .3s}
+.cursordot{width:8px;height:8px;background:var(--orange)}
+.cursorring{width:38px;height:38px;border:2px solid var(--blue);
+  transition:opacity .3s,width .25s var(--ease),height .25s var(--ease),background .25s var(--ease)}
+body.cursor-on .cursordot,body.cursor-on .cursorring{opacity:1}
+body.cursor-on{cursor:none}
+.cursorring.hot{width:64px;height:64px;background:rgba(50,50,255,.08)}
+
+/* ---- Tilt 3D ---- */
+.tilt{transition:transform .3s var(--ease)}
+
+/* ---- Lenis (smooth-scroll) ---- */
+html.lenis,html.lenis body{height:auto}
+.lenis.lenis-smooth{scroll-behavior:auto!important}
+.lenis.lenis-smooth [data-lenis-prevent]{overscroll-behavior:contain}
+.lenis.lenis-stopped{overflow:hidden}
+
+/* ---- Fallback : rien d'invisible si JS absent (reveals existants) ---- */
+html:not(.js-anim) .about__photo{clip-path:none!important}
+html:not(.js-anim) .about__text>*,
+html:not(.js-anim) .about__media::before,
+html:not(.js-anim) .about__badge,
+html:not(.js-anim) .about__caption,
+html:not(.js-anim) .proj,
+html:not(.js-anim) .sb__imgwrap img{opacity:1!important;transform:none!important}
+html:not(.js-anim) .sb__shutter{display:none!important}
+
+/* ---- Reduced-motion : pas de curseur ni de barre ---- */
+@media (prefers-reduced-motion: reduce){
+  .cursordot,.cursorring,.scrollbar{display:none!important}
+}
