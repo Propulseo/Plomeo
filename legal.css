@@ -1,0 +1,102 @@
+/* ============================================
+   PLOMÉO — Pages légales (charte)
+   Variables fournies par /assets/css/base.css
+   ============================================ */
+body.legal {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    line-height: 1.7;
+    margin: 0;
+}
+
+.legal__bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px clamp(1rem, 5vw, 4rem);
+    background: var(--navy);
+}
+
+.legal__back {
+    color: rgba(255, 255, 255, 0.85);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.legal__back:hover {
+    color: #fff;
+}
+
+.legal__brand {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.3rem;
+    letter-spacing: 0.5px;
+    color: #fff;
+}
+
+.legal__container {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: clamp(2.5rem, 6vw, 5rem) clamp(1.25rem, 5vw, 2rem) 5rem;
+}
+
+.legal__title {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(2rem, 5vw, 3rem);
+    color: var(--navy);
+    margin: 0 0 0.4rem;
+}
+
+.legal__updated {
+    color: var(--muted);
+    font-size: 0.9rem;
+    margin: 0 0 2.5rem;
+}
+
+.legal__section {
+    margin-bottom: 2.25rem;
+}
+
+.legal__section h2 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: var(--blue);
+    margin: 0 0 0.6rem;
+}
+
+.legal__section p {
+    margin: 0 0 0.75rem;
+    color: var(--ink);
+}
+
+.legal__section ul {
+    margin: 0;
+    padding-left: 1.2rem;
+}
+
+.legal__section li {
+    margin-bottom: 0.4rem;
+}
+
+.legal a {
+    color: var(--blue);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+.legal em {
+    color: var(--muted);
+    font-style: italic;
+}
+
+.legal__nav-back {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+}
