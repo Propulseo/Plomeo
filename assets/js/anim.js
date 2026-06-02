@@ -51,7 +51,7 @@
   /* ---------- Souris : curseur, parallaxe, magnétique, tilt (desktop) ---------- */
   const dot = document.querySelector('.cursordot');
   const ring = document.querySelector('.cursorring');
-  let mx = innerWidth / 2, my = innerHeight / 2, rx = mx, ry = my;
+  let mx = innerWidth / 2, my = innerHeight / 2, rx = mx, ry = my, rectsDirty = false;
   if (fine) {
     body.classList.add('cursor-on');
     const mouseEls = [...document.querySelectorAll('[data-mouse]')].map(el => ({ el, f: parseFloat(el.dataset.mouse) || 0 }));
@@ -71,7 +71,7 @@
       let r = null;
       el.addEventListener('mouseenter', () => { r = el.getBoundingClientRect(); });
       el.addEventListener('mousemove', e => {
-        if (!r) r = el.getBoundingClientRect();
+        if (rectsDirty || !r) { r = el.getBoundingClientRect(); rectsDirty = false; }
         el.style.transform = `translate(${((e.clientX - (r.left + r.width / 2)) * 0.35).toFixed(1)}px, ${((e.clientY - (r.top + r.height / 2)) * 0.35).toFixed(1)}px)`;
       });
       el.addEventListener('mouseleave', () => { el.style.transform = ''; r = null; });
@@ -80,7 +80,7 @@
       let r = null;
       el.addEventListener('mouseenter', () => { r = el.getBoundingClientRect(); });
       el.addEventListener('mousemove', e => {
-        if (!r) r = el.getBoundingClientRect();
+        if (rectsDirty || !r) { r = el.getBoundingClientRect(); rectsDirty = false; }
         const px = (e.clientX - r.left) / r.width - 0.5, py = (e.clientY - r.top) / r.height - 0.5;
         el.style.transform = `perspective(800px) rotateY(${(px * 8).toFixed(2)}deg) rotateX(${(-py * 8).toFixed(2)}deg)`;
       });
@@ -111,7 +111,8 @@
     else running = false; // au repos : on stoppe la boucle (CPU ~0), relancée au scroll/souris
   }
   function kick() { if (!running) { running = true; requestAnimationFrame(frame); } }
-  addEventListener('scroll', kick, { passive: true });
+  addEventListener('scroll', () => { rectsDirty = true; kick(); }, { passive: true });
+  addEventListener('resize', kick, { passive: true });
   if (fine) addEventListener('mousemove', kick, { passive: true });
   kick();
 })();
