@@ -1,6 +1,6 @@
 /* ============ FOOTER ============ */
 .foot{background:var(--navy);color:rgba(255,255,255,.7);padding:clamp(3rem,6vw,4.5rem) 0 1.8rem}
-.foot__inner{max-width:1340px;margin:0 auto;padding:0 clamp(1.2rem,5vw,3rem);display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:30px}
+.foot__inner{max-width:1474px;margin:0 auto;padding:0 clamp(1.2rem,5vw,3rem);display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:30px}
 .foot__logo{font-family:var(--font-display);font-weight:800;color:#fff;font-size:1.6rem}
 .foot__logo img{height:42px;width:auto}
 .foot__credit{color:rgba(255,255,255,.6);text-align:center}
@@ -11,7 +11,7 @@
 .foot h4{color:#fff;font-size:12px;text-transform:uppercase;letter-spacing:.08em;margin-bottom:14px;font-family:var(--font-display)}
 .foot__col a{color:rgba(255,255,255,.7);text-decoration:none;display:block;margin-bottom:9px;font-size:14px;transition:color .2s}
 .foot__col a:hover{color:#fff}
-.foot__bottom{max-width:1340px;margin:2.5rem auto 0;padding:1.4rem clamp(1.2rem,5vw,3rem) 0;border-top:1px solid rgba(255,255,255,.12);
+.foot__bottom{max-width:1474px;margin:2.5rem auto 0;padding:1.4rem clamp(1.2rem,5vw,3rem) 0;border-top:1px solid rgba(255,255,255,.12);
   display:flex;justify-content:space-between;font-size:12px;flex-wrap:wrap;gap:10px}
 .foot__bottom a{color:rgba(255,255,255,.7);text-decoration:none}
 @media(max-width:780px){.foot__inner{grid-template-columns:1fr 1fr}.foot__brand{grid-column:1/-1}}

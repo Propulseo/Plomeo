@@ -1,11 +1,11 @@
 /* ============ PILLARS (volet métier + photos) ============ */
 .pil{padding:clamp(3rem,7vw,5.5rem) 0;background:var(--bg)}
-.pil__head{max-width:1340px;margin:0 auto clamp(2rem,5vw,3.5rem);padding:0 clamp(1.2rem,5vw,3rem)}
+.pil__head{max-width:1474px;margin:0 auto clamp(2rem,5vw,3.5rem);padding:0 clamp(1.2rem,5vw,3rem)}
 .pil__eyebrow{font-family:var(--font-serif);font-style:italic;color:var(--blue);font-size:1.05rem}
 .pil__head h2{font-size:clamp(2rem,4.5vw,3.2rem);color:var(--navy);margin:.3rem 0}
 .pil__head h2 em{font-style:italic;font-family:var(--font-serif);font-weight:400;color:var(--blue)}
 .pil__head p{color:var(--muted);max-width:56ch}
-.sb{--c:var(--blue);--ca:var(--blue);max-width:1340px;margin:0 auto;padding:clamp(1.5rem,4vw,3rem) clamp(1.2rem,5vw,3rem);
+.sb{--c:var(--blue);--ca:var(--blue);max-width:1474px;margin:0 auto;padding:clamp(1.5rem,4vw,3rem) clamp(1.2rem,5vw,3rem);
   display:grid;grid-template-columns:1fr 1fr;gap:clamp(1.5rem,4vw,4rem);align-items:center}
 .sb[data-m="plomberie"]{--c:var(--blue);--ca:var(--blue)}
 .sb[data-m="chauffage"]{--c:var(--orange);--ca:var(--orange)}

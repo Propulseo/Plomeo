@@ -1,6 +1,6 @@
 /* ============ CONTACT ============ */
 .contact{padding:clamp(3.5rem,8vw,6rem) 0;background:linear-gradient(135deg,var(--navy) 0%,#1a1ab0 100%);color:#fff}
-.contact__inner{max-width:1280px;margin:0 auto;padding:0 clamp(1.2rem,5vw,3rem);display:grid;grid-template-columns:1fr 1.1fr;gap:clamp(2rem,5vw,4rem)}
+.contact__inner{max-width:1408px;margin:0 auto;padding:0 clamp(1.2rem,5vw,3rem);display:grid;grid-template-columns:1fr 1.1fr;gap:clamp(2rem,5vw,4rem)}
 .contact__eyebrow{font-family:var(--font-serif);font-style:italic;color:var(--sky);font-size:1.05rem}
 .contact h2{font-size:clamp(2rem,4.5vw,3rem);margin:.3rem 0 1rem}
 .contact h2 em{font-style:italic;font-family:var(--font-serif);font-weight:400;color:var(--sky)}
