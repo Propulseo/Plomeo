@@ -5,6 +5,13 @@ function splitHero(w){heroTitle.innerHTML=[...w].map((c,i)=>`<span class="ltr" s
 splitHero(heroTitle.textContent.trim());
 function replayHero(){const h=document.getElementById('hero');h.classList.remove('play');void h.offsetWidth;h.classList.add('play');}
 
+// ---- Vidéo hero : chargée sur desktop seulement (économie data/CPU sur mobile) ----
+(()=>{const v=document.querySelector('.hero__video');
+  if(v && innerWidth>=768 && !matchMedia('(prefers-reduced-motion: reduce)').matches){
+    const s=v.querySelector('source[data-src]');
+    if(s && !s.getAttribute('src')){s.src=s.dataset.src;v.load();v.play().catch(()=>{});}
+  }})();
+
 // ---- Counters (déclenchés à l'entrée dans le viewport) ----
 const reduceCounters=matchMedia('(prefers-reduced-motion: reduce)').matches;
 function runCounter(el){

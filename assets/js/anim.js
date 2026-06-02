@@ -90,16 +90,28 @@
 
   /* ---------- Boucle rAF : progression + parallaxe + curseur ---------- */
   const bar = document.querySelector('.scrollbar');
+  let running = false, lastY = -1;
   function frame() {
+    const y = scrollY;
     const max = root.scrollHeight - innerHeight;
-    if (bar) bar.style.setProperty('--sp', (max > 0 ? scrollY / max : 0).toFixed(4));
-    const mid = scrollY + innerHeight / 2;
+    if (bar) bar.style.setProperty('--sp', (max > 0 ? y / max : 0).toFixed(4));
+    const mid = y + innerHeight / 2;
     para.forEach(p => {
       const off = (p.top + p.h / 2) - mid;
       p.el.style.transform = `translate3d(0, ${(-off * p.f).toFixed(1)}px, 0)`;
     });
-    if (fine && ring) { rx += (mx - rx) * 0.18; ry += (my - ry) * 0.18; ring.style.left = rx + 'px'; ring.style.top = ry + 'px'; }
-    requestAnimationFrame(frame);
+    let ringMoving = false;
+    if (fine && ring) {
+      rx += (mx - rx) * 0.18; ry += (my - ry) * 0.18;
+      ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+      if (Math.abs(mx - rx) > 0.5 || Math.abs(my - ry) > 0.5) ringMoving = true;
+    }
+    const scrolled = y !== lastY; lastY = y;
+    if (scrolled || ringMoving) requestAnimationFrame(frame);
+    else running = false; // au repos : on stoppe la boucle (CPU ~0), relancée au scroll/souris
   }
-  requestAnimationFrame(frame);
+  function kick() { if (!running) { running = true; requestAnimationFrame(frame); } }
+  addEventListener('scroll', kick, { passive: true });
+  if (fine) addEventListener('mousemove', kick, { passive: true });
+  kick();
 })();
