@@ -10,3 +10,4 @@ html{scroll-behavior:smooth}
 body{font-family:var(--font-body);color:var(--ink);background:var(--bg);line-height:1.6;overflow-x:hidden}
 h1,h2,h3{font-family:var(--font-display);font-weight:800;line-height:1.05}
 img{display:block;max-width:100%}
+picture{display:contents}
