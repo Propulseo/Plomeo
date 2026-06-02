@@ -1,10 +1,10 @@
 /* ===== Process 3 étapes ===== */
 .process{padding:clamp(3.5rem,8vw,6rem) 0;background:var(--bg)}
-.process__head{max-width:1180px;margin:0 auto 2.6rem;padding:0 clamp(1.2rem,5vw,3rem);text-align:center}
+.process__head{max-width:1340px;margin:0 auto 2.6rem;padding:0 clamp(1.2rem,5vw,3rem);text-align:center}
 .process__eyebrow{font-family:var(--font-serif);font-style:italic;color:var(--blue);font-size:1.05rem}
 .process__head h2{font-size:clamp(2rem,4.5vw,3rem);color:var(--navy);margin-top:.3rem}
 .process__head h2 em{font-style:italic;font-family:var(--font-serif);font-weight:400;color:var(--blue)}
-.process__grid{max-width:1180px;margin:0 auto;padding:0 clamp(1.2rem,5vw,3rem);display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.process__grid{max-width:1340px;margin:0 auto;padding:0 clamp(1.2rem,5vw,3rem);display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
 .pstep{position:relative;background:#fff;border:1px solid rgba(0,0,0,.07);border-radius:18px;padding:30px 26px;text-align:center}
 .pstep__n{width:56px;height:56px;margin:0 auto 16px;border-radius:50%;background:var(--blue);color:#fff;font-family:var(--font-display);font-weight:800;font-size:1.4rem;display:flex;align-items:center;justify-content:center}
 .pstep:nth-child(2) .pstep__n{background:var(--orange)}.pstep:nth-child(3) .pstep__n{background:var(--navy)}
