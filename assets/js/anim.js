@@ -35,20 +35,7 @@
   }), { threshold: 0.18 });
   document.querySelectorAll('[data-reveal]').forEach(el => revIO.observe(el));
 
-  /* ---------- Smooth-scroll Lenis (desktop) ---------- */
-  let lenis = null;
-  if (fine && window.Lenis) {
-    root.style.scrollBehavior = 'auto';
-    lenis = new Lenis({ duration: 1.1, smoothWheel: true });
-    document.querySelectorAll('a[href^="#"]').forEach(a => {
-      a.addEventListener('click', ev => {
-        const t = document.querySelector(a.getAttribute('href'));
-        if (!t) return;
-        ev.preventDefault();
-        lenis.scrollTo(t, { offset: -8 });
-      });
-    });
-  }
+  /* ---------- (Lenis retiré : scroll natif = plus réactif/instantané) ---------- */
 
   /* ---------- Parallaxe scroll (positions en cache, pas de feedback) ---------- */
   const para = [...document.querySelectorAll('[data-parallax]')].map(el => ({
@@ -81,26 +68,29 @@
       el.addEventListener('mouseleave', () => ring && ring.classList.remove('hot'));
     });
     document.querySelectorAll('.magnetic').forEach(el => {
+      let r = null;
+      el.addEventListener('mouseenter', () => { r = el.getBoundingClientRect(); });
       el.addEventListener('mousemove', e => {
-        const r = el.getBoundingClientRect();
+        if (!r) r = el.getBoundingClientRect();
         el.style.transform = `translate(${((e.clientX - (r.left + r.width / 2)) * 0.35).toFixed(1)}px, ${((e.clientY - (r.top + r.height / 2)) * 0.35).toFixed(1)}px)`;
       });
-      el.addEventListener('mouseleave', () => { el.style.transform = ''; });
+      el.addEventListener('mouseleave', () => { el.style.transform = ''; r = null; });
     });
     document.querySelectorAll('.tilt').forEach(el => {
+      let r = null;
+      el.addEventListener('mouseenter', () => { r = el.getBoundingClientRect(); });
       el.addEventListener('mousemove', e => {
-        const r = el.getBoundingClientRect();
+        if (!r) r = el.getBoundingClientRect();
         const px = (e.clientX - r.left) / r.width - 0.5, py = (e.clientY - r.top) / r.height - 0.5;
         el.style.transform = `perspective(800px) rotateY(${(px * 8).toFixed(2)}deg) rotateX(${(-py * 8).toFixed(2)}deg)`;
       });
-      el.addEventListener('mouseleave', () => { el.style.transform = ''; });
+      el.addEventListener('mouseleave', () => { el.style.transform = ''; r = null; });
     });
   }
 
-  /* ---------- Boucle rAF unique : Lenis + progression + parallaxe ---------- */
+  /* ---------- Boucle rAF : progression + parallaxe + curseur ---------- */
   const bar = document.querySelector('.scrollbar');
-  function frame(time) {
-    if (lenis) lenis.raf(time);
+  function frame() {
     const max = root.scrollHeight - innerHeight;
     if (bar) bar.style.setProperty('--sp', (max > 0 ? scrollY / max : 0).toFixed(4));
     const mid = scrollY + innerHeight / 2;
