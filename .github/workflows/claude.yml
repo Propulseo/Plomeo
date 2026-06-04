@@ -1,0 +1,37 @@
+name: Claude Code
+
+# Quand l'Action se déclenche :
+on:
+  issues:
+    types: [opened]          # une nouvelle issue est créée
+  issue_comment:
+    types: [created]         # un commentaire est ajouté à une issue / PR
+  pull_request_review_comment:
+    types: [created]         # un commentaire de revue sur une PR
+
+jobs:
+  claude:
+    # Ne s'exécute QUE si le texte contient "@claude" (évite de tourner pour rien)
+    if: |
+      (github.event_name == 'issues' && contains(github.event.issue.body, '@claude')) ||
+      (github.event_name == 'issue_comment' && contains(github.event.comment.body, '@claude')) ||
+      (github.event_name == 'pull_request_review_comment' && contains(github.event.comment.body, '@claude'))
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write         # éditer les fichiers
+      pull-requests: write    # ouvrir une PR
+      issues: write           # répondre à l'issue
+      id-token: write
+    steps:
+      - name: Récupérer le code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Lancer Claude
+        uses: anthropics/claude-code-action@v1
+        with:
+          # Auth via l'abonnement Claude Max (jeton stocké en secret GitHub)
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          # Limite de tours pour éviter qu'il tourne trop longtemps
+          claude_args: "--max-turns 15"
