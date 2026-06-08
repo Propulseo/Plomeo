@@ -1,5 +1,5 @@
 /* ============ CONSEILS / JOURNAL ============ */
-.blog{padding:clamp(3.5rem,8vw,6rem) 0;background:#fff}
+.blog{padding:clamp(1.75rem,4vw,3rem) 0;background:#fff}
 .blog__head{max-width:1408px;margin:0 auto 1.2rem;padding:0 clamp(1.2rem,5vw,3rem)}
 .blog__eyebrow{font-family:var(--font-serif);font-style:italic;color:var(--blue);font-size:1.05rem}
 .blog__head h2{font-size:clamp(2rem,4.5vw,3rem);color:var(--navy);margin-top:.3rem}

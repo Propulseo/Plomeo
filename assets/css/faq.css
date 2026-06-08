@@ -1,5 +1,5 @@
 /* ===== FAQ ===== */
-.faq{padding:clamp(3.5rem,8vw,6rem) 0;background:var(--bg)}
+.faq{padding:clamp(1.75rem,4vw,3rem) 0;background:var(--bg)}
 .faq__head{max-width:836px;margin:0 auto 2.2rem;padding:0 clamp(1.2rem,5vw,3rem);text-align:center}
 .faq__eyebrow{font-family:var(--font-serif);font-style:italic;color:var(--blue);font-size:1.05rem}
 .faq__head h2{font-size:clamp(2rem,4.5vw,3rem);color:var(--navy);margin-top:.3rem}

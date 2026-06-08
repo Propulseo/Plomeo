@@ -1,6 +1,6 @@
 /* ============ HEADER (repris de la LP) ============ */
 .lhead{position:fixed;top:0;left:0;right:0;z-index:900;display:flex;align-items:center;justify-content:space-between;
-  padding:16px clamp(1.2rem,5vw,3rem);pointer-events:none;transition:.3s var(--ease)}
+  padding:16px max(clamp(1.2rem,5vw,3rem),calc(50% - 689px));pointer-events:none;transition:.3s var(--ease)}
 .lhead.scrolled{background:rgba(50,50,255,.94);backdrop-filter:blur(12px);padding-top:12px;padding-bottom:12px;box-shadow:0 8px 30px rgba(50,50,255,.3)}
 .lhead>*{pointer-events:auto}
 .lhead__logo{display:inline-flex;align-items:center;text-decoration:none}
