@@ -139,13 +139,14 @@ if(cform){
   const btn=cform.querySelector('.cbtn');
   cform.addEventListener('submit',async e=>{
     e.preventDefault();
-    if(cform._honey&&cform._honey.value)return; // honeypot rempli = bot
+    if(cform.botcheck&&cform.botcheck.checked)return; // honeypot coché = bot
     const label=btn.textContent;
     btn.disabled=true;btn.textContent='Envoi…';
     status.hidden=true;status.className='cform__status';
     try{
-      const res=await fetch('https://formsubmit.co/ajax/contact@plomeo.fr',{
-        method:'POST',headers:{'Accept':'application/json'},body:new FormData(cform)
+      const res=await fetch('https://api.web3forms.com/submit',{
+        method:'POST',headers:{'Accept':'application/json','Content-Type':'application/json'},
+        body:JSON.stringify(Object.fromEntries(new FormData(cform)))
       });
       const data=await res.json();
       if(res.ok&&(data.success==='true'||data.success===true)){
