@@ -3,6 +3,10 @@
 const heroTitle=document.getElementById('heroTitle');
 function splitHero(w){heroTitle.innerHTML=[...w].map((c,i)=>`<span class="ltr" style="animation-delay:${i*0.06}s">${c===' '?'&nbsp;':c}</span>`).join('')+'<span class="u"></span>';}
 splitHero(heroTitle.textContent.trim());
+// Le CMS (assets/js/site/cms-singletons.js) peut livrer un titre plus récent que
+// celui cuit au build : on ré-anime le hero UNIQUEMENT s'il a changé (sinon
+// l'animation rejouerait à chaque visite alors que rien n'a bougé).
+document.addEventListener('cms:singletons-applied',e=>{const t=e.detail&&e.detail['hero.titre'];if(t!=null&&t.trim()!==heroTitle.textContent.replace(/\u00A0/g,' ').trim())splitHero(t.trim());});
 function replayHero(){const h=document.getElementById('hero');h.classList.remove('play');void h.offsetWidth;h.classList.add('play');}
 
 // ---- Vidéo hero : chargée sur desktop seulement (économie data/CPU sur mobile) ----

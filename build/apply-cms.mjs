@@ -1,5 +1,6 @@
 import * as cheerio from 'cheerio'
 import sanitizeHtml from 'sanitize-html'
+import { isSafeUrl } from '../assets/js/site/render.mjs'
 
 /**
  * Réécrit le contenu des éléments [data-cms] à partir de la table CMS.
@@ -12,12 +13,16 @@ export function applyCms(html, table) {
   const $ = cheerio.load(html, { decodeEntities: false })
   const warnings = []
 
+  // POLITIQUE DES REPÈRES : on CONSERVE data-cms / data-cms-attr / data-cms-html dans
+  // la sortie pour que la couche « lecture live » (assets/js/site/cms-singletons.js)
+  // puisse réécrire ces champs sans redéploiement. On RETIRE en revanche
+  // data-cms-html-rich (pages légales) et data-cms-json (<head>) : eux restent cuits.
+
   $('[data-cms]').each((_, el) => {
     const key = $(el).attr('data-cms')
     const val = table[key]
     if (val === undefined) { warnings.push(`clé manquante: ${key}`); return }
     $(el).text(val)
-    $(el).removeAttr('data-cms')
   })
 
   $('[data-cms-attr]').each((_, el) => {
@@ -27,20 +32,19 @@ export function applyCms(html, table) {
       if (!attr || !key) continue
       const val = table[key]
       if (val === undefined) { warnings.push(`clé manquante (attr): ${key}`); continue }
-      if ((attr === 'href' || attr === 'src') && /^\s*javascript:/i.test(val)) {
+      if ((attr === 'href' || attr === 'src') && !isSafeUrl(val)) {
         warnings.push(`URL bloquée (${attr}): ${key}`); continue
       }
       $(el).attr(attr, val)
     }
-    $(el).removeAttr('data-cms-attr')
   })
 
   const STRICT_ALLOWED = ['em', 'strong', 'b', 'i', 'br', 'a', 'span']
   const RICH_ALLOWED = ['h2', 'h3', 'h4', 'p', 'ul', 'ol', 'li', 'em', 'strong', 'b', 'i', 'br', 'a', 'span']
   const HTML_ALLOWED_ATTRIBUTES = { a: ['href', 'target', 'rel'], span: ['class'] }
 
-  injectHtml($, '[data-cms-html]', table, warnings, STRICT_ALLOWED)
-  injectHtml($, '[data-cms-html-rich]', table, warnings, RICH_ALLOWED)
+  injectHtml($, '[data-cms-html]', table, warnings, STRICT_ALLOWED, true) // live → repère conservé
+  injectHtml($, '[data-cms-html-rich]', table, warnings, RICH_ALLOWED, false) // cuit (légal) → repère retiré
 
   $('script[data-cms-json]').each((_, el) => {
     const spec = $(el).attr('data-cms-json') || ''
@@ -69,7 +73,7 @@ export function applyCms(html, table) {
    * @param {string[]} warn
    * @param {string[]} allowedTags
    */
-  function injectHtml($, selector, tbl, warn, allowedTags) {
+  function injectHtml($, selector, tbl, warn, allowedTags, preserveMarker) {
     const attrName = selector.slice(1, -1)
     $(selector).each((_, el) => {
       const key = $(el).attr(attrName)
@@ -79,7 +83,7 @@ export function applyCms(html, table) {
         allowedTags,
         allowedAttributes: HTML_ALLOWED_ATTRIBUTES,
       }))
-      $(el).removeAttr(attrName)
+      if (!preserveMarker) $(el).removeAttr(attrName)
     })
   }
 }

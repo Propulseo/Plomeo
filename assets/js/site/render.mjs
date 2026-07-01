@@ -8,16 +8,19 @@ export function esc(s) {
   ))
 }
 
+// Prédicat pur : schéma d'URL autorisé (ALLOWLIST — relatif/ancre, http/https/
+// mailto/tel). Robuste contre les contournements par caractères de contrôle
+// (ex. "java\tscript:") qu'un simple deny de "javascript:" laisse passer : le
+// navigateur retire ces caractères AVANT de parser le schéma.
+export function isSafeUrl(u) {
+  const s = String(u ?? '').trim()
+  return /^(#|\/|\.\/|\.\.\/)/.test(s) || /^(https?:|mailto:|tel:)/i.test(s)
+}
+
 // Valide le schéma d'une URL destinée à un attribut href (défense en profondeur :
 // esc() échappe le HTML mais n'empêche pas un schéma actif type javascript:).
 export function safeHref(u, fallback = '#contact') {
-  if (!u) return fallback
-  const s = String(u).trim()
-  // relatif / ancre / chemin autorisés
-  if (/^(#|\/|\.\/|\.\.\/)/.test(s)) return s
-  // schémas explicitement autorisés
-  if (/^(https?:|mailto:|tel:)/i.test(s)) return s
-  return fallback
+  return isSafeUrl(u) ? String(u).trim() : fallback
 }
 
 // Dérive le chemin de la variante WebP d'une image par convention (remplace
