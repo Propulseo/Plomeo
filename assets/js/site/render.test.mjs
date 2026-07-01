@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { esc, renderCommunes } from './render.mjs'
+import { esc, renderCommunes, renderPiliers, renderProcess } from './render.mjs'
 
 describe('esc', () => {
   it('échappe les caractères HTML dangereux', () => {
@@ -27,5 +27,58 @@ describe('renderCommunes', () => {
   })
   it('retourne une chaîne vide sur liste vide', () => {
     expect(renderCommunes([])).toBe('')
+  })
+})
+
+describe('renderPiliers', () => {
+  const row = {
+    categorie: 'plomberie', numero: '01', titre: 'Plomberie',
+    description: "De l'installation complète à la rénovation.",
+    image_path: 'assets/photos/sdb-jacuzzi.jpg', image_alt: 'Plomberie',
+    points: ['Installation sanitaire complète', 'Rénovation de salle de bain'],
+    cta_texte: 'Demander un devis', cta_lien: '#contact',
+  }
+
+  it('rend une article.sb avec data-m = categorie', () => {
+    const html = renderPiliers([row])
+    expect(html).toContain('<article class="sb" data-m="plomberie">')
+    expect(html).toContain('<span class="sb__num">01</span>')
+    expect(html).toContain('<h3>Plomberie</h3>')
+  })
+
+  it('rend chaque point de la liste points[] en <li>', () => {
+    const html = renderPiliers([row])
+    expect(html).toContain('<ul class="sb__list"><li>Installation sanitaire complète</li><li>Rénovation de salle de bain</li></ul>')
+  })
+
+  it('rend le lien cta avec le texte fourni', () => {
+    const html = renderPiliers([row])
+    expect(html).toContain('<a class="sb__link" href="#contact">Demander un devis</a>')
+  })
+
+  it('échappe titre/description/points', () => {
+    const html = renderPiliers([{ ...row, titre: '<b>X</b>', points: ['<i>y</i>'] }])
+    expect(html).toContain('&lt;b&gt;X&lt;/b&gt;')
+    expect(html).toContain('&lt;i&gt;y&lt;/i&gt;')
+  })
+
+  it('gère points absent/null sans planter (liste vide)', () => {
+    const html = renderPiliers([{ ...row, points: null }])
+    expect(html).toContain('<ul class="sb__list"></ul>')
+  })
+})
+
+describe('renderProcess', () => {
+  it('rend une étape .pstep avec numéro/titre/description', () => {
+    const html = renderProcess([{ numero: '1', titre: 'On échange', description: 'Vous décrivez votre besoin.' }])
+    expect(html).toBe(
+      '<div class="pstep" data-reveal="up"><div class="pstep__n">1</div><h3>On échange</h3><p>Vous décrivez votre besoin.</p></div>'
+    )
+  })
+
+  it('échappe titre/description', () => {
+    const html = renderProcess([{ numero: '1', titre: '<b>T</b>', description: '<i>D</i>' }])
+    expect(html).toContain('&lt;b&gt;T&lt;/b&gt;')
+    expect(html).toContain('&lt;i&gt;D&lt;/i&gt;')
   })
 })
