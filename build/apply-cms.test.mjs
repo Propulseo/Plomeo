@@ -30,3 +30,31 @@ describe('applyCms — texte via data-cms', () => {
     expect(out).toContain('<title>T</title>')
   })
 })
+
+describe('applyCms — attributs via data-cms-attr', () => {
+  it("pose la valeur sur l'attribut visé", () => {
+    const html = '<meta name="description" data-cms-attr="content:seo.meta_description" content="old">'
+    const { html: out } = applyCms(html, { 'seo.meta_description': 'nouvelle desc' })
+    expect(out).toContain('content="nouvelle desc"')
+  })
+
+  it("gère plusieurs paires attr:clé séparées par une virgule", () => {
+    const html = '<meta data-cms-attr="content:a.b, data-x:c.d" content="o" data-x="o2">'
+    const { html: out } = applyCms(html, { 'a.b': 'V1', 'c.d': 'V2' })
+    expect(out).toContain('content="V1"')
+    expect(out).toContain('data-x="V2"')
+  })
+
+  it("laisse l'attribut inchangé + warning si la clé manque", () => {
+    const html = '<meta data-cms-attr="content:a.b" content="OLD">'
+    const { html: out, warnings } = applyCms(html, {})
+    expect(out).toContain('content="OLD"')
+    expect(warnings).toContain('clé manquante (attr): a.b')
+  })
+
+  it("remplace le <title> via data-cms (texte)", () => {
+    const html = '<head><title data-cms="seo.meta_title">Old</title></head>'
+    const { html: out } = applyCms(html, { 'seo.meta_title': 'Nouveau titre' })
+    expect(out).toContain('<title>Nouveau titre</title>')
+  })
+})

@@ -16,6 +16,18 @@ export function applyCms(html, table) {
     const val = table[key]
     if (val === undefined) { warnings.push(`clé manquante: ${key}`); return }
     $(el).text(val)
+    $(el).removeAttr('data-cms')
+  })
+
+  $('[data-cms-attr]').each((_, el) => {
+    const spec = $(el).attr('data-cms-attr') || ''
+    for (const pair of spec.split(',')) {
+      const [attr, key] = pair.split(':').map((s) => s.trim())
+      if (!attr || !key) continue
+      const val = table[key]
+      if (val === undefined) { warnings.push(`clé manquante (attr): ${key}`); continue }
+      $(el).attr(attr, val)
+    }
   })
 
   return { html: $.html(), warnings }
