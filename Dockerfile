@@ -1,5 +1,7 @@
 # --- Étape build : Node construit le site (bake CMS + bundle + copie assets) ---
-FROM node:20-alpine AS build
+# Node 22 requis : @supabase/supabase-js a besoin d'un WebSocket natif (présent
+# dès Node 22 ; Node 20 fait échouer createClient au build).
+FROM node:22-alpine AS build
 WORKDIR /app
 
 # Deps (package-lock.json est gitignoré dans ce repo → npm install, pas npm ci)
