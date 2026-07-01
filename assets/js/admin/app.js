@@ -7,7 +7,6 @@ import { mountAvis } from './avis.js'
 import { mountFaq } from './faq.js'
 import { mountArticles } from './articles.js'
 import { mountCommunes } from './communes.js'
-import { mountVilles } from './villes.js'
 import { mountHero } from './hero.js'
 import { mountNav } from './nav.js'
 import { mountIntro } from './intro.js'
@@ -87,7 +86,6 @@ const TILES = [
   { key: 'realisations', label: 'Réalisations', icon: '🛠️', ready: true },
   { key: 'avis', label: 'Avis clients', icon: '⭐', ready: true },
   { key: 'communes', label: 'Communes desservies', icon: '📍', ready: true },
-  { key: 'villes', label: 'Villes (carte)', icon: '🗺️', ready: true },
   { key: 'blog', label: 'Articles / conseils', icon: '📝', ready: true },
   { key: 'faq', label: 'Questions / FAQ', icon: '❓', ready: true },
   { key: 'about', label: 'À propos (Ayoub)', icon: '👤', ready: true },
@@ -141,7 +139,6 @@ const EDITORS = {
   faq: mountFaq,
   blog: mountArticles,
   communes: mountCommunes,
-  villes: mountVilles,
   hero: mountHero,
   nav: mountNav,
   intro: mountIntro,
