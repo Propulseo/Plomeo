@@ -13,6 +13,7 @@ export function cmsPlugin({ url, anonKey, isBuild }) {
       try {
         if (!url || !anonKey) throw new Error('VITE_SUPABASE_URL / VITE_SUPABASE_ANON_KEY manquants')
         table = await fetchContent({ url, anonKey })
+        if (isBuild && Object.keys(table).length === 0) throw new Error('table site_content vide — anomalie, build interrompu')
         this.info?.(`[cms] ${Object.keys(table).length} clés chargées`)
       } catch (e) {
         if (isBuild) throw new Error(`[cms] build interrompu : ${e.message}`)
@@ -23,7 +24,8 @@ export function cmsPlugin({ url, anonKey, isBuild }) {
     transformIndexHtml: {
       order: 'post',
       handler(html, ctx) {
-        if (ctx.filename && ctx.filename.replace(/\\/g, '/').endsWith('admin.html')) return html
+        const fname = (ctx.filename || ctx.path || '').replace(/\\/g, '/')
+        if (fname.endsWith('admin.html')) return html
         const { html: out, warnings } = applyCms(html, table)
         for (const w of warnings) console.warn(`[cms] ${ctx.path}: ${w}`)
         return out

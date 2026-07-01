@@ -27,8 +27,12 @@ export function applyCms(html, table) {
       if (!attr || !key) continue
       const val = table[key]
       if (val === undefined) { warnings.push(`clé manquante (attr): ${key}`); continue }
+      if ((attr === 'href' || attr === 'src') && /^\s*javascript:/i.test(val)) {
+        warnings.push(`URL bloquée (${attr}): ${key}`); continue
+      }
       $(el).attr(attr, val)
     }
+    $(el).removeAttr('data-cms-attr')
   })
 
   const STRICT_ALLOWED = ['em', 'strong', 'b', 'i', 'br', 'a', 'span']
@@ -49,7 +53,9 @@ export function applyCms(html, table) {
       if (val === undefined) { warnings.push(`clé manquante (json): ${key}`); continue }
       json[field] = val
     }
-    $(el).text(JSON.stringify(json, null, 2))
+    const safe = JSON.stringify(json, null, 2).replace(/</g, '\\u003c')
+    $(el).text(safe)
+    $(el).removeAttr('data-cms-json')
   })
 
   return { html: $.html(), warnings }

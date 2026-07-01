@@ -115,3 +115,31 @@ describe('applyCms — JSON-LD via data-cms-json', () => {
     expect(json['@type']).toBe('Plumber')
   })
 })
+
+describe('applyCms — sécurité injection (revue finale)', () => {
+  it('C1: neutralise </script> dans le JSON-LD (pas de breakout)', () => {
+    const html = '<script type="application/ld+json" data-cms-json="description:s.d">{"description":"x"}</script>'
+    const { html: out } = applyCms(html, { 's.d': '</script><script>alert(1)</script>' })
+    expect(out).not.toContain('</script><script>alert(1)')
+    expect(out).toContain('\\u003c')
+    const m = out.match(/application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/)
+    expect(() => JSON.parse(m[1])).not.toThrow()
+  })
+  it('C1bis: retire l’attribut data-cms-json de la sortie', () => {
+    const html = '<script type="application/ld+json" data-cms-json="description:s.d">{"description":"x"}</script>'
+    const { html: out } = applyCms(html, { 's.d': 'ok' })
+    expect(out).not.toContain('data-cms-json')
+  })
+  it('C2: bloque une URL javascript: sur href + warning', () => {
+    const html = '<a data-cms-attr="href:f.u" href="#">x</a>'
+    const { html: out, warnings } = applyCms(html, { 'f.u': 'javascript:alert(1)' })
+    expect(out).not.toContain('javascript:alert(1)')
+    expect(warnings.some((w) => w.includes('URL bloquée'))).toBe(true)
+  })
+  it('C2bis: une URL normale passe et data-cms-attr est retiré', () => {
+    const html = '<a data-cms-attr="href:f.u" href="#">x</a>'
+    const { html: out } = applyCms(html, { 'f.u': 'https://instagram.com/plomeo' })
+    expect(out).toContain('href="https://instagram.com/plomeo"')
+    expect(out).not.toContain('data-cms-attr')
+  })
+})
