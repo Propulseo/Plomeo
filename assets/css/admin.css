@@ -1,0 +1,104 @@
+/* ===== Back office Ploméo — mobile-first ===== */
+:root{
+  --bl:#2f2bff; --or:#ff6a2b; --bg:#f4f6fb; --card:#fff; --line:#e4e8f0;
+  --tx:#1a1d27; --mut:#727a8c; --ok:#1c9e63; --err:#d23b3b; --radius:14px;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{font:16px/1.5 system-ui,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--tx)}
+button{font:inherit;cursor:pointer}
+input,select,textarea{font:inherit}
+.adm{min-height:100vh}
+
+/* boutons */
+.primary{background:var(--bl);color:#fff;border:0;border-radius:10px;padding:12px 18px;font-weight:700}
+.primary:disabled{opacity:.6}
+.ghost{background:transparent;border:1px solid var(--line);border-radius:10px;padding:10px 14px;color:var(--tx)}
+.danger{color:var(--err)}
+.adm-link{color:var(--bl);text-decoration:none;font-weight:600;font-size:14px}
+.adm-muted{color:var(--mut)}
+.adm-error{color:var(--err);font-weight:600}
+.adm-code{background:#0e1014;color:#d7e0ff;padding:12px;border-radius:10px;font-size:12px;overflow:auto;white-space:pre-wrap;word-break:break-all;margin:0}
+
+/* connexion */
+.adm-login{min-height:100vh;display:grid;place-items:center;padding:20px;
+  background:radial-gradient(1200px 500px at 50% -10%,#e9eaff,transparent),var(--bg)}
+.adm-login__box{background:var(--card);border:1px solid var(--line);border-radius:18px;
+  padding:28px;width:100%;max-width:380px;box-shadow:0 20px 50px #0b1a5512;display:flex;flex-direction:column;gap:12px}
+.adm-logo{font-size:26px;font-weight:800;color:var(--bl);letter-spacing:.3px}
+.adm-logo small{font-size:13px;color:var(--mut);font-weight:600}
+.adm-login__box label,.adm-modal label{display:flex;flex-direction:column;gap:6px;font-weight:600;font-size:14px}
+.adm-login__box small,.adm-modal small{font-weight:400;color:var(--mut)}
+.adm-login__box input,.adm-modal input,.adm-modal select,.adm-modal textarea{
+  border:1px solid var(--line);border-radius:10px;padding:11px 12px;background:#fbfcfe}
+.adm-login__box input:focus,.adm-modal :focus{outline:2px solid #bcd;border-color:var(--bl)}
+
+/* topbar */
+.adm-topbar{position:sticky;top:0;z-index:5;display:flex;align-items:center;justify-content:space-between;
+  background:#fff;border-bottom:1px solid var(--line);padding:12px 16px}
+.adm-topbar__r{display:flex;align-items:center;gap:12px}
+.adm-main{max-width:900px;margin:auto;padding:18px 16px 80px}
+.adm-hello{color:var(--mut);margin:6px 2px 16px}
+
+/* tuiles */
+.adm-tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+.adm-tile{position:relative;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  padding:20px 14px;display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;
+  box-shadow:0 6px 18px #0b1a5508}
+.adm-tile:not(.soon):hover{border-color:var(--bl);transform:translateY(-2px);transition:.15s}
+.adm-tile__i{font-size:30px}
+.adm-tile__l{font-weight:700;font-size:14px}
+.adm-tile.soon{opacity:.55}
+.adm-tile__soon{position:absolute;top:8px;right:8px;font-size:10px;background:#eef;color:var(--bl);
+  padding:2px 7px;border-radius:999px;font-weight:700}
+
+/* en-tête éditeur */
+.adm-head{display:flex;align-items:center;gap:10px;margin-bottom:16px}
+.adm-head h1{font-size:20px;margin:0;flex:1}
+.adm-back{background:transparent;border:0;color:var(--bl);font-weight:700;font-size:15px}
+
+/* liste de cartes */
+.adm-list{display:flex;flex-direction:column;gap:10px}
+.adm-card{display:flex;gap:12px;align-items:center;background:var(--card);border:1px solid var(--line);
+  border-radius:var(--radius);padding:10px}
+.adm-card.is-hidden{opacity:.5}
+.adm-card__img{width:64px;height:64px;border-radius:10px;overflow:hidden;flex:0 0 auto;background:#eef1f7;
+  display:grid;place-items:center;font-size:22px}
+.adm-card__img img{width:100%;height:100%;object-fit:cover}
+.adm-card__body{flex:1;min-width:0}
+.adm-card__title{font-weight:700}
+.adm-card__meta{font-size:13px;color:var(--mut);display:flex;align-items:center;gap:6px}
+.adm-tag{background:#eef;color:var(--bl);font-size:11px;font-weight:700;padding:2px 8px;border-radius:999px;text-transform:capitalize}
+.adm-dot{color:var(--or);font-size:11px}
+.adm-card__actions{display:flex;gap:4px;flex-wrap:wrap;justify-content:flex-end}
+.adm-card__actions button{background:#f2f4f9;border:1px solid var(--line);border-radius:8px;width:34px;height:34px;font-size:15px}
+.adm-card__actions button:disabled{opacity:.35}
+
+/* modale formulaire */
+.adm-modal{position:fixed;inset:0;z-index:50;background:#0b1a5566;display:grid;place-items:end center;padding:0}
+.adm-modal__box{background:var(--card);width:100%;max-width:560px;border-radius:18px 18px 0 0;
+  padding:20px 18px calc(18px + env(safe-area-inset-bottom));max-height:92vh;overflow:auto;
+  display:flex;flex-direction:column;gap:12px}
+.adm-modal__box h2{margin:0 0 4px;font-size:18px}
+.adm-photo{display:flex;flex-direction:column;gap:8px}
+.adm-photo img{width:100%;max-height:220px;object-fit:cover;border-radius:10px;border:1px solid var(--line)}
+.adm-modal__actions{display:flex;gap:10px;justify-content:flex-end;position:sticky;bottom:0;background:var(--card);padding-top:8px}
+@media(min-width:600px){.adm-modal{place-items:center}.adm-modal__box{border-radius:18px}}
+
+/* formulaire singleton (éditeurs « texte ») */
+.adm-form{display:flex;flex-direction:column;gap:14px;max-width:560px}
+.adm-form label{display:flex;flex-direction:column;gap:6px;font-weight:600;font-size:14px}
+.adm-form small{font-weight:400;color:var(--mut)}
+.adm-form input,.adm-form select,.adm-form textarea{border:1px solid var(--line);border-radius:10px;padding:11px 12px;background:#fbfcfe;font:inherit}
+.adm-form :focus{outline:2px solid #bcd;border-color:var(--bl)}
+.adm-rt-bar{display:flex;gap:6px}
+.adm-rt-bar button{width:34px;height:34px;border:1px solid var(--line);border-radius:8px;background:#f2f4f9;font-weight:700}
+.adm-rt{border:1px solid var(--line);border-radius:10px;padding:11px 12px;background:#fbfcfe;min-height:120px}
+
+/* toasts */
+#adm-toasts{position:fixed;left:0;right:0;bottom:16px;z-index:100;display:flex;flex-direction:column;align-items:center;gap:8px;pointer-events:none}
+.adm-toast{background:#1a1d27;color:#fff;padding:10px 16px;border-radius:10px;font-weight:600;font-size:14px;
+  box-shadow:0 10px 30px #0006;transition:opacity .3s,transform .3s}
+.adm-toast--ok{background:var(--ok)}
+.adm-toast--err{background:var(--err)}
+.adm-toast.out{opacity:0;transform:translateY(8px)}
