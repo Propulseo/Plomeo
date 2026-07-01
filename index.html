@@ -77,18 +77,18 @@
 <header class="lhead" id="lhead">
   <a href="#hero" class="lhead__logo"><img src="/assets/logos/bleu_blanc.png" alt="Ploméo"></a>
   <nav class="lhead__nav">
-    <a href="#hero" class="active">Accueil</a>
-    <a href="#about">À propos</a>
-    <a href="#pil">Prestations</a>
-    <a href="#work">Réalisations</a>
-    <a href="#blog">Conseils</a>
+    <a href="#hero" class="active"><span data-cms="nav.nav_accueil">Accueil</span></a>
+    <a href="#about"><span data-cms="nav.nav_apropos">À propos</span></a>
+    <a href="#pil"><span data-cms="nav.nav_prestations">Prestations</span></a>
+    <a href="#work"><span data-cms="nav.nav_realisations">Réalisations</span></a>
+    <a href="#blog"><span data-cms="nav.nav_conseils">Conseils</span></a>
   </nav>
   <div class="lhead__actions">
     <a href="tel:+33695165889" class="lhead__tel">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
       06 95 16 58 89
     </a>
-    <a href="#contact" class="lhead__cta">Contact
+    <a href="#contact" class="lhead__cta"><span data-cms="nav.nav_cta">Contact</span>
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
     </a>
     <button class="lhead__burger" id="burger" aria-label="Ouvrir le menu" aria-expanded="false"><span></span><span></span><span></span></button>
@@ -98,16 +98,16 @@
 <!-- Menu mobile -->
 <div class="mnav" id="mnav">
   <nav class="mnav__links">
-    <a href="#hero">Accueil</a>
-    <a href="#about">À propos</a>
-    <a href="#pil">Prestations</a>
-    <a href="#work">Réalisations</a>
-    <a href="#blog">Conseils</a>
-    <a href="#contact">Contact</a>
+    <a href="#hero"><span data-cms="nav.nav_accueil">Accueil</span></a>
+    <a href="#about"><span data-cms="nav.nav_apropos">À propos</span></a>
+    <a href="#pil"><span data-cms="nav.nav_prestations">Prestations</span></a>
+    <a href="#work"><span data-cms="nav.nav_realisations">Réalisations</span></a>
+    <a href="#blog"><span data-cms="nav.nav_conseils">Conseils</span></a>
+    <a href="#contact"><span data-cms="nav.nav_cta">Contact</span></a>
   </nav>
   <div class="mnav__foot">
-    <a href="tel:+33695165889">06 95 16 58 89</a>
-    <a href="mailto:contact@plomeo.fr">contact@plomeo.fr</a>
+    <a href="tel:+33695165889"><span data-cms="identite.telephone">06 95 16 58 89</span></a>
+    <a href="mailto:contact@plomeo.fr"><span data-cms="identite.email">contact@plomeo.fr</span></a>
   </div>
 </div>
 
@@ -181,13 +181,13 @@
   <div class="about__inner">
     <div class="about__media">
       <div class="about__photo tilt"><img loading="lazy" src="https://i.pravatar.cc/800?img=68" alt="Portrait (placeholder) — Ayoub Berkane"></div>
-      <div class="about__badge"><b>2023</b><span>Création de Ploméo</span></div>
-      <div class="about__caption"><b>Ayoub Berkane</b><span>Fondateur &amp; dirigeant</span></div>
+      <div class="about__badge"><b data-cms="about.annee">2023</b><span data-cms="about.annee_label">Création de Ploméo</span></div>
+      <div class="about__caption"><b data-cms="about.nom">Ayoub Berkane</b><span data-cms="about.role">Fondateur &amp; dirigeant</span></div>
     </div>
     <div class="about__text">
-      <p class="about__eyebrow">Le fondateur</p>
+      <p class="about__eyebrow" data-cms="about.surtitre">Le fondateur</p>
       <h2 class="about__title">Ayoub Berkane,<br><em>artisan de terrain</em></h2>
-      <blockquote class="about__quote">« Je préfère un chantier bien fait et bien expliqué à une belle promesse. Le reste suit tout seul. »</blockquote>
+      <blockquote class="about__quote" data-cms="about.citation">« Je préfère un chantier bien fait et bien expliqué à une belle promesse. Le reste suit tout seul. »</blockquote>
       <div class="about__bio">
         <p><strong>Plus de 10 ans d'expérience</strong>, un double CAP et un BP en génie climatique : Ayoub a appris le métier sur le terrain avant de fonder Ploméo en 2023, dans le Var.</p>
         <p>Plomberie, chauffage, climatisation et piscine, <strong>du dépannage à la construction neuve</strong> : un même objectif à chaque intervention : votre satisfaction.</p>
@@ -216,9 +216,9 @@
 <!-- PILLARS (volet métier) -->
 <section class="pil" id="pil">
   <div class="pil__head">
-    <p class="pil__eyebrow">Nos expertises</p>
+    <p class="pil__eyebrow" data-cms="sections.pil_eyebrow">Nos expertises</p>
     <h2>Quatre piliers, <em>une même exigence</em></h2>
-    <p>Du simple dépannage au chantier neuf. On vous explique tout simplement, et on soigne chaque finition.</p>
+    <p data-cms="sections.pil_intro">Du simple dépannage au chantier neuf. On vous explique tout simplement, et on soigne chaque finition.</p>
   </div>
 
   <article class="sb" data-m="plomberie">
@@ -285,7 +285,7 @@
 <!-- PROCESS -->
 <section class="process" id="process">
   <div class="process__head" data-reveal="up">
-    <p class="process__eyebrow">Comment ça se passe</p>
+    <p class="process__eyebrow" data-cms="sections.process_eyebrow">Comment ça se passe</p>
     <h2>Simple, <em>du premier appel à la fin du chantier</em></h2>
   </div>
   <div class="process__grid" data-stagger>
@@ -310,7 +310,7 @@
 <!-- RÉALISATIONS -->
 <section class="work" id="work" data-v="grid">
   <div class="work__head">
-    <p class="work__eyebrow">Réalisations</p>
+    <p class="work__eyebrow" data-cms="sections.work_eyebrow">Réalisations</p>
     <h2>Des chantiers <em>qui parlent d'eux-mêmes</em></h2>
   </div>
   <div class="work__filters" id="wfilters">
@@ -333,9 +333,9 @@
 <!-- ZONE D'INTERVENTION -->
 <section class="zone" id="zone">
   <div class="zone__inner">
-    <p class="zone__eyebrow">Zone d'intervention</p>
+    <p class="zone__eyebrow" data-cms="sections.zone_eyebrow">Zone d'intervention</p>
     <h2>Plomeo intervient <em>partout dans le Var</em></h2>
-    <p>Du littoral à l'arrière-pays, on se déplace dans tout le département (83) pour vos dépannages comme pour vos chantiers neufs.</p>
+    <p data-cms="sections.zone_intro">Du littoral à l'arrière-pays, on se déplace dans tout le département (83) pour vos dépannages comme pour vos chantiers neufs.</p>
     <div class="zone__communes" data-stagger>
       <span class="zone__chip" data-reveal="up">Toulon</span>
       <span class="zone__chip" data-reveal="up">La Seyne-sur-Mer</span>
@@ -382,7 +382,7 @@
 <!-- CONSEILS -->
 <section class="blog" id="blog" data-v="index">
   <div class="blog__head">
-    <p class="blog__eyebrow">Conseils</p>
+    <p class="blog__eyebrow" data-cms="sections.blog_eyebrow">Conseils</p>
     <h2>Pour <em>y voir clair</em> avant de se lancer</h2>
   </div>
   <div class="blog__list">
@@ -425,7 +425,7 @@
 <!-- FAQ -->
 <section class="faq" id="faq">
   <div class="faq__head">
-    <p class="faq__eyebrow">Questions fréquentes</p>
+    <p class="faq__eyebrow" data-cms="sections.faq_eyebrow">Questions fréquentes</p>
     <h2>Vous vous demandez <em>peut-être…</em></h2>
   </div>
   <div class="faq__list" data-stagger>
@@ -456,13 +456,13 @@
 <section class="contact" id="contact" data-v="split">
   <div class="contact__inner">
     <div data-reveal="up">
-      <p class="contact__eyebrow">Contact</p>
+      <p class="contact__eyebrow" data-cms="sections.contact_eyebrow">Contact</p>
       <h2>Parlons de <em>votre projet</em></h2>
-      <p class="contact__desc">Un projet précis ou juste une question ? Décrivez votre besoin : on revient vers vous avec une première orientation claire, sans engagement.</p>
-      <div class="cinfo"><span>Téléphone</span><a href="tel:+33695165889">06 95 16 58 89</a></div>
-      <div class="cinfo"><span>Email</span><a href="mailto:contact@plomeo.fr">contact@plomeo.fr</a></div>
-      <div class="cinfo"><span>Zone</span><b>Var (83)</b></div>
-      <div class="cinfo"><span>Instagram</span><a href="https://www.instagram.com/sarl_plomeo" target="_blank" rel="noopener">@sarl_plomeo</a></div>
+      <p class="contact__desc" data-cms="sections.contact_desc">Un projet précis ou juste une question ? Décrivez votre besoin : on revient vers vous avec une première orientation claire, sans engagement.</p>
+      <div class="cinfo"><span>Téléphone</span><a href="tel:+33695165889" data-cms="identite.telephone">06 95 16 58 89</a></div>
+      <div class="cinfo"><span>Email</span><a href="mailto:contact@plomeo.fr" data-cms="identite.email">contact@plomeo.fr</a></div>
+      <div class="cinfo"><span>Zone</span><b data-cms="identite.zone">Var (83)</b></div>
+      <div class="cinfo"><span>Instagram</span><a href="https://www.instagram.com/sarl_plomeo" target="_blank" rel="noopener" data-cms-attr="href:identite.instagram">@sarl_plomeo</a></div>
     </div>
     <form class="cform" data-reveal="up" action="https://api.web3forms.com/submit" method="POST">
       <input type="hidden" name="access_key" value="b3b820e6-0489-4102-a570-c6af843cc16c">
@@ -492,17 +492,17 @@
   <div class="foot__inner" data-stagger>
     <div class="foot__brand" data-reveal="up">
       <div class="foot__logo"><img src="/assets/logos/bleu_blanc.png" alt="Ploméo"></div>
-      <p>Plomberie, chauffage, climatisation et piscine : du dépannage à la construction neuve, partout dans le Var (83).</p>
-      <a href="https://www.instagram.com/sarl_plomeo" target="_blank" rel="noopener">Instagram · @sarl_plomeo</a>
+      <p data-cms="footer.baseline">Plomberie, chauffage, climatisation et piscine : du dépannage à la construction neuve, partout dans le Var (83).</p>
+      <a href="https://www.instagram.com/sarl_plomeo" target="_blank" rel="noopener" data-cms-attr="href:footer.reseau_url"><span data-cms="footer.reseau_label">Instagram · @sarl_plomeo</span></a>
     </div>
     <div class="foot__col" data-reveal="up"><h4>Navigation</h4><a href="#about">À propos</a><a href="#pil">Expertises</a><a href="#work">Réalisations</a><a href="#blog">Conseils</a></div>
     <div class="foot__col" data-reveal="up"><h4>Services</h4><a href="#pil">Plomberie</a><a href="#pil">Chauffage</a><a href="#pil">Climatisation</a><a href="#pil">Piscine</a></div>
     <div class="foot__col" data-reveal="up"><h4>Contact</h4><a href="tel:+33695165889">06 95 16 58 89</a><a href="mailto:contact@plomeo.fr">contact@plomeo.fr</a><a href="#contact">137 av. de la République, 83210 La Farlède</a></div>
   </div>
   <div class="foot__bottom">
-    <span>© 2026 Ploméo. Tous droits réservés.</span>
+    <span data-cms="footer.copyright">© 2026 Ploméo. Tous droits réservés.</span>
     <span class="foot__credit">Fait avec passion par <a href="https://propulseo-site.com" target="_blank" rel="noopener">Propul'SEO</a></span>
-    <span><a href="mentions-legales.html">Mentions légales</a> · <a href="confidentialite.html">Confidentialité</a></span>
+    <span><a href="mentions-legales.html" data-cms-attr="href:footer.mentions_url"><span data-cms="footer.mentions_label">Mentions légales</span></a> · <a href="confidentialite.html" data-cms-attr="href:footer.confidentialite_url"><span data-cms="footer.confidentialite_label">Confidentialité</span></a></span>
   </div>
 </footer>
 
