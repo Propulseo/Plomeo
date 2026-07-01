@@ -25,7 +25,8 @@ export function cmsPlugin({ url, anonKey, isBuild }) {
       order: 'post',
       handler(html, ctx) {
         const fname = (ctx.filename || ctx.path || '').replace(/\\/g, '/')
-        if (fname.endsWith('admin.html')) return html
+        // Back-office : jamais touché par le CMS (admin.html d'avant, admin/index.html depuis le passage à /admin).
+        if (fname.endsWith('admin.html') || fname.endsWith('admin/index.html')) return html
         const { html: out, warnings } = applyCms(html, table)
         for (const w of warnings) console.warn(`[cms] ${ctx.path}: ${w}`)
         return out

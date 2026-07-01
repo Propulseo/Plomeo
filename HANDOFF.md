@@ -16,7 +16,7 @@ _Snapshot 2026-07-01. Écrit dans un fichier **versionné** (pas `.planning/`, q
    VITE_SUPABASE_URL=https://qetptoyouhtyzueequdy.supabase.co
    VITE_SUPABASE_ANON_KEY=...          # Settings → API → clé "anon"
    ```
-3. `npm run dev` → http://localhost:5173/ (+ `/admin.html`). Compte admin : `admin@plomeo.fr`.
+3. `npm run dev` → http://localhost:5173/ (+ `/admin`). Compte admin : `admin@plomeo.fr`.
 
 ## 🔴 PRIORITÉ #1 — Corriger la faille de sécurité RLS (avant tout le reste)
 **Problème** (confirmé, `enable_signup = true`) : les policies d'écriture autorisent **tout utilisateur `authenticated`**, et les inscriptions sont ouvertes → n'importe qui peut s'inscrire via la clé anon publique et **modifier/supprimer tout le contenu + le storage**.

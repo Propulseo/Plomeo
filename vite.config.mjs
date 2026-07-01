@@ -36,7 +36,7 @@ export default defineConfig(({ command, mode }) => {
           main: resolve(__dirname, 'index.html'),
           confidentialite: resolve(__dirname, 'confidentialite.html'),
           mentions: resolve(__dirname, 'mentions-legales.html'),
-          admin: resolve(__dirname, 'admin.html'),
+          admin: resolve(__dirname, 'admin/index.html'),
         },
       },
     },
