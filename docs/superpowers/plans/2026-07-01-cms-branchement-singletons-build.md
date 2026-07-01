@@ -582,3 +582,18 @@ git commit -m "feat(seo): JSON-LD cuit au build depuis seo.*"
 - **Non-régression galerie + pages légales** → Task 4 step 5, Task 5 step 5. ✅
 
 Aucune section de la spec sans tâche. Types cohérents entre tâches (`applyCms(html, table) → {html, warnings}` stable ; `fetchContent({url,anonKey}) → table` ; `cmsPlugin({url,anonKey,isBuild})`).
+
+---
+
+## Task 5b: `data-cms-html` sécurisé + clés à valeur HTML + pastilles (ajout post-Task 5)
+
+**Origine :** la Task 5 a laissé ~11 clés en dur car leur valeur contient du HTML (`<em>`, `<br>`, `<strong>`) incompatible avec le `.text()` échappé. Décision utilisateur : ajouter un mécanisme `data-cms-html` **assaini** (liste blanche) pour les couvrir, et brancher les 3 pastilles dans la section Réassurance.
+
+**Files:** `build/apply-cms.mjs` (+ `data-cms-html`), `build/apply-cms.test.mjs` (tests), `package.json` (devDep `sanitize-html`), `index.html`, `confidentialite.html`, `mentions-legales.html`.
+
+**Interface produite :** `applyCms` gère `data-cms-html="section.cle"` → `innerHTML = sanitize(table[K])` (liste blanche : `em, strong, b, i, br, a, span` ; attrs `a:[href,target,rel]`, `span:[class]`). Clé absente → contenu inchangé + warning `clé manquante (html): K`. Attribut retiré en sortie.
+
+**Clés HTML à brancher (via `data-cms-html`) :** about.bio, sections.about_titre, sections.pil_titre, sections.process_titre, sections.work_titre, sections.zone_titre, sections.blog_titre, sections.faq_titre, sections.contact_titre, legal.mentions_legales, legal.confidentialite (+ about.titre si sa valeur contient du HTML).
+**Pastilles (via `data-cms`) :** intro.pastille_1/2/3 sur les `.pill` de `.rea__badges`.
+
+**Étapes :** TDD (tests data-cms-html : injecte HTML autorisé, retire balise interdite type `<script>`, fallback+warning si clé absente) → implémenter → annoter → `vite build` sans « clé manquante » → `npm test` vert → commit.
