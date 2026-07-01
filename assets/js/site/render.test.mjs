@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { esc, safeHref, renderCommunes, renderPiliers, renderProcess, renderFaq, renderArticles, renderAvis } from './render.mjs'
+import { esc, safeHref, isSafeUrl, renderCommunes, renderPiliers, renderProcess, renderFaq, renderArticles, renderAvis } from './render.mjs'
 
 describe('safeHref', () => {
   it('rejette un schéma javascript: (fallback #contact)', () => {
@@ -19,6 +19,27 @@ describe('safeHref', () => {
     expect(safeHref('')).toBe('#contact')
     expect(safeHref(null)).toBe('#contact')
     expect(safeHref(undefined)).toBe('#contact')
+  })
+})
+
+describe('isSafeUrl', () => {
+  it('accepte relatif/ancre et http/https/mailto/tel', () => {
+    expect(isSafeUrl('/x')).toBe(true)
+    expect(isSafeUrl('#a')).toBe(true)
+    expect(isSafeUrl('https://x')).toBe(true)
+    expect(isSafeUrl('mailto:a@b')).toBe(true)
+    expect(isSafeUrl('tel:+33')).toBe(true)
+  })
+  it('rejette javascript:, ses contournements par caractère de contrôle, et data:', () => {
+    expect(isSafeUrl('javascript:alert(1)')).toBe(false)
+    expect(isSafeUrl('java\tscript:alert(1)')).toBe(false)
+    expect(isSafeUrl(String.fromCharCode(1) + 'javascript:alert(1)')).toBe(false)
+    expect(isSafeUrl('data:text/html,x')).toBe(false)
+  })
+  it('rejette vide/null/undefined', () => {
+    expect(isSafeUrl('')).toBe(false)
+    expect(isSafeUrl(null)).toBe(false)
+    expect(isSafeUrl(undefined)).toBe(false)
   })
 })
 

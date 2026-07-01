@@ -55,7 +55,8 @@ describe('applyCms — attributs via data-cms-attr', () => {
   it("remplace le <title> via data-cms (texte)", () => {
     const html = '<head><title data-cms="seo.meta_title">Old</title></head>'
     const { html: out } = applyCms(html, { 'seo.meta_title': 'Nouveau titre' })
-    expect(out).toContain('<title>Nouveau titre</title>')
+    expect(out).toContain('>Nouveau titre</title>')
+    expect(out).not.toContain('Old')
   })
 })
 
@@ -136,10 +137,39 @@ describe('applyCms — sécurité injection (revue finale)', () => {
     expect(out).not.toContain('javascript:alert(1)')
     expect(warnings.some((w) => w.includes('URL bloquée'))).toBe(true)
   })
-  it('C2bis: une URL normale passe et data-cms-attr est retiré', () => {
+  it('C2bis: une URL normale passe et data-cms-attr est CONSERVÉ (couche live)', () => {
     const html = '<a data-cms-attr="href:f.u" href="#">x</a>'
     const { html: out } = applyCms(html, { 'f.u': 'https://instagram.com/plomeo' })
     expect(out).toContain('href="https://instagram.com/plomeo"')
-    expect(out).not.toContain('data-cms-attr')
+    expect(out).toContain('data-cms-attr="href:f.u"')
+  })
+  it('C2ter: bloque un contournement de schéma via allowlist (pas un simple deny de javascript:)', () => {
+    const html = '<a data-cms-attr="href:f.u" href="#">x</a>'
+    const { html: out, warnings } = applyCms(html, { 'f.u': 'java\tscript:alert(1)' })
+    expect(out).toContain('href="#"')
+    expect(warnings.some((w) => w.includes('URL bloquée'))).toBe(true)
+  })
+})
+
+describe('applyCms — repères conservés pour la couche « lecture live »', () => {
+  it('CONSERVE data-cms (texte) après cuisson (cms-singletons.js s\'y accroche)', () => {
+    const { html: out } = applyCms('<h1 data-cms="hero.titre">x</h1>', { 'hero.titre': 'Y' })
+    expect(out).toContain('data-cms="hero.titre"')
+    expect(out).toContain('>Y</h1>')
+  })
+  it('CONSERVE data-cms-html (strict) après cuisson', () => {
+    const { html: out } = applyCms('<h2 data-cms-html="s.t">x</h2>', { 's.t': 'a<em>b</em>' })
+    expect(out).toContain('data-cms-html="s.t"')
+    expect(out).toContain('<em>b</em>')
+  })
+  it('RETIRE data-cms-html-rich (pages légales, cuites au build)', () => {
+    const { html: out } = applyCms('<div data-cms-html-rich="legal.x">x</div>', { 'legal.x': '<p>ok</p>' })
+    expect(out).not.toContain('data-cms-html-rich')
+    expect(out).toContain('<p>ok</p>')
+  })
+  it('RETIRE data-cms-json (<head>, cuit au build)', () => {
+    const html = '<script type="application/ld+json" data-cms-json="description:s.d">{"description":"x"}</script>'
+    const { html: out } = applyCms(html, { 's.d': 'ok' })
+    expect(out).not.toContain('data-cms-json')
   })
 })
