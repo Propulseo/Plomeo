@@ -58,3 +58,28 @@ describe('applyCms — attributs via data-cms-attr', () => {
     expect(out).toContain('<title>Nouveau titre</title>')
   })
 })
+
+describe('applyCms — HTML assaini via data-cms-html', () => {
+  it('injecte le HTML autorisé (em, br) sans l’échapper', () => {
+    const html = '<h2 data-cms-html="s.t">EN DUR</h2>'
+    const { html: out } = applyCms(html, { 's.t': 'Bonjour <em>le Var</em><br>ici' })
+    expect(out).toContain('<em>le Var</em>')
+    expect(out).toContain('<br>')
+    expect(out).not.toContain('EN DUR')
+  })
+
+  it('retire les balises interdites (script)', () => {
+    const html = '<h2 data-cms-html="s.t">x</h2>'
+    const { html: out } = applyCms(html, { 's.t': 'ok<script>alert(1)</script><strong>gras</strong>' })
+    expect(out).toContain('<strong>gras</strong>')
+    expect(out).not.toContain('<script>')
+    expect(out).not.toContain('alert(1)')
+  })
+
+  it('garde le contenu en dur + warning si la clé manque', () => {
+    const html = '<h2 data-cms-html="a.b">FALLBACK</h2>'
+    const { html: out, warnings } = applyCms(html, {})
+    expect(out).toContain('FALLBACK')
+    expect(warnings).toContain('clé manquante (html): a.b')
+  })
+})

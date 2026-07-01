@@ -1,4 +1,5 @@
 import * as cheerio from 'cheerio'
+import sanitizeHtml from 'sanitize-html'
 
 /**
  * Réécrit le contenu des éléments [data-cms] à partir de la table CMS.
@@ -28,6 +29,17 @@ export function applyCms(html, table) {
       if (val === undefined) { warnings.push(`clé manquante (attr): ${key}`); continue }
       $(el).attr(attr, val)
     }
+  })
+
+  $('[data-cms-html]').each((_, el) => {
+    const key = $(el).attr('data-cms-html')
+    const val = table[key]
+    if (val === undefined) { warnings.push(`clé manquante (html): ${key}`); return }
+    $(el).html(sanitizeHtml(val, {
+      allowedTags: ['em', 'strong', 'b', 'i', 'br', 'a', 'span'],
+      allowedAttributes: { a: ['href', 'target', 'rel'], span: ['class'] },
+    }))
+    $(el).removeAttr('data-cms-html')
   })
 
   return { html: $.html(), warnings }
