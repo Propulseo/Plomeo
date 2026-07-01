@@ -2,6 +2,7 @@ import { defineConfig, loadEnv } from 'vite'
 import { fileURLToPath } from 'url'
 import { dirname, resolve } from 'path'
 import { cmsPlugin } from './build/vite-plugin-cms.mjs'
+import { copyAssetsPlugin } from './build/vite-plugin-copy-assets.mjs'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
@@ -16,6 +17,7 @@ export default defineConfig(({ command, mode }) => {
         anonKey: env.VITE_SUPABASE_ANON_KEY,
         isBuild: command === 'build',
       }),
+      copyAssetsPlugin(),
     ],
     server: {
       watch: {
