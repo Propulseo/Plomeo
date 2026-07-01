@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { esc, safeHref, renderCommunes, renderPiliers, renderProcess } from './render.mjs'
+import { esc, safeHref, renderCommunes, renderPiliers, renderProcess, renderFaq } from './render.mjs'
 
 describe('safeHref', () => {
   it('rejette un schéma javascript: (fallback #contact)', () => {
@@ -117,5 +117,28 @@ describe('renderProcess', () => {
     const html = renderProcess([{ numero: '1', titre: '<b>T</b>', description: '<i>D</i>' }])
     expect(html).toContain('&lt;b&gt;T&lt;/b&gt;')
     expect(html).toContain('&lt;i&gt;D&lt;/i&gt;')
+  })
+})
+
+describe('renderFaq', () => {
+  it('rend un item accordéon avec question/réponse', () => {
+    const html = renderFaq([{ question: 'Intervenez-vous en urgence ?', reponse: 'Oui, selon nos disponibilités.' }])
+    expect(html).toBe(
+      '<div class="faqitem" data-reveal="up">' +
+      '<button class="faqitem__q">Intervenez-vous en urgence ?</button>' +
+      '<div class="faqitem__a"><p>Oui, selon nos disponibilités.</p></div>' +
+      '</div>'
+    )
+  })
+
+  it('échappe question et réponse', () => {
+    const html = renderFaq([{ question: '<b>Q</b>', reponse: '<i>R</i>' }])
+    expect(html).toContain('&lt;b&gt;Q&lt;/b&gt;')
+    expect(html).toContain('&lt;i&gt;R&lt;/i&gt;')
+  })
+
+  it('concatène plusieurs items dans l\'ordre', () => {
+    const html = renderFaq([{ question: 'A', reponse: 'a' }, { question: 'B', reponse: 'b' }])
+    expect(html.indexOf('>A<')).toBeLessThan(html.indexOf('>B<'))
   })
 })

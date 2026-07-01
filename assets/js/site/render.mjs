@@ -62,3 +62,10 @@ export function renderProcess(rows) {
     `<div class="pstep" data-reveal="up"><div class="pstep__n">${esc(r.numero)}</div><h3>${esc(r.titre)}</h3><p>${esc(r.description)}</p></div>`
   )).join('')
 }
+
+// Section « FAQ » — index.html .faqitem (table faq, colonne visible).
+export function renderFaq(rows) {
+  return rows.map(r => (
+    `<div class="faqitem" data-reveal="up"><button class="faqitem__q">${esc(r.question)}</button><div class="faqitem__a"><p>${esc(r.reponse)}</p></div></div>`
+  )).join('')
+}
