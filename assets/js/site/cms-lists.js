@@ -15,6 +15,11 @@ export async function mountList({ table, selector, hasVisible, render }) {
   const { data, error } = await query.order('ordre', { ascending: true })
   if (error || !data || !data.length) return false // fallback : HTML en dur conserve
   container.innerHTML = render(data)
+  // anim.js observe les [data-reveal] UNE SEULE FOIS au chargement (pas de
+  // MutationObserver) : les noeuds injectés ici après coup ne seraient jamais
+  // révélés (opacity:0 pour toujours). On les révèle donc directement.
+  if (container.matches('[data-reveal]')) container.classList.add('is-in')
+  container.querySelectorAll('[data-reveal]').forEach(el => el.classList.add('is-in'))
   return true
 }
 
