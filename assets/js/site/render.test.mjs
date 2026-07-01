@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { esc, safeHref, renderCommunes, renderPiliers, renderProcess, renderFaq, renderArticles } from './render.mjs'
+import { esc, safeHref, renderCommunes, renderPiliers, renderProcess, renderFaq, renderArticles, renderAvis } from './render.mjs'
 
 describe('safeHref', () => {
   it('rejette un schéma javascript: (fallback #contact)', () => {
@@ -184,5 +184,33 @@ describe('renderArticles', () => {
   it('neutralise un lien en javascript: (pas de schéma actif dans le href)', () => {
     const html = renderArticles([{ ...row, lien: 'javascript:alert(1)' }], resolveImg)
     expect(html).not.toContain('javascript:')
+  })
+})
+
+describe('renderAvis', () => {
+  const rows = [
+    { texte: 'Travail soigné, propre, dans les délais.', auteur: 'François R.' },
+    { texte: 'Super plombier, efficace.', auteur: 'Manon S.' },
+  ]
+
+  it('rend une carte .rea__rev par avis avec 5 étoiles', () => {
+    const html = renderAvis(rows)
+    expect(html).toContain('<div class="rea__rev"><div class="stars">★★★★★</div><p>« Travail soigné, propre, dans les délais. »</p><div class="who">François R.</div></div>')
+  })
+
+  it('double la liste (boucle marquee continue)', () => {
+    const html = renderAvis(rows)
+    const count = html.split('class="rea__rev"').length - 1
+    expect(count).toBe(4) // 2 avis x 2
+  })
+
+  it('échappe texte et auteur', () => {
+    const html = renderAvis([{ texte: '<b>T</b>', auteur: '<i>A</i>' }])
+    expect(html).toContain('&lt;b&gt;T&lt;/b&gt;')
+    expect(html).toContain('&lt;i&gt;A&lt;/i&gt;')
+  })
+
+  it('retourne une chaîne vide sur liste vide', () => {
+    expect(renderAvis([])).toBe('')
   })
 })

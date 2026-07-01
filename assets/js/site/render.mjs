@@ -90,3 +90,10 @@ export function renderArticles(rows, resolveImg) {
     </a>`
   }).join('')
 }
+
+// Section « REASSURANCE » — index.html #reaTrack (table avis, colonne visible).
+// Doublonne la liste (comme le faisait assets/js/main.js) pour la boucle CSS du marquee.
+export function renderAvis(rows) {
+  const card = r => `<div class="rea__rev"><div class="stars">★★★★★</div><p>« ${esc(r.texte)} »</p><div class="who">${esc(r.auteur)}</div></div>`
+  return [...rows, ...rows].map(card).join('')
+}

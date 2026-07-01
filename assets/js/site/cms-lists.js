@@ -2,7 +2,7 @@
 // Patron repris de assets/js/site/realisations.js : fetch -> remplace le HTML
 // en dur -> fallback (return tot) si la base est injoignable/vide.
 import { supabase, configured, publicUrl } from '../admin/client.js'
-import { renderCommunes, renderPiliers, renderProcess, renderFaq, renderArticles } from './render.mjs'
+import { renderCommunes, renderPiliers, renderProcess, renderFaq, renderArticles, renderAvis } from './render.mjs'
 
 // Monte une liste : fetch la table, filtre/trie, remplace le HTML en dur.
 // hasVisible=true ajoute .eq('visible', true) (tables avec cette colonne uniquement).
@@ -32,6 +32,8 @@ function bindFaqAccordion() {
 }
 
 async function mountAll() {
+  const avisMounted = await mountList({ table: 'avis', selector: '#reaTrack', hasVisible: true, render: renderAvis })
+  if (avisMounted) document.getElementById('reaTrack').dataset.cmsFilled = '1'
   await mountList({ table: 'communes', selector: '.zone__communes', hasVisible: false, render: renderCommunes })
   await mountList({ table: 'piliers', selector: '#pilCards', hasVisible: true, render: renderPiliers })
   await mountList({ table: 'process_etapes', selector: '.process__grid', hasVisible: false, render: renderProcess })
