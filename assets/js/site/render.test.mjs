@@ -1,5 +1,26 @@
 import { describe, it, expect } from 'vitest'
-import { esc, renderCommunes, renderPiliers, renderProcess } from './render.mjs'
+import { esc, safeHref, renderCommunes, renderPiliers, renderProcess } from './render.mjs'
+
+describe('safeHref', () => {
+  it('rejette un schéma javascript: (fallback #contact)', () => {
+    expect(safeHref('javascript:alert(1)')).toBe('#contact')
+  })
+  it('accepte https:, mailto:, tel:', () => {
+    expect(safeHref('https://x')).toBe('https://x')
+    expect(safeHref('mailto:a@b')).toBe('mailto:a@b')
+    expect(safeHref('tel:+33')).toBe('tel:+33')
+  })
+  it('accepte les chemins relatifs et ancres', () => {
+    expect(safeHref('/page')).toBe('/page')
+    expect(safeHref('#contact')).toBe('#contact')
+    expect(safeHref('./x')).toBe('./x')
+  })
+  it('retombe sur le fallback si vide', () => {
+    expect(safeHref('')).toBe('#contact')
+    expect(safeHref(null)).toBe('#contact')
+    expect(safeHref(undefined)).toBe('#contact')
+  })
+})
 
 describe('esc', () => {
   it('échappe les caractères HTML dangereux', () => {
@@ -65,6 +86,22 @@ describe('renderPiliers', () => {
   it('gère points absent/null sans planter (liste vide)', () => {
     const html = renderPiliers([{ ...row, points: null }])
     expect(html).toContain('<ul class="sb__list"></ul>')
+  })
+
+  it('neutralise un cta_lien en javascript: (pas de schéma actif dans le href)', () => {
+    const html = renderPiliers([{ ...row, cta_lien: 'javascript:alert(1)' }])
+    expect(html).not.toContain('javascript:')
+  })
+
+  it('conserve un cta_lien https légitime', () => {
+    const html = renderPiliers([{ ...row, cta_lien: 'https://ex.fr' }])
+    expect(html).toContain('href="https://ex.fr"')
+  })
+
+  it('émet une source webp dérivée de image_path', () => {
+    const html = renderPiliers([row])
+    expect(html).toContain('<source type="image/webp"')
+    expect(html).toContain('srcset="assets/photos/sdb-jacuzzi.webp"')
   })
 })
 

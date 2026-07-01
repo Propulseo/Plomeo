@@ -8,6 +8,25 @@ export function esc(s) {
   ))
 }
 
+// Valide le schéma d'une URL destinée à un attribut href (défense en profondeur :
+// esc() échappe le HTML mais n'empêche pas un schéma actif type javascript:).
+export function safeHref(u, fallback = '#contact') {
+  if (!u) return fallback
+  const s = String(u).trim()
+  // relatif / ancre / chemin autorisés
+  if (/^(#|\/|\.\/|\.\.\/)/.test(s)) return s
+  // schémas explicitement autorisés
+  if (/^(https?:|mailto:|tel:)/i.test(s)) return s
+  return fallback
+}
+
+// Dérive le chemin de la variante WebP d'une image par convention (remplace
+// l'extension). Reste pur : pas de résolution d'URL publique ici (voir client.js).
+function webpPath(imagePath) {
+  const s = String(imagePath ?? '')
+  return s.replace(/\.[a-zA-Z0-9]+$/, '.webp')
+}
+
 // Section « ZONE D'INTERVENTION » — index.html .zone__communes (table communes, pas de colonne visible).
 export function renderCommunes(rows) {
   return rows.map(r => (
@@ -22,7 +41,7 @@ export function renderPiliers(rows) {
     const points = Array.isArray(r.points) ? r.points : []
     return `<article class="sb" data-m="${esc(r.categorie)}">
     <div class="sb__media">
-      <div class="sb__imgwrap tilt"><picture><img loading="lazy" src="${esc(r.image_path)}" alt="${esc(r.image_alt || '')}"></picture></div>
+      <div class="sb__imgwrap tilt"><picture><source type="image/webp" srcset="${esc(webpPath(r.image_path))}"><img loading="lazy" src="${esc(r.image_path)}" alt="${esc(r.image_alt || '')}"></picture></div>
       <span class="sb__shutter"></span>
       <span class="sb__num">${esc(r.numero)}</span>
     </div>
@@ -31,7 +50,7 @@ export function renderPiliers(rows) {
       <h3>${esc(r.titre)}</h3>
       <p>${esc(r.description)}</p>
       <ul class="sb__list">${points.map(p => `<li>${esc(p)}</li>`).join('')}</ul>
-      <a class="sb__link" href="${esc(r.cta_lien || '#contact')}">${esc(r.cta_texte || 'Demander un devis')}</a>
+      <a class="sb__link" href="${esc(safeHref(r.cta_lien))}">${esc(r.cta_texte || 'Demander un devis')}</a>
     </div>
   </article>`
   }).join('')
