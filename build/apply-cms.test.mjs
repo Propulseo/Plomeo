@@ -102,3 +102,16 @@ describe('applyCms — HTML riche via data-cms-html-rich', () => {
     expect(out).not.toContain('alert(1)')
   })
 })
+
+describe('applyCms — JSON-LD via data-cms-json', () => {
+  it('met à jour les champs de premier niveau du bloc ld+json', () => {
+    const html = `<script type="application/ld+json" data-cms-json="name:seo.meta_title,description:seo.meta_description">
+      {"@type":"Plumber","name":"OLD","description":"OLDD"}
+    </script>`
+    const { html: out } = applyCms(html, { 'seo.meta_title': 'Ploméo', 'seo.meta_description': 'desc' })
+    const json = JSON.parse(out.match(/\{[\s\S]*\}/)[0])
+    expect(json.name).toBe('Ploméo')
+    expect(json.description).toBe('desc')
+    expect(json['@type']).toBe('Plumber')
+  })
+})

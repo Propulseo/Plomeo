@@ -38,6 +38,20 @@ export function applyCms(html, table) {
   injectHtml($, '[data-cms-html]', table, warnings, STRICT_ALLOWED)
   injectHtml($, '[data-cms-html-rich]', table, warnings, RICH_ALLOWED)
 
+  $('script[data-cms-json]').each((_, el) => {
+    const spec = $(el).attr('data-cms-json') || ''
+    let json
+    try { json = JSON.parse($(el).text()) } catch { warnings.push('JSON-LD illisible'); return }
+    for (const pair of spec.split(',')) {
+      const [field, key] = pair.split(':').map((s) => s.trim())
+      if (!field || !key) continue
+      const val = table[key]
+      if (val === undefined) { warnings.push(`clé manquante (json): ${key}`); continue }
+      json[field] = val
+    }
+    $(el).text(JSON.stringify(json, null, 2))
+  })
+
   return { html: $.html(), warnings }
 
   /**
