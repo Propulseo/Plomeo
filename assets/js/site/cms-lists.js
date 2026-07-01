@@ -1,8 +1,8 @@
 // Monte les sections « listes » du site sur Supabase (lecture live).
 // Patron repris de assets/js/site/realisations.js : fetch -> remplace le HTML
 // en dur -> fallback (return tot) si la base est injoignable/vide.
-import { supabase, configured } from '../admin/client.js'
-import { renderCommunes, renderPiliers, renderProcess, renderFaq } from './render.mjs'
+import { supabase, configured, publicUrl } from '../admin/client.js'
+import { renderCommunes, renderPiliers, renderProcess, renderFaq, renderArticles } from './render.mjs'
 
 // Monte une liste : fetch la table, filtre/trie, remplace le HTML en dur.
 // hasVisible=true ajoute .eq('visible', true) (tables avec cette colonne uniquement).
@@ -37,6 +37,10 @@ async function mountAll() {
   await mountList({ table: 'process_etapes', selector: '.process__grid', hasVisible: false, render: renderProcess })
   const faqMounted = await mountList({ table: 'faq', selector: '.faq__list', hasVisible: true, render: renderFaq })
   if (faqMounted) bindFaqAccordion()
+  await mountList({
+    table: 'articles', selector: '.blog__list', hasVisible: true,
+    render: rows => renderArticles(rows, path => publicUrl('articles', path)),
+  })
 }
 
 if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', mountAll)

@@ -69,3 +69,24 @@ export function renderFaq(rows) {
     `<div class="faqitem" data-reveal="up"><button class="faqitem__q">${esc(r.question)}</button><div class="faqitem__a"><p>${esc(r.reponse)}</p></div></div>`
   )).join('')
 }
+
+// Section « CONSEILS » — index.html .bitem (table articles, colonne visible).
+// resolveImg : fonction fournie par l'appelant (publicUrl de admin/client.js) pour
+// garder ce module sans dependance DOM/Supabase, donc testable en Node pur.
+// lien passe par safeHref (defense en profondeur contre un schema javascript:).
+export function renderArticles(rows, resolveImg) {
+  return rows.map(r => {
+    const img = resolveImg(r.image_path)
+    return `<a href="${esc(safeHref(r.lien, '#blog'))}" class="bitem" data-m="${esc(r.categorie)}">
+      <div class="bitem__img"><picture><source type="image/webp" srcset="${esc(webpPath(r.image_path))}"><img loading="lazy" src="${esc(img)}" alt="${esc(r.image_alt || '')}"></picture></div>
+      <span class="bitem__n">${esc(r.numero)}</span>
+      <div class="bitem__body">
+        <span class="bitem__cat">${esc(r.categorie)}</span>
+        <h3>${esc(r.titre)}</h3>
+        <p>${esc(r.extrait)}</p>
+        <span class="bitem__meta">${esc(r.meta_lecture)}</span>
+      </div>
+      <span class="bitem__arrow">↗</span>
+    </a>`
+  }).join('')
+}

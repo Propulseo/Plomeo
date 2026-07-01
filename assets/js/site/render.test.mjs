@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { esc, safeHref, renderCommunes, renderPiliers, renderProcess, renderFaq } from './render.mjs'
+import { esc, safeHref, renderCommunes, renderPiliers, renderProcess, renderFaq, renderArticles } from './render.mjs'
 
 describe('safeHref', () => {
   it('rejette un schéma javascript: (fallback #contact)', () => {
@@ -140,5 +140,49 @@ describe('renderFaq', () => {
   it('concatène plusieurs items dans l\'ordre', () => {
     const html = renderFaq([{ question: 'A', reponse: 'a' }, { question: 'B', reponse: 'b' }])
     expect(html.indexOf('>A<')).toBeLessThan(html.indexOf('>B<'))
+  })
+})
+
+describe('renderArticles', () => {
+  const row = {
+    categorie: 'Plomberie', numero: '01',
+    titre: 'Pourquoi une installation bien faite dure vraiment plus longtemps',
+    extrait: 'Matériel, pose, finitions : ce qui fait la différence.',
+    meta_lecture: '5 min de lecture',
+    image_path: 'https://images.pexels.com/photos/7227624/pexels-photo-7227624.jpeg',
+    image_alt: '', lien: '#blog',
+  }
+  const resolveImg = (path) => path // identité en test : pas de resolution Supabase
+
+  it('rend une carte .bitem avec categorie/titre/extrait/meta', () => {
+    const html = renderArticles([row], resolveImg)
+    expect(html).toContain('<a href="#blog" class="bitem" data-m="Plomberie">')
+    expect(html).toContain('<span class="bitem__n">01</span>')
+    expect(html).toContain('<span class="bitem__cat">Plomberie</span>')
+    expect(html).toContain('<h3>Pourquoi une installation bien faite dure vraiment plus longtemps</h3>')
+    expect(html).toContain('<p>Matériel, pose, finitions : ce qui fait la différence.</p>')
+    expect(html).toContain('<span class="bitem__meta">5 min de lecture</span>')
+  })
+
+  it('utilise resolveImg pour construire le src de l\'image', () => {
+    const resolve = (path) => `RESOLVED(${path})`
+    const html = renderArticles([row], resolve)
+    expect(html).toContain('src="RESOLVED(https://images.pexels.com/photos/7227624/pexels-photo-7227624.jpeg)"')
+  })
+
+  it('échappe titre/extrait/categorie', () => {
+    const html = renderArticles([{ ...row, titre: '<b>T</b>', extrait: '<i>E</i>' }], resolveImg)
+    expect(html).toContain('&lt;b&gt;T&lt;/b&gt;')
+    expect(html).toContain('&lt;i&gt;E&lt;/i&gt;')
+  })
+
+  it('utilise lien="#blog" par défaut si absent', () => {
+    const html = renderArticles([{ ...row, lien: null }], resolveImg)
+    expect(html).toContain('<a href="#blog" class="bitem"')
+  })
+
+  it('neutralise un lien en javascript: (pas de schéma actif dans le href)', () => {
+    const html = renderArticles([{ ...row, lien: 'javascript:alert(1)' }], resolveImg)
+    expect(html).not.toContain('javascript:')
   })
 })
