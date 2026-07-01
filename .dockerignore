@@ -1,0 +1,14 @@
+node_modules
+dist
+.git
+.env
+.env.local
+.env.*.local
+.planning
+.superpowers
+docs
+supabase
+*.mov
+Doc Plomeo v2
+index-lab.html
+lab-inject.js

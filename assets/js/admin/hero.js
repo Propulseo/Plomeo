@@ -8,8 +8,8 @@ export async function mountHero(root, onBack) {
     section: 'hero',
     intro: 'Le grand bandeau tout en haut de la page d\'accueil.',
     fields: [
-      { cle: 'eyebrow', label: 'Surtitre', type: 'text',
-        help: 'Petit texte au-dessus du titre (ex : « Ploméo, »).' },
+      // « Surtitre » (eyebrow) retiré : à cet emplacement le hero affiche le
+      // logo, pas de texte — le champ n'avait donc aucun effet sur le site.
       { cle: 'titre', label: 'Titre principal', type: 'text',
         help: 'Le grand mot en gros (ex : « L\'ARTISAN »).' },
       { cle: 'accent', label: 'Suite du titre (accent)', type: 'text',
