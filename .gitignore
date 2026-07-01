@@ -2,6 +2,14 @@
 node_modules/
 package-lock.json
 
+# Build
+dist/
+
+# Secrets / variables d'environnement — NE JAMAIS COMMITTER
+.env
+.env.local
+.env.*.local
+
 # OS files
 .DS_Store
 Thumbs.db
@@ -23,3 +31,8 @@ npm-debug.log*
 # Sources lourdes / archives (hors dépôt)
 Elements/Vidéo/
 Plomeo v1/
+Doc Plomeo v2/
+
+# Labo temporaire (orphelin, à supprimer)
+index-lab.html
+lab-inject.js
