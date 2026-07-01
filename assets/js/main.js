@@ -24,7 +24,10 @@ function runCounter(el){
 const countIO=new IntersectionObserver((es,obs)=>es.forEach(e=>{if(e.isIntersecting){runCounter(e.target);obs.unobserve(e.target);}}),{threshold:.5});
 document.querySelectorAll('[data-count]').forEach(el=>countIO.observe(el));
 
-// ---- Marquee reviews ----
+// ---- Marquee reviews (fallback en dur) ----
+// cms-lists.js (module, differe) tente de charger les avis depuis Supabase et
+// pose data-cms-filled sur #reaTrack s'il reussit ; ce script (classique, execute
+// avant les modules) ne remplit le marquee que si le CMS n'a pas encore agi.
 const reviews=[
   ['Travail soigné, propre, dans les délais. Je recommande.','François R.'],
   ['Super plombier, efficace et de bon conseil. Merci !','Manon S.'],
@@ -32,8 +35,10 @@ const reviews=[
   ['Intervention propre, tout bien expliqué.','Karim B.'],
 ];
 const track=document.getElementById('reaTrack');
-const cards=[...reviews,...reviews].map(([t,w])=>`<div class="rea__rev"><div class="stars">★★★★★</div><p>« ${t} »</p><div class="who">${w}</div></div>`).join('');
-track.innerHTML=cards;
+if(track && !track.dataset.cmsFilled){
+  const cards=[...reviews,...reviews].map(([t,w])=>`<div class="rea__rev"><div class="stars">★★★★★</div><p>« ${t} »</p><div class="who">${w}</div></div>`).join('');
+  track.innerHTML=cards;
+}
 
 // ---- Pillars: reveal volet au scroll ----
 const io=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting)en.target.classList.add('in')}),{threshold:.35});
