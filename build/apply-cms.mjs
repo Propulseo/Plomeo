@@ -31,16 +31,35 @@ export function applyCms(html, table) {
     }
   })
 
-  $('[data-cms-html]').each((_, el) => {
-    const key = $(el).attr('data-cms-html')
-    const val = table[key]
-    if (val === undefined) { warnings.push(`clé manquante (html): ${key}`); return }
-    $(el).html(sanitizeHtml(val, {
-      allowedTags: ['em', 'strong', 'b', 'i', 'br', 'a', 'span'],
-      allowedAttributes: { a: ['href', 'target', 'rel'], span: ['class'] },
-    }))
-    $(el).removeAttr('data-cms-html')
-  })
+  const STRICT_ALLOWED = ['em', 'strong', 'b', 'i', 'br', 'a', 'span']
+  const RICH_ALLOWED = ['h2', 'h3', 'h4', 'p', 'ul', 'ol', 'li', 'em', 'strong', 'b', 'i', 'br', 'a', 'span']
+  const HTML_ALLOWED_ATTRIBUTES = { a: ['href', 'target', 'rel'], span: ['class'] }
+
+  injectHtml($, '[data-cms-html]', table, warnings, STRICT_ALLOWED)
+  injectHtml($, '[data-cms-html-rich]', table, warnings, RICH_ALLOWED)
 
   return { html: $.html(), warnings }
+
+  /**
+   * Assainit et injecte le HTML des éléments correspondant au sélecteur, en
+   * utilisant la liste blanche de balises fournie. Pure : ne fait que muter $.
+   * @param {cheerio.CheerioAPI} $
+   * @param {string} selector
+   * @param {Record<string,string>} tbl
+   * @param {string[]} warn
+   * @param {string[]} allowedTags
+   */
+  function injectHtml($, selector, tbl, warn, allowedTags) {
+    const attrName = selector.slice(1, -1)
+    $(selector).each((_, el) => {
+      const key = $(el).attr(attrName)
+      const val = tbl[key]
+      if (val === undefined) { warn.push(`clé manquante (html): ${key}`); return }
+      $(el).html(sanitizeHtml(val, {
+        allowedTags,
+        allowedAttributes: HTML_ALLOWED_ATTRIBUTES,
+      }))
+      $(el).removeAttr(attrName)
+    })
+  }
 }

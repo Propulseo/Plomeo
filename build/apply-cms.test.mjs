@@ -83,3 +83,22 @@ describe('applyCms — HTML assaini via data-cms-html', () => {
     expect(warnings).toContain('clé manquante (html): a.b')
   })
 })
+
+describe('applyCms — HTML riche via data-cms-html-rich', () => {
+  it('conserve les balises de structure (h2, ul, li)', () => {
+    const html = '<div data-cms-html-rich="legal.x">EN DUR</div>'
+    const val = '<h2>Titre</h2><ul><li>un</li><li>deux</li></ul>'
+    const { html: out } = applyCms(html, { 'legal.x': val })
+    expect(out).toContain('<h2>Titre</h2>')
+    expect(out).toContain('<li>un</li>')
+    expect(out).not.toContain('EN DUR')
+  })
+  it('retire quand même les balises dangereuses (script, iframe)', () => {
+    const html = '<div data-cms-html-rich="legal.x">y</div>'
+    const { html: out } = applyCms(html, { 'legal.x': '<p>ok</p><script>alert(1)</script><iframe src="x"></iframe>' })
+    expect(out).toContain('<p>ok</p>')
+    expect(out).not.toContain('<script>')
+    expect(out).not.toContain('<iframe')
+    expect(out).not.toContain('alert(1)')
+  })
+})
