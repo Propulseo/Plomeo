@@ -481,12 +481,12 @@
       <input type="hidden" name="from_name" value="Site Ploméo">
       <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
       <div class="cform__row">
-        <div class="cfield"><label for="f-prenom">Prénom</label><input id="f-prenom" name="Prenom" type="text" placeholder="Jean" required></div>
-        <div class="cfield"><label for="f-nom">Nom</label><input id="f-nom" name="Nom" type="text" placeholder="Dupont" required></div>
+        <div class="cfield"><label for="f-prenom">Prénom</label><input id="f-prenom" name="Prenom" type="text" autocomplete="given-name" placeholder="Jean" required></div>
+        <div class="cfield"><label for="f-nom">Nom</label><input id="f-nom" name="Nom" type="text" autocomplete="family-name" placeholder="Dupont" required></div>
       </div>
       <div class="cform__row">
-        <div class="cfield"><label for="f-email">Email</label><input id="f-email" name="Email" type="email" placeholder="jean@exemple.fr" required></div>
-        <div class="cfield"><label for="f-tel">Téléphone</label><input id="f-tel" name="Telephone" type="tel" placeholder="06 00 00 00 00" required></div>
+        <div class="cfield"><label for="f-email">Email</label><input id="f-email" name="Email" type="email" autocomplete="email" placeholder="jean@exemple.fr" required></div>
+        <div class="cfield"><label for="f-tel">Téléphone</label><input id="f-tel" name="Telephone" type="tel" autocomplete="tel" placeholder="06 00 00 00 00" required></div>
       </div>
       <div class="cfield"><label for="f-type">Type de projet</label>
         <select id="f-type" name="Type de projet" required><option value="" disabled selected>Sélectionnez</option><option>Plomberie</option><option>Chauffage</option><option>Climatisation</option><option>Piscine</option><option>Projet multi-services</option></select>

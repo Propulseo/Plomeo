@@ -36,5 +36,8 @@
 .sb__link{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-display);font-weight:600;color:var(--ca);text-decoration:none}
 .sb__link::after{content:'→';transition:transform .3s var(--ease)}
 .sb__link:hover::after{transform:translateX(5px)}
-@media(max-width:780px){.sb{grid-template-columns:1fr}.sb:nth-child(even) .sb__media{order:0}}
+@media(max-width:780px){.sb{grid-template-columns:1fr}.sb:nth-child(even) .sb__media{order:0}
+  /* Lien de fin de bloc : sans padding, la zone de frappe fait la hauteur du
+     texte seul, au milieu d'un long défilement. */
+  .sb__link{padding:10px 0}}
 

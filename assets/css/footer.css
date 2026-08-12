@@ -14,5 +14,8 @@
 .foot__bottom{max-width:var(--cadre);margin:2.5rem auto 0;padding:1.4rem clamp(1.2rem,5vw,3rem) 0;border-top:1px solid rgba(255,255,255,.12);
   display:flex;justify-content:space-between;font-size:12px;flex-wrap:wrap;gap:10px}
 .foot__bottom a{color:rgba(255,255,255,.7);text-decoration:none}
-@media(max-width:780px){.foot__inner{grid-template-columns:1fr 1fr}.foot__brand{grid-column:1/-1}}
+@media(max-width:780px){.foot__inner{grid-template-columns:1fr 1fr}.foot__brand{grid-column:1/-1}
+  /* Liens de 22px de haut : infrappables au pouce. Le padding gonfle la zone
+     sans changer l'espacement visuel (la marge est reprise dedans). */
+  .foot__col a{padding:7px 0;margin-bottom:2px}}
 
