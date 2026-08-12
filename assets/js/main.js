@@ -46,7 +46,12 @@ if(track && !track.dataset.cmsFilled){
 
 // ---- Pillars: reveal volet au scroll ----
 const io=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting)en.target.classList.add('in')}),{threshold:.35});
-document.querySelectorAll('.sb, .about, .work, .blog').forEach(s=>io.observe(s));
+function observeReveals(root){root.querySelectorAll('.sb, .about, .work, .blog').forEach(s=>io.observe(s));}
+observeReveals(document);
+// Le CMS (cms-lists.js, module differe) remplace #pilCards APRES ce script :
+// les .sb observes ici disparaissent et les nouveaux ne seraient jamais reveles
+// — le volet de couleur resterait ferme sur les photos. D'ou ce point d'entree.
+window.plomeoObserveReveals=observeReveals;
 
 // ---- Réalisations filter ----
 document.getElementById('wfilters').addEventListener('click',e=>{

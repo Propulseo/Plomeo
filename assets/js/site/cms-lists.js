@@ -20,6 +20,9 @@ export async function mountList({ table, selector, hasVisible, render }) {
   // révélés (opacity:0 pour toujours). On les révèle donc directement.
   if (container.matches('[data-reveal]')) container.classList.add('is-in')
   container.querySelectorAll('[data-reveal]').forEach(el => el.classList.add('is-in'))
+  // Même piège pour l'observateur de main.js (classe `in`, volet des piliers) :
+  // sans ré-observation, le volet de couleur reste fermé sur les photos.
+  window.plomeoObserveReveals?.(container)
   return true
 }
 
@@ -46,10 +49,14 @@ async function mountAll() {
   await mountList({ table: 'process_etapes', selector: '.process__grid', hasVisible: false, render: renderProcess })
   const faqMounted = await mountList({ table: 'faq', selector: '.faq__list', hasVisible: true, render: renderFaq })
   if (faqMounted) bindFaqAccordion()
-  await mountList({
+  const articlesMounted = await mountList({
     table: 'articles', selector: '.blog__list', hasVisible: true,
     render: rows => renderArticles(rows, path => publicUrl('articles', path)),
   })
+  // Même raison que la FAQ : les écouteurs de main.js pointent sur les .bitem
+  // en dur, disparus après remplacement — sans ça, cliquer un conseil ne fait rien.
+  if (articlesMounted) document.querySelectorAll('.bitem').forEach(b =>
+    b.addEventListener('click', (e) => { e.preventDefault(); window.openAM?.(b) }))
 }
 
 if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', mountAll)
