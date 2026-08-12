@@ -3,16 +3,30 @@
   background:linear-gradient(120deg,var(--blue) 0%,#1a1ab0 52%,var(--navy) 100%)}
 .hero__video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
 .hero__veil{position:absolute;inset:0;z-index:1;background:linear-gradient(120deg,rgba(50,50,255,.72) 0%,rgba(26,26,176,.66) 52%,rgba(0,0,109,.8) 100%)}
-.hero__map{position:absolute;z-index:2;top:50%;right:max(clamp(1rem,3vw,3.5rem),calc(50% - 689px));transform:translateY(-50%);width:min(46%,560px);pointer-events:none;filter:drop-shadow(0 24px 50px rgba(0,0,40,.45))}
-.hero__map svg{width:100%;height:auto;overflow:visible}
-.vmap-fill{fill:rgba(255,255,255,.07)}
-.vmap-out{fill:none;stroke:var(--sky);stroke-width:3;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:1;animation:vdraw 3.2s var(--ease) .8s forwards}
-@keyframes vdraw{to{stroke-dashoffset:0}}
-.vmap-dot{fill:var(--orange)}
-.vmap-dotMain{fill:#fff;stroke:var(--orange);stroke-width:3}
-.vmap-ping{fill:var(--orange);transform-box:fill-box;transform-origin:center;animation:vping 2.6s ease-out infinite}
-@keyframes vping{0%{transform:scale(1);opacity:.55}70%,100%{transform:scale(2.6);opacity:0}}
-.vmap-label{fill:#fff;font-family:var(--font-display);font-weight:600;font-size:23px}
+/* Emplacement de la carte de zone (remplie par assets/js/site/zone-map/).
+   La largeur est plafonnée par la hauteur de la fenêtre : le 3e terme réserve la
+   place de la légende, de la ligne d'info et du lien, puis convertit le reste en
+   largeur via le format de la carte. C'est ce qui garantit qu'aucun TEXTE de la
+   carte ne remonte dans la bande du header — la silhouette, elle, peut passer
+   derrière, comme sur la version d'origine. */
+/* z-index 6 et pas 3 : .hero__inner (z-index 5) est un bloc pleine largeur qui
+   recouvrait entièrement la carte, la rendant inerte au pointeur. Le conteneur
+   reste en pointer-events:none, seules les cibles de la carte captent. */
+.hero__map{position:absolute;z-index:6;top:50%;
+  right:max(clamp(1rem,3vw,3.5rem),calc(50% - 689px));transform:translateY(-50%);
+  width:min(52%,660px,calc((100vh - 172px) * 1.186));pointer-events:none}
+/* Fondu des bords : sans lui la carte se termine par une arête franche contre le
+   hero et se lit comme un rectangle collé. */
+.zm-hero__map{
+  -webkit-mask-image:
+    linear-gradient(to right, transparent 0, #000 13%, #000 93%, transparent 100%),
+    linear-gradient(to bottom, transparent 0, #000 16%, #000 100%);
+  -webkit-mask-composite:source-in;
+  mask-image:
+    linear-gradient(to right, transparent 0, #000 13%, #000 93%, transparent 100%),
+    linear-gradient(to bottom, transparent 0, #000 16%, #000 100%);
+  mask-composite:intersect;
+}
 @media(max-width:900px){.hero__map{display:none}}
 .hero__photo{position:absolute;top:0;right:0;width:58%;height:100%;overflow:hidden}
 .hero__photo img{width:100%;height:100%;object-fit:cover}

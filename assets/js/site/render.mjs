@@ -31,9 +31,12 @@ function webpPath(imagePath) {
 }
 
 // Section « ZONE D'INTERVENTION » — index.html .zone__communes (table communes, pas de colonne visible).
+// `zone` (r1/r2/r3) est ajouté par la carte quand la commune a des coordonnées :
+// il permet de relier la puce et le point sur la carte dans les deux sens.
 export function renderCommunes(rows) {
   return rows.map(r => (
-    `<span class="zone__chip" data-reveal="up">${esc(r.nom)}</span>`
+    `<span class="zone__chip" data-reveal="up" data-n="${esc(r.nom)}"` +
+    `${r.zone ? ` data-zone="${esc(r.zone)}"` : ''}>${esc(r.nom)}</span>`
   )).join('')
 }
 

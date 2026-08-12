@@ -58,9 +58,18 @@ describe('renderCommunes', () => {
     const rows = [{ nom: 'Toulon' }, { nom: 'Fréjus' }]
     const html = renderCommunes(rows)
     expect(html).toBe(
-      '<span class="zone__chip" data-reveal="up">Toulon</span>' +
-      '<span class="zone__chip" data-reveal="up">Fréjus</span>'
+      '<span class="zone__chip" data-reveal="up" data-n="Toulon">Toulon</span>' +
+      '<span class="zone__chip" data-reveal="up" data-n="Fréjus">Fréjus</span>'
     )
+  })
+  it('porte le palier quand il est connu, pour que la carte puisse relier les deux', () => {
+    const html = renderCommunes([{ nom: 'Cuers', zone: 'r2' }])
+    expect(html).toBe('<span class="zone__chip" data-reveal="up" data-n="Cuers" data-zone="r2">Cuers</span>')
+  })
+  it('échappe aussi le nom placé en attribut', () => {
+    const html = renderCommunes([{ nom: 'L\'"Île"' }])
+    expect(html).not.toContain('data-n="L\'"Île""')
+    expect(html).toContain('&quot;')
   })
   it('échappe le nom de la commune', () => {
     const html = renderCommunes([{ nom: '<b>X</b>' }])

@@ -39,7 +39,9 @@ function bindFaqAccordion() {
 async function mountAll() {
   const avisMounted = await mountList({ table: 'avis', selector: '#reaTrack', hasVisible: true, render: renderAvis })
   if (avisMounted) document.getElementById('reaTrack').dataset.cmsFilled = '1'
-  await mountList({ table: 'communes', selector: '.zone__communes', hasVisible: false, render: renderCommunes })
+  // `communes` n'est plus monté ici : la carte de zone en est propriétaire
+  // (assets/js/site/zone-map/), parce qu'elle doit y ajouter le palier de délai.
+  // Deux écrivains sur .zone__communes se seraient écrasés l'un l'autre.
   await mountList({ table: 'piliers', selector: '#pilCards', hasVisible: true, render: renderPiliers })
   await mountList({ table: 'process_etapes', selector: '.process__grid', hasVisible: false, render: renderProcess })
   const faqMounted = await mountList({ table: 'faq', selector: '.faq__list', hasVisible: true, render: renderFaq })

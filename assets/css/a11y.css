@@ -7,6 +7,7 @@
   .sb__shutter{display:none!important}
   .about__photo{clip-path:none!important}
   .about__text>*,.about__media::before,.about__badge,.about__caption{opacity:1!important;transform:none!important}
-  .vmap-out{stroke-dashoffset:0!important}
-  .vmap-ping{display:none}
+  /* Carte de zone : trait de côte déjà tracé, aucun clignotement. */
+  .zm-coast{stroke-dashoffset:0!important}
+  .zm-ping{display:none}
 }

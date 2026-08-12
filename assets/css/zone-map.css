@@ -1,0 +1,121 @@
+/* ===== Carte de la zone d'intervention (hero + section « Zone ») ===== */
+
+/* Palette des paliers, distribuée à tout ce qui porte un data-zone, SVG comme HTML.
+   La rampe passe par l'ambré : un dégradé orange → bleu direct traverse un brun
+   violacé en sRGB. */
+:root{--zm1:#FF5A1E; --zm2:#FFA53D; --zm3:#A5E2EA}
+[data-zone="r1"]{--z:var(--zm1)}
+[data-zone="r2"]{--z:var(--zm2)}
+[data-zone="r3"]{--z:var(--zm3)}
+
+/* ---------- Carte ---------- */
+/* overflow:hidden contient tout : sans lui le SVG peint hors de sa colonne, jusque
+   sur le header, et son cercle de survol de 40 km capte le pointeur par-dessus le
+   titre et les boutons du hero. */
+.zm{width:100%;height:auto;overflow:hidden;display:block}
+.zm-hero__map .zm{filter:drop-shadow(0 16px 38px rgba(0,0,40,.32))}
+.zm-land{fill:rgba(255,255,255,.05)}
+.zm--dense .zm-land{fill:rgba(0,0,60,.03)}
+.zm-coast{fill:none;stroke:var(--sky);stroke-width:2.4;stroke-linejoin:round;opacity:.55}
+.zm--dense .zm-coast{stroke:var(--navy);stroke-width:1.8;opacity:.2}
+@media(prefers-reduced-motion:no-preference){
+  .zm-coast{stroke-dasharray:1;stroke-dashoffset:1;animation:zmDraw 2.6s var(--ease) .3s forwards}
+}
+@keyframes zmDraw{to{stroke-dashoffset:0}}
+.zm-hit{fill:transparent;pointer-events:auto;cursor:pointer}
+
+.zm-glow{transition:opacity .3s var(--ease)}
+.zm--dense .zm-glow{opacity:.9}
+[data-active] .zm-glow{opacity:.35}
+.zm-edge{fill:none;stroke:var(--z);stroke-width:1.2;opacity:.14;stroke-dasharray:5 7;transition:opacity .3s,stroke-width .3s}
+[data-active] .zm-edge{opacity:.08}
+[data-active="r1"] .zm-edge[data-zone="r1"],
+[data-active="r2"] .zm-edge[data-zone="r2"],
+[data-active="r3"] .zm-edge[data-zone="r3"]{opacity:.95;stroke-width:2.6}
+.zm-arc{fill:#fff;font-family:var(--font-display);font-weight:700;font-size:18px;letter-spacing:.18em;opacity:.55;transition:opacity .3s}
+.zm--dense .zm-arc{fill:var(--navy);font-size:17px;letter-spacing:.16em;opacity:.6}
+[data-active] .zm-arc{opacity:.12}
+[data-active="r1"] .zm-arc[data-zone="r1"],
+[data-active="r2"] .zm-arc[data-zone="r2"],
+[data-active="r3"] .zm-arc[data-zone="r3"]{opacity:1}
+
+/* ---------- Une commune = une cible de survol ---------- */
+.zm-c{cursor:pointer;outline:none;transition:opacity .25s var(--ease)}
+.zm-c__hit{fill:transparent;pointer-events:auto}
+.zm-c__ring{fill:none;stroke:#fff;stroke-width:1.5;opacity:0;pointer-events:none;
+  transform-box:fill-box;transform-origin:center;transform:scale(.55);
+  transition:opacity .25s var(--ease),transform .25s var(--ease)}
+.zm--dense .zm-c__ring{stroke:var(--navy)}
+/* Orange, comme la carte d'origine : le codage par palier est porté par le dégradé. */
+.zm-c__dot{fill:var(--orange);opacity:.92;pointer-events:none;transition:fill .2s,opacity .25s}
+.zm--dense .zm-c__dot{opacity:.85}
+.zm-c__lab{fill:#fff;font-family:var(--font-display);font-weight:600;font-size:19px;
+  paint-order:stroke;stroke:rgba(2,2,24,.6);stroke-width:3.5px;stroke-linejoin:round;
+  opacity:0;pointer-events:none;transition:opacity .25s var(--ease)}
+.zm--dense .zm-c__lab{fill:var(--navy);stroke:#fff;stroke-width:4px;font-size:20px}
+.zm-c.is-named .zm-c__lab{opacity:1}
+.zm-c.is-hub .zm-c__dot{fill:#fff;stroke:var(--orange);stroke-width:3.4}
+.zm--dense .zm-c.is-hub .zm-c__dot{fill:var(--orange);stroke:#fff}
+.zm-c.is-hub .zm-c__lab{font-weight:800;opacity:1}
+
+/* Ping orange sur les villes principales, départs décalés pour éviter le scintillement. */
+.zm-ping{fill:var(--orange);transform-box:fill-box;transform-origin:center;opacity:0;pointer-events:none}
+@media(prefers-reduced-motion:no-preference){
+  .zm-ping{animation:zmPing 4.2s ease-out infinite;animation-delay:calc(var(--i,0) * .6s)}
+  .zm-c.is-hub .zm-ping{animation:zmPingHub 3.2s ease-out infinite}
+}
+@keyframes zmPing{0%{transform:scale(1);opacity:.42}55%,100%{transform:scale(3);opacity:0}}
+@keyframes zmPingHub{0%{transform:scale(1);opacity:.55}60%,100%{transform:scale(3.4);opacity:0}}
+[data-active] .zm-ping{animation-play-state:paused;opacity:0}
+
+/* Au survol le point s'inverse : sur un fond de points orange, un changement de
+   teinte passerait inaperçu. */
+.zm-c:hover .zm-c__ring,.zm-c:focus-visible .zm-c__ring,.zm-c.is-focus .zm-c__ring{opacity:.85;transform:scale(1)}
+.zm-c:hover .zm-c__dot,.zm-c:focus-visible .zm-c__dot,.zm-c.is-focus .zm-c__dot{fill:#fff;stroke:var(--orange);stroke-width:2.6;opacity:1}
+.zm--dense .zm-c:hover .zm-c__dot,.zm--dense .zm-c.is-focus .zm-c__dot{fill:var(--navy);stroke:var(--orange)}
+.zm-c:hover .zm-c__lab,.zm-c:focus-visible .zm-c__lab,.zm-c.is-focus .zm-c__lab{opacity:1}
+[data-active] .zm-c{opacity:.22}
+[data-active="r1"] .zm-c[data-zone="r1"],
+[data-active="r2"] .zm-c[data-zone="r2"],
+[data-active="r3"] .zm-c[data-zone="r3"]{opacity:1}
+[data-active] .zm-c.is-hub,[data-active] .zm-c.is-focus{opacity:1}
+
+/* Fil tiré de Toulon à la commune survolée */
+.zm-lead{opacity:0;pointer-events:none;transition:opacity .25s var(--ease)}
+.zm-lead line{stroke:var(--z);stroke-width:1.3;stroke-dasharray:3 4}
+.zm-lead text{fill:#fff;font-family:var(--font-display);font-weight:700;font-size:14px;
+  paint-order:stroke;stroke:rgba(2,2,24,.65);stroke-width:3.5px}
+.zm--dense .zm-lead text{fill:var(--navy);stroke:#fff;stroke-width:4px}
+.zm-c:hover .zm-lead,.zm-c:focus-visible .zm-lead,.zm-c.is-focus .zm-lead{opacity:1}
+
+/* ---------- Bloc du hero ---------- */
+.zm-hero{display:flex;flex-direction:column;gap:.5rem}
+.zm-legend{display:flex;gap:5px;justify-content:flex-end;flex-wrap:wrap;padding-inline-end:2%}
+.zm-legend__i{all:unset;pointer-events:auto;cursor:pointer;display:inline-flex;align-items:center;gap:6px;
+  padding:5px 9px;border-radius:30px;border:1px solid rgba(255,255,255,.16);
+  background:rgba(4,4,26,.38);backdrop-filter:blur(6px);white-space:nowrap;
+  font:600 10.5px/1 var(--font-body);color:rgba(255,255,255,.62);transition:all .22s var(--ease)}
+.zm-legend__i:hover,.zm-legend__i:focus-visible{border-color:var(--z);color:#fff}
+.zm-legend__sw{width:7px;height:7px;border-radius:50%;background:var(--z);flex:none}
+.zm-legend__i b{font-family:var(--font-display);font-weight:800;font-size:11.5px;color:#fff}
+.zm-legend__i span{opacity:.55}
+
+.zm-cap{min-height:2.9em;margin:0;text-align:right;padding-inline-end:2%;font-size:12.5px;
+  line-height:1.45;color:rgba(255,255,255,.45);transition:color .2s}
+.zm-cap.is-on{color:rgba(255,255,255,.78)}
+.zm-cap b{font-family:var(--font-display);font-weight:800;color:#fff;font-size:14.5px}
+.zm-cap.is-commune b{color:var(--z)}
+.zm-cap em{font-style:normal;font-weight:700;font-size:11px;color:var(--z);
+  border:1px solid currentColor;border-radius:20px;padding:1px 7px;margin-left:8px;white-space:nowrap}
+.zm-cap span{display:block;margin-top:2px}
+
+/* Tertiaire : le hero a déjà deux boutons, celui-ci ne doit pas leur voler l'attention. */
+.zm-cta{pointer-events:auto;align-self:flex-end;margin-inline-end:2%;
+  display:inline-flex;align-items:center;gap:9px;color:#fff;text-decoration:none;
+  font-family:var(--font-display);font-weight:700;font-size:14px;
+  padding:5px 0;border-bottom:1px solid rgba(255,255,255,.28);transition:all .22s var(--ease)}
+.zm-cta:hover,.zm-cta:focus-visible{color:var(--orange);border-bottom-color:var(--orange)}
+.zm-cta__arrow{font-style:normal;display:grid;place-items:center;width:20px;height:20px;flex:none;
+  border-radius:50%;background:var(--orange);color:#fff;font-size:12px;line-height:1;
+  transition:transform .22s var(--ease)}
+.zm-cta:hover .zm-cta__arrow{transform:translateY(3px)}
