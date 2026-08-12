@@ -24,7 +24,12 @@
      formulaire. Ce dernier reste aligné à gauche : centrer des libellés de
      champs les rendrait pénibles à parcourir. */
   .contact__inner>div:first-child{text-align:center}
-  .contact__desc{margin-inline:auto}}
+  .contact__desc{margin-inline:auto}
+  .cinfo{margin-bottom:11px}
+  /* Les paires côte à côte laissaient ~135px par champ sur un téléphone :
+     une adresse e-mail n'y tient pas, on ne voit jamais ce qu'on tape.
+     Un champ par ligne, sur toute la largeur. */
+  .cform__row{grid-template-columns:1fr;gap:0}}
 /* Sous 16px, Safari iOS zoome tout l'écran dès qu'on touche un champ : le
    visiteur se retrouve décalé, à dézoomer à la main, en plein formulaire de
    devis. 16px exactement = le seuil, et c'est mobile seulement. */

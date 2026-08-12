@@ -41,7 +41,19 @@
   .hero__inner{order:1}
   .hero__map{display:block;order:2;position:static;top:auto;right:auto;
     transform:none;width:min(82%,330px);margin:clamp(.8rem,4vw,1.8rem) auto 0}
-  .hero__lead{margin-top:16px}
+  /* Les décalages de quelques pixels calaient les blocs sur la grille du
+     desktop ; à cette largeur ils se lisent comme un défaut d'alignement. */
+  .hero__eyebrow,.hero__accent{margin-left:0}
+  .hero__lead{margin:16px 0 0}
+  .hero__cta{margin-left:0}
+}
+/* Sur un vrai téléphone, les deux boutons côte à côte laissent ~150px chacun :
+   « Voir les réalisations » y passe à la ligne. Empilés pleine largeur, ils
+   deviennent deux cibles franches. */
+@media(max-width:560px){
+  .hero__cta{flex-direction:column;gap:10px}
+  .hero__cta .hbtn{width:100%}
+  .hero__title{font-size:clamp(3rem,13vw,10rem)}
 }
 .hero__photo{position:absolute;top:0;right:0;width:58%;height:100%;overflow:hidden}
 .hero__photo img{width:100%;height:100%;object-fit:cover}
