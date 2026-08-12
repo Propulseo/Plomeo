@@ -1,7 +1,11 @@
 // Ploméo — interactions (extrait de l’inline d’index.html)
 // ---- Hero: split letters + replay ----
 const heroTitle=document.getElementById('heroTitle');
-function splitHero(w){heroTitle.innerHTML=[...w].map((c,i)=>`<span class="ltr" style="animation-delay:${i*0.06}s">${c===' '?'&nbsp;':c}</span>`).join('')+'<span class="u"></span>';}
+// esc() : même liste de caractères que assets/js/site/render.mjs — le titre peut
+// venir du CMS (voir l'écouteur cms:singletons-applied plus bas) et doit être
+// échappé comme tout le reste du contenu édité en ligne.
+const escChar=c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]??c);
+function splitHero(w){heroTitle.innerHTML=[...w].map((c,i)=>`<span class="ltr" style="animation-delay:${i*0.06}s">${c===' '?'&nbsp;':escChar(c)}</span>`).join('')+'<span class="u"></span>';}
 splitHero(heroTitle.textContent.trim());
 // Le CMS (assets/js/site/cms-singletons.js) peut livrer un titre plus récent que
 // celui cuit au build : on ré-anime le hero UNIQUEMENT s'il a changé (sinon
