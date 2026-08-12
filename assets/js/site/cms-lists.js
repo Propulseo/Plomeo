@@ -34,8 +34,11 @@ function bindFaqAccordion() {
   document.querySelectorAll('.faqitem__q').forEach(q => q.addEventListener('click', () => {
     const item = q.closest('.faqitem')
     const wasOpen = item.classList.contains('open')
-    document.querySelectorAll('.faqitem').forEach(i => i.classList.remove('open'))
-    if (!wasOpen) item.classList.add('open')
+    document.querySelectorAll('.faqitem').forEach(i => {
+      i.classList.remove('open')
+      i.querySelector('.faqitem__q').setAttribute('aria-expanded', 'false')
+    })
+    if (!wasOpen) { item.classList.add('open'); q.setAttribute('aria-expanded', 'true') }
   }))
 }
 

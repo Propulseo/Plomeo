@@ -155,7 +155,7 @@ describe('renderFaq', () => {
     const html = renderFaq([{ question: 'Intervenez-vous en urgence ?', reponse: 'Oui, selon nos disponibilités.' }])
     expect(html).toBe(
       '<div class="faqitem" data-reveal="up">' +
-      '<button class="faqitem__q">Intervenez-vous en urgence ?</button>' +
+      '<button class="faqitem__q" aria-expanded="false">Intervenez-vous en urgence ?</button>' +
       '<div class="faqitem__a"><p>Oui, selon nos disponibilités.</p></div>' +
       '</div>'
     )
