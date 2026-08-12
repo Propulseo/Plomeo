@@ -62,7 +62,6 @@ function monterHero(slot, communes, nbParZone) {
 
   slot.replaceChildren(root)
   entree(svg)
-  parallaxe(svg)
 }
 
 /* La barre de réassurance annonce le nombre de communes. Il est écrit en dur dans
@@ -73,19 +72,6 @@ function majCompteur(n) {
   if (!cible) return
   cible.dataset.count = String(n)
   if (cible.textContent !== String(n)) cible.textContent = String(n)
-}
-
-/* Parallaxe souris, comme la carte d'origine (data-mouse="0.02"). anim.js capture
-   ses cibles une seule fois au chargement : une carte injectée après ne serait
-   jamais branchée, on refait donc le geste ici. */
-function parallaxe(svg) {
-  if (!matchMedia('(pointer:fine)').matches || matchMedia('(prefers-reduced-motion:reduce)').matches) return
-  addEventListener('mousemove', (e) => {
-    if (!svg.isConnected) return
-    const dx = ((e.clientX - innerWidth / 2) * 0.02).toFixed(1)
-    const dy = ((e.clientY - innerHeight / 2) * 0.02).toFixed(1)
-    svg.style.transform = `translate3d(${dx}px, ${dy}px, 0)`
-  }, { passive: true })
 }
 
 /* ---------- Section « Zone d'intervention » ---------- */
