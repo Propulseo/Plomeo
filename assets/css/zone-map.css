@@ -195,6 +195,25 @@
    sur une 3e ligne, le bloc grandissait et repoussait la carte vers le haut. */
 .zm-cap span{display:block;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 
+/* ---------- Petit écran ----------
+   La carte de la section passe pleine largeur sous 860px : le SVG (800 unités)
+   se retrouve rendu sur ~330px, soit un facteur 0,4. Les textes tombent à 6-8px
+   réels. On les regrossit dans le repère du SVG, et on ne garde que les noms
+   qui portent l'information (Toulon + villes repères) — les 23 communes restent
+   listées en toutes lettres juste en dessous. */
+@media(max-width:600px){
+  .zm--dense .zm-c__lab{font-size:30px;stroke-width:5px}
+  .zm--dense .zm-c:not(.is-named) .zm-c__lab{display:none}
+  .zm--dense .zm-badge text{font-size:21px}
+  .zm--dense .zm-lead text{font-size:22px}
+  .zm--dense .zm-c__dot{r:6}
+  /* Le fil et sa distance n'ont pas de sens sans survol : au doigt, on tape. */
+  .zm--dense .zm-arc{font-size:26px}
+}
+/* Au doigt, la puce d'une commune n'a pas d'état de survol : le curseur main
+   promettait une interaction qui n'arrive jamais. */
+@media(hover:none){.zone__chip[data-zone]{cursor:default}}
+
 /* Tertiaire : le hero a déjà deux boutons, celui-ci ne doit pas leur voler l'attention. */
 .zm-cta{pointer-events:auto;align-self:flex-end;margin-inline-end:2%;
   display:inline-flex;align-items:center;gap:9px;color:#fff;text-decoration:none;
