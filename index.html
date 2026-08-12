@@ -474,8 +474,11 @@
       <div class="cinfo"><span>Email</span><a href="mailto:contact@plomeo.fr" data-cms="identite.email">contact@plomeo.fr</a></div>
       <div class="cinfo"><span>Zone</span><b data-cms="identite.zone">Aire toulonnaise (83)</b></div>
       <div class="cinfo"><span>Instagram</span><a href="https://www.instagram.com/sarl_plomeo" target="_blank" rel="noopener" data-cms-attr="href:identite.instagram">@sarl_plomeo</a></div>
+      <!-- Mobile uniquement (masqué en CSS au-delà) : ouvre le formulaire en fenêtre. -->
+      <button class="cform__open" type="button" aria-expanded="false">Demander un devis<i class="cform__open-arrow" aria-hidden="true">→</i></button>
     </div>
     <form class="cform" data-reveal="up" action="https://api.web3forms.com/submit" method="POST">
+      <button class="cform__close" type="button" aria-label="Fermer le formulaire">✕</button>
       <input type="hidden" name="access_key" value="b3b820e6-0489-4102-a570-c6af843cc16c">
       <input type="hidden" name="subject" value="Nouvelle demande de devis — site Ploméo">
       <input type="hidden" name="from_name" value="Site Ploméo">

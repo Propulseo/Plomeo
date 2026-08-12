@@ -23,13 +23,46 @@
   /* Le bloc de gauche (titre, phrase, coordonnées) passe centré au-dessus du
      formulaire. Ce dernier reste aligné à gauche : centrer des libellés de
      champs les rendrait pénibles à parcourir. */
-  .contact__inner>div:first-child{text-align:center}
+  .contact__inner>div:first-child{text-align:center;display:grid;grid-template-columns:1fr 1fr;gap:0 14px}
+  /* Titre, accroche et description gardent toute la largeur ; seuls les quatre
+     blocs de coordonnées se rangent en 2×2 — empilés, ils faisaient une colonne
+     inutilement longue pour quatre informations très courtes. */
+  .contact__inner>div:first-child>:not(.cinfo){grid-column:1/-1}
   .contact__desc{margin-inline:auto}
-  .cinfo{margin-bottom:11px}
+  .cinfo{margin-bottom:14px}
   /* Les paires côte à côte laissaient ~135px par champ sur un téléphone :
      une adresse e-mail n'y tient pas, on ne voit jamais ce qu'on tape.
      Un champ par ligne, sur toute la largeur. */
-  .cform__row{grid-template-columns:1fr;gap:0}}
+  .cform__row{grid-template-columns:1fr;gap:0}
+
+  /* ---- Le formulaire passe en fenêtre ----
+     Déplié dans la page, il ajoutait ~600px de défilement au bas du site pour
+     un visiteur qui, la plupart du temps, préfère appeler. On ne montre qu'un
+     bouton ; le formulaire s'ouvre par-dessus, plein écran. */
+  .cform{display:none}
+  .cform__open{display:inline-flex;align-items:center;justify-content:center;gap:10px;
+    width:100%;min-height:52px;margin-top:.4rem;padding:14px 22px;border:none;border-radius:12px;
+    background:var(--orange);color:#fff;cursor:pointer;
+    font:600 15px var(--font-display)}
+  .cform__open-arrow{font-style:normal;transition:transform .22s var(--ease)}
+  .cform__open:active .cform__open-arrow{transform:translateX(4px)}
+
+  /* opacity/transform forcés : le formulaire porte data-reveal, et masqué en
+     display:none il n'entre jamais dans le champ de l'observateur d'apparition
+     — sans ça, la fenêtre s'ouvrirait vide (opacité 0, décalée de 46px). */
+  .contact.is-form-open .cform{display:block;opacity:1;transform:none;
+    position:fixed;inset:0;z-index:950;
+    border-radius:0;overflow-y:auto;-webkit-overflow-scrolling:touch;
+    padding:calc(env(safe-area-inset-top) + 62px) clamp(1.1rem,5vw,1.6rem)
+            calc(env(safe-area-inset-bottom) + 28px)}
+  .contact.is-form-open .cform__close{display:grid;place-items:center;position:fixed;
+    top:calc(env(safe-area-inset-top) + 12px);right:14px;z-index:951;
+    width:44px;height:44px;border:none;border-radius:50%;
+    background:#f4f4f7;color:var(--navy);font-size:19px;line-height:1;cursor:pointer}}
+
+/* Hors mobile, ni le bouton d'ouverture ni la croix n'existent visuellement :
+   le formulaire est affiché en permanence à côté du texte. */
+.cform__open,.cform__close{display:none}
 /* Sous 16px, Safari iOS zoome tout l'écran dès qu'on touche un champ : le
    visiteur se retrouve décalé, à dézoomer à la main, en plein formulaire de
    devis. 16px exactement = le seuil, et c'est mobile seulement. */

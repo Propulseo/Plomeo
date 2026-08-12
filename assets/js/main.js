@@ -125,7 +125,30 @@ function closeAM(){am.classList.remove('open');}
 document.querySelectorAll('.bitem').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();openAM(b);}));
 am.querySelector('.amodal__backdrop').addEventListener('click',closeAM);
 am.querySelector('.amodal__close').addEventListener('click',closeAM);
-addEventListener('keydown',e=>{if(e.key==='Escape'){closePM();closeAM();}});
+// ---- Contact : sur mobile le formulaire s'ouvre en fenêtre ----
+// Le bouton d'ouverture et la croix n'existent qu'en mobile (CSS) : sur
+// ordinateur ces écouteurs ne se déclenchent jamais, le formulaire reste
+// affiché en permanence. La barre d'action basse ouvre directement la fenêtre
+// plutôt que de faire défiler vers un second bouton.
+const contactSec=document.getElementById('contact');
+const cformOpen=contactSec&&contactSec.querySelector('.cform__open');
+function toggleCform(open){
+  contactSec.classList.toggle('is-form-open',open);
+  cformOpen.setAttribute('aria-expanded',String(open));
+  document.body.style.overflow=open?'hidden':'';
+}
+if(cformOpen){
+  cformOpen.addEventListener('click',()=>toggleCform(true));
+  contactSec.querySelector('.cform__close').addEventListener('click',()=>toggleCform(false));
+  const devis=document.querySelector('.mobilecta__devis');
+  if(devis)devis.addEventListener('click',e=>{
+    if(getComputedStyle(cformOpen).display==='none')return; // desktop : lien normal
+    e.preventDefault();toggleCform(true);
+  });
+}
+function closeCform(){if(cformOpen&&contactSec.classList.contains('is-form-open'))toggleCform(false);}
+
+addEventListener('keydown',e=>{if(e.key==='Escape'){closePM();closeAM();closeCform();}});
 
 // ---- FAQ accordéon ----
 document.querySelectorAll('.faqitem__q').forEach(q=>q.addEventListener('click',()=>{
