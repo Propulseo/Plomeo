@@ -4,6 +4,11 @@
   --bg:#f4f4f7; --ink:#1a1a1a; --muted:#6b6b72; --border:rgba(0,0,40,.1);
   --font-display:'Gabarito',sans-serif; --font-body:'Albert Sans',sans-serif; --font-serif:'Libre Baskerville',serif;
   --ease:cubic-bezier(0.16,1,0.3,1);
+  /* Gabarit canonique des sections pleines : les sections épousent l'écran
+     (fluide), le cap ne joue que sur les très grands moniteurs. UNE seule
+     valeur pour tout le site — header compris — sinon les largeurs dérivent
+     (on a retrouvé 1474 / 1408 / 1378 / 1180 avant cette variable). */
+  --cadre:1700px;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}

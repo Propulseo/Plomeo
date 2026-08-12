@@ -32,7 +32,7 @@
 .hero__photo img{width:100%;height:100%;object-fit:cover}
 .hero__photo::before{content:'';position:absolute;inset:0;background:linear-gradient(to right,var(--navy),transparent 55%);z-index:1}
 .hero__photo::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,var(--navy),transparent 55%);z-index:1}
-.hero__inner{position:relative;z-index:5;width:100%;max-width:1474px;margin-inline:auto;padding:0 clamp(1.2rem,5vw,3rem)}
+.hero__inner{position:relative;z-index:5;width:100%;max-width:var(--cadre);margin-inline:auto;padding:0 clamp(1.2rem,5vw,3rem)}
 @media(min-width:1600px){.hero{align-items:center}}
 .hero__eyebrow{font-family:var(--font-serif);font-style:italic;font-size:clamp(1.7rem,3.2vw,2.8rem);color:#fff;margin-left:6px}
 .hero__logo-mark{height:clamp(52px,6vw,90px);width:auto;display:block;margin-bottom:.6rem}
