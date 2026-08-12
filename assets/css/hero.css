@@ -12,8 +12,10 @@
 /* z-index 6 et pas 3 : .hero__inner (z-index 5) est un bloc pleine largeur qui
    recouvrait entièrement la carte, la rendant inerte au pointeur. Le conteneur
    reste en pointer-events:none, seules les cibles de la carte captent. */
+/* La carte se cale au bord droit avec la MÊME gouttière que le contenu à
+   gauche (symétrie), au lieu de s'arrêter au cadre de 1378px d'origine. */
 .hero__map{position:absolute;z-index:6;top:50%;
-  right:max(clamp(1rem,3vw,3.5rem),calc(50% - 689px));transform:translateY(-50%);
+  right:clamp(1.2rem,5vw,3rem);transform:translateY(-50%);
   width:min(52%,660px,calc((100vh - 172px) * 1.186));pointer-events:none}
 /* Fondu des bords : sans lui la carte se termine par une arête franche contre le
    hero et se lit comme un rectangle collé. */
