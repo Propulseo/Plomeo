@@ -46,7 +46,10 @@
 @media(max-width:640px){.pmodal__box{grid-template-columns:1fr;max-height:88vh}.pmodal__img img{min-height:0;max-height:230px}}
 /* Seuil tactile 44px : les filtres et la croix de fermeture (seul moyen de
    sortir de la fenêtre hors clic sur le fond) étaient sous la barre. */
-@media(max-width:780px){.wfilter{padding:13px 18px}.pmodal__close{width:44px;height:44px}}
+@media(max-width:780px){.wfilter{padding:13px 18px}.pmodal__close{width:44px;height:44px}
+  /* Titre et filtres centrés, comme les autres sections sur mobile. */
+  .work__head{text-align:center}
+  .work__filters{justify-content:center}}
 
 
 /* ===== Réalisations — variantes ===== */

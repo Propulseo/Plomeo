@@ -50,5 +50,10 @@
     padding-inline:clamp(1.2rem,5vw,3rem);scroll-padding-inline:clamp(1.2rem,5vw,3rem);
     padding-bottom:8px}
   #pilCards .sb{flex:0 0 87%;max-width:none;margin:0;padding-inline:0;
-    scroll-snap-align:start}}
+    scroll-snap-align:start}
+
+  /* Titres centrés sur mobile, comme les sections Process, Zone et FAQ qui
+     l'étaient déjà : à cette largeur, un titre calé à gauche paraît décalé. */
+  .pil__head{text-align:center}
+  .pil__head p{margin-inline:auto}}
 
