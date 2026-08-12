@@ -1,0 +1,75 @@
+# Empêche la mise en pause du projet Supabase.
+#
+# Le plan gratuit suspend un projet après 7 jours SANS REQUÊTE API. Quand ça arrive,
+# le nom de domaine du projet disparaît même du DNS : le back-office /admin tombe et
+# le site public retombe silencieusement sur ses textes de repli codés en dur.
+# Personne ne s'en aperçoit — c'est exactement ce qui s'est produit en août 2026.
+#
+# Ce workflow fait une vraie lecture du CMS chaque jour. S'il échoue, GitHub envoie
+# un mail aux administrateurs du dépôt : c'est aussi le système d'alerte.
+#
+# ── Mise en service (une seule fois) ────────────────────────────────────────
+# Dépôt → Settings → Secrets and variables → Actions → New repository secret :
+#   SUPABASE_URL       = https://xxxxxxxx.supabase.co   (valeur de VITE_SUPABASE_URL)
+#   SUPABASE_ANON_KEY  = la clé anon  (valeur de VITE_SUPABASE_ANON_KEY)
+# La clé anon est déjà publique — elle est livrée dans le JS du site — mais elle
+# reste en secret pour ne pas la versionner.
+# ─────────────────────────────────────────────────────────────────────────────
+
+name: Garder Supabase éveillé
+
+on:
+  schedule:
+    # Tous les jours à 06:17 UTC. Quotidien et pas hebdomadaire : les crons GitHub
+    # peuvent être retardés ou sautés en période de charge, il faut de la marge
+    # sous les 7 jours.
+    - cron: '17 6 * * *'
+  workflow_dispatch: # permet aussi de le lancer à la main pour tester
+
+permissions:
+  contents: write # nécessaire au battement de cœur mensuel (voir plus bas)
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Lecture réelle du CMS
+        env:
+          URL: ${{ secrets.SUPABASE_URL }}
+          KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+        run: |
+          set -euo pipefail
+          if [ -z "${URL:-}" ] || [ -z "${KEY:-}" ]; then
+            echo "::error::Secrets SUPABASE_URL / SUPABASE_ANON_KEY absents. Voir l'en-tête de ce fichier."
+            exit 1
+          fi
+          code=$(curl -sS -o reponse.json -w '%{http_code}' --max-time 30 \
+            -H "apikey: $KEY" -H "Authorization: Bearer $KEY" \
+            "$URL/rest/v1/site_content?select=cle&limit=1")
+          echo "HTTP $code"
+          if [ "$code" != "200" ]; then
+            echo "::error::Supabase injoignable (HTTP $code). Projet en pause, supprimé, ou clé invalide."
+            head -c 500 reponse.json || true
+            exit 1
+          fi
+          echo "Supabase répond, le compteur d'inactivité est remis à zéro."
+          rm -f reponse.json
+
+      - name: Battement de cœur mensuel
+        # GitHub désactive tout seul les workflows planifiés après 60 jours SANS
+        # commit sur le dépôt. Sur un site livré et stable, c'est le piège qui ferait
+        # échouer ce garde-fou en silence. Un commit le 1er du mois remet ce
+        # compteur-là à zéro aussi.
+        if: github.event_name == 'schedule'
+        run: |
+          set -euo pipefail
+          [ "$(date -u +%d)" = "01" ] || { echo "Pas le 1er du mois, rien à faire."; exit 0; }
+          date -u +"%Y-%m-%dT%H:%M:%SZ" > .github/derniere-verification.txt
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .github/derniere-verification.txt
+          git diff --staged --quiet && { echo "Rien à committer."; exit 0; }
+          git commit -m "chore: battement de coeur mensuel (maintient le workflow planifie actif)"
+          git push
