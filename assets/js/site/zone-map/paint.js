@@ -49,18 +49,31 @@ export function paint({ svg, defs, zones, over, uid, dense }) {
     over.append(tx)
   })
 
-  // Fil tiré de Toulon vers la commune survolée, avec sa distance.
+  /* Hero : une route courbe se trace de Toulon vers la commune survolée, avec
+     le temps du palier qui compte (fx.js). Section : le fil droit d'origine,
+     avec la distance. */
   svg.querySelectorAll('.zm-c:not(.is-hub)').forEach((g) => {
     const d = g.querySelector('.zm-c__dot')
     const x = Number(d.getAttribute('cx'))
     const y = Number(d.getAttribute('cy'))
-    const lead = el('g', { class: 'zm-lead' }, [
-      el('line', { x1: CX, y1: CY, x2: x, y2: y }),
-      el('text', {
-        x: (CX + x) / 2, y: (CY + y) / 2 - 7, 'text-anchor': 'middle',
-        text: `${String(g.dataset.km).replace('.', ',')} km`,
-      }),
-    ])
-    g.insertBefore(lead, g.firstChild)
+    if (!dense) {
+      // Point de contrôle décalé de 14 % perpendiculairement : une route, pas une règle.
+      const dx = x - CX
+      const dy = y - CY
+      const qx = (CX + x) / 2 - dy * 0.14
+      const qy = (CY + y) / 2 + dx * 0.14
+      g.insertBefore(el('g', { class: 'zm-route' }, [
+        el('path', { d: `M${CX} ${CY} Q${qx.toFixed(1)} ${qy.toFixed(1)} ${x} ${y}`, pathLength: '1' }),
+        el('text', { x, y: y - 16, 'text-anchor': 'middle', text: '' }),
+      ]), g.firstChild)
+    } else {
+      g.insertBefore(el('g', { class: 'zm-lead' }, [
+        el('line', { x1: CX, y1: CY, x2: x, y2: y }),
+        el('text', {
+          x: (CX + x) / 2, y: (CY + y) / 2 - 7, 'text-anchor': 'middle',
+          text: `${String(g.dataset.km).replace('.', ',')} km`,
+        }),
+      ]), g.firstChild)
+    }
   })
 }

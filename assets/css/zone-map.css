@@ -102,7 +102,24 @@
 [data-active="r3"] .zm-c[data-zone="r3"]{opacity:1}
 [data-active] .zm-c.is-hub,[data-active] .zm-c.is-focus{opacity:1}
 
-/* Fil tiré de Toulon à la commune survolée */
+/* Route courbe tracée de Toulon à la commune survolée (hero), temps qui compte.
+   pathLength normalisé à 1 : le dashoffset 1 → 0 dessine le trait en .45s. */
+.zm-route{pointer-events:none}
+.zm-route path{fill:none;stroke:var(--orange);stroke-width:2.4;stroke-linecap:round;
+  stroke-dasharray:1;stroke-dashoffset:1;opacity:0;
+  transition:stroke-dashoffset .45s var(--ease),opacity .12s}
+.zm-c:hover .zm-route path,.zm-c:focus-visible .zm-route path,
+.zm-c.is-focus .zm-route path{stroke-dashoffset:0;opacity:1}
+.zm-route text{fill:#fff;font:800 15px var(--font-display);
+  paint-order:stroke;stroke:rgba(2,2,24,.65);stroke-width:3.5px;
+  opacity:0;transition:opacity .15s .15s}
+.zm-c:hover .zm-route text,.zm-c:focus-visible .zm-route text,
+.zm-c.is-focus .zm-route text{opacity:1}
+@media(prefers-reduced-motion:reduce){
+  .zm-route path,.zm-route text{transition:none}
+}
+
+/* Fil tiré de Toulon à la commune survolée (section), avec sa distance */
 .zm-lead{opacity:0;pointer-events:none;transition:opacity .25s var(--ease)}
 .zm-lead line{stroke:var(--z);stroke-width:1.3;stroke-dasharray:3 4}
 .zm-lead text{fill:#fff;font-family:var(--font-display);font-weight:700;font-size:14px;
