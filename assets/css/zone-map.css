@@ -177,7 +177,9 @@
 .zm-cap.is-commune b{color:var(--z)}
 .zm-cap em{font-style:normal;font-weight:700;font-size:11px;color:var(--z);
   border:1px solid currentColor;border-radius:20px;padding:1px 7px;margin-left:8px;white-space:nowrap}
-.zm-cap span{display:block;margin-top:2px}
+/* Une seule ligne, coupée aux points de suspension : si le descriptif passait
+   sur une 3e ligne, le bloc grandissait et repoussait la carte vers le haut. */
+.zm-cap span{display:block;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 
 /* Tertiaire : le hero a déjà deux boutons, celui-ci ne doit pas leur voler l'attention. */
 .zm-cta{pointer-events:auto;align-self:flex-end;margin-inline-end:2%;
