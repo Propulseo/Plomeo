@@ -60,3 +60,13 @@
 .work[data-v="rail"] .work__grid{display:flex;grid-template-columns:none;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:14px;-webkit-mask:linear-gradient(90deg,#000 92%,transparent);mask:linear-gradient(90deg,#000 92%,transparent)}
 .work[data-v="rail"] .proj{flex:0 0 320px;aspect-ratio:4/3;scroll-snap-align:start}
 
+/* Sur petit écran, les 6 réalisations en une colonne font ~1700px de
+   défilement : on reprend le principe du carrousel ci-dessus. Entre 540 et
+   860px la grille à 2 colonnes reste plus lisible, on n'y touche pas. */
+@media(max-width:540px){
+  .work__grid{display:flex;grid-template-columns:none;gap:14px;overflow-x:auto;
+    scroll-snap-type:x mandatory;scroll-padding-inline:clamp(1.2rem,5vw,3rem);
+    padding-bottom:12px}
+  .work__grid .proj{flex:0 0 82%;scroll-snap-align:start}
+}
+

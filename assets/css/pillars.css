@@ -39,5 +39,16 @@
 @media(max-width:780px){.sb{grid-template-columns:1fr}.sb:nth-child(even) .sb__media{order:0}
   /* Lien de fin de bloc : sans padding, la zone de frappe fait la hauteur du
      texte seul, au milieu d'un long défilement. */
-  .sb__link{padding:10px 0}}
+  .sb__link{padding:10px 0}
+
+  /* Empilées, les 4 prestations pèsent ~2500px de défilement à elles seules.
+     Elles deviennent un carrousel que l'on fait glisser au doigt : une carte
+     à la fois, un bout de la suivante visible pour montrer qu'il y en a
+     d'autres. Le volet de chaque carte s'ouvre quand elle arrive à l'écran —
+     l'observateur de main.js suit le défilement horizontal comme le vertical. */
+  #pilCards{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;
+    padding-inline:clamp(1.2rem,5vw,3rem);scroll-padding-inline:clamp(1.2rem,5vw,3rem);
+    padding-bottom:8px}
+  #pilCards .sb{flex:0 0 87%;max-width:none;margin:0;padding-inline:0;
+    scroll-snap-align:start}}
 
