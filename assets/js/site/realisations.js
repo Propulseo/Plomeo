@@ -21,17 +21,20 @@ async function render() {
 function tile(r) {
   const img = publicUrl('realisations', r.photo_path)
   const tag = LABEL[r.categorie] || r.categorie
-  return `<article class="proj tilt" data-m="${esc(r.categorie)}" data-id="${esc(r.id)}">
+  return `<article class="proj tilt" tabindex="0" role="button" data-m="${esc(r.categorie)}" data-id="${esc(r.id)}">
     <picture><img loading="lazy" src="${esc(img)}" alt="${esc(r.photo_alt || '')}"></picture>
     <div class="proj__ov"><span class="proj__tag">${esc(tag)}</span><h3>${esc(r.titre)}</h3><span class="proj__loc">${esc(r.localisation || '')}</span></div>
   </article>`
 }
 
+// bindActivate/openModal : posés sur window par assets/js/main.js (script classique,
+// exécuté avant ce module différé) — même piège clavier/focus que la galerie en
+// dur, on réutilise le même helper plutôt que de le dupliquer ici.
 function bindModal(grid, data) {
   const pm = document.getElementById('pmodal')
   if (!pm) return
   const byId = Object.fromEntries(data.map(r => [String(r.id), r]))
-  grid.querySelectorAll('.proj').forEach(p => p.addEventListener('click', () => {
+  grid.querySelectorAll('.proj').forEach(p => window.bindActivate(p, () => {
     const r = byId[p.dataset.id]; if (!r) return
     const set = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val }
     const pmImg = document.getElementById('pmImg'); if (pmImg) pmImg.src = publicUrl('realisations', r.photo_path)
@@ -40,7 +43,7 @@ function bindModal(grid, data) {
     set('pmTitle', r.titre)
     set('pmLoc', r.localisation || '')
     set('pmDesc', r.description || '')
-    pm.classList.add('open')
+    window.openModal(pm, p)
   }))
 }
 

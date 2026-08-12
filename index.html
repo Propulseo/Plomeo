@@ -311,12 +311,12 @@
     <button class="wfilter" data-f="piscine">Piscine</button>
   </div>
   <div class="work__grid" id="wgrid">
-    <article class="proj tilt" data-m="plomberie"><picture><source type="image/webp" srcset="assets/photos/douche-avant-apres.webp"><img loading="lazy" src="assets/photos/douche-avant-apres.jpg" alt=""></picture><div class="proj__ov"><span class="proj__tag">Plomberie</span><h3>Rénovation de douche</h3><span class="proj__loc">Var (83)</span></div></article>
-    <article class="proj tilt" data-m="plomberie"><picture><source type="image/webp" srcset="assets/photos/salle-de-bain.webp"><img loading="lazy" src="assets/photos/salle-de-bain.jpg" alt=""></picture><div class="proj__ov"><span class="proj__tag">Plomberie</span><h3>Salle de bain complète</h3><span class="proj__loc">Var (83)</span></div></article>
-    <article class="proj tilt" data-m="piscine"><picture><source type="image/webp" srcset="assets/photos/piscine.webp"><img loading="lazy" src="assets/photos/piscine.jpg" alt=""></picture><div class="proj__ov"><span class="proj__tag">Piscine</span><h3>Piscine &amp; local technique</h3><span class="proj__loc">Var (83)</span></div></article>
-    <article class="proj tilt" data-m="chauffage"><picture><source type="image/webp" srcset="assets/photos/pompe-a-chaleur.webp"><img loading="lazy" src="assets/photos/pompe-a-chaleur.jpg" alt=""></picture><div class="proj__ov"><span class="proj__tag">Chauffage</span><h3>Pompe à chaleur</h3><span class="proj__loc">Var (83)</span></div></article>
-    <article class="proj tilt" data-m="climatisation"><picture><source type="image/webp" srcset="assets/photos/climatisation.webp"><img loading="lazy" src="assets/photos/climatisation.jpg" alt=""></picture><div class="proj__ov"><span class="proj__tag">Climatisation</span><h3>Climatisation gainable</h3><span class="proj__loc">Var (83)</span></div></article>
-    <article class="proj tilt" data-m="plomberie"><picture><source type="image/webp" srcset="assets/photos/sdb-jacuzzi.webp"><img loading="lazy" src="assets/photos/sdb-jacuzzi.jpg" alt=""></picture><div class="proj__ov"><span class="proj__tag">Plomberie</span><h3>Salle de bain travertin</h3><span class="proj__loc">Var (83)</span></div></article>
+    <article class="proj tilt" tabindex="0" role="button" data-m="plomberie"><picture><source type="image/webp" srcset="assets/photos/douche-avant-apres.webp"><img loading="lazy" src="assets/photos/douche-avant-apres.jpg" alt=""></picture><div class="proj__ov"><span class="proj__tag">Plomberie</span><h3>Rénovation de douche</h3><span class="proj__loc">Var (83)</span></div></article>
+    <article class="proj tilt" tabindex="0" role="button" data-m="plomberie"><picture><source type="image/webp" srcset="assets/photos/salle-de-bain.webp"><img loading="lazy" src="assets/photos/salle-de-bain.jpg" alt=""></picture><div class="proj__ov"><span class="proj__tag">Plomberie</span><h3>Salle de bain complète</h3><span class="proj__loc">Var (83)</span></div></article>
+    <article class="proj tilt" tabindex="0" role="button" data-m="piscine"><picture><source type="image/webp" srcset="assets/photos/piscine.webp"><img loading="lazy" src="assets/photos/piscine.jpg" alt=""></picture><div class="proj__ov"><span class="proj__tag">Piscine</span><h3>Piscine &amp; local technique</h3><span class="proj__loc">Var (83)</span></div></article>
+    <article class="proj tilt" tabindex="0" role="button" data-m="chauffage"><picture><source type="image/webp" srcset="assets/photos/pompe-a-chaleur.webp"><img loading="lazy" src="assets/photos/pompe-a-chaleur.jpg" alt=""></picture><div class="proj__ov"><span class="proj__tag">Chauffage</span><h3>Pompe à chaleur</h3><span class="proj__loc">Var (83)</span></div></article>
+    <article class="proj tilt" tabindex="0" role="button" data-m="climatisation"><picture><source type="image/webp" srcset="assets/photos/climatisation.webp"><img loading="lazy" src="assets/photos/climatisation.jpg" alt=""></picture><div class="proj__ov"><span class="proj__tag">Climatisation</span><h3>Climatisation gainable</h3><span class="proj__loc">Var (83)</span></div></article>
+    <article class="proj tilt" tabindex="0" role="button" data-m="plomberie"><picture><source type="image/webp" srcset="assets/photos/sdb-jacuzzi.webp"><img loading="lazy" src="assets/photos/sdb-jacuzzi.jpg" alt=""></picture><div class="proj__ov"><span class="proj__tag">Plomberie</span><h3>Salle de bain travertin</h3><span class="proj__loc">Var (83)</span></div></article>
   </div>
 </section>
 
@@ -522,7 +522,7 @@
 
 <!-- Modal Réalisations -->
 <!-- Modal Article -->
-<div class="amodal" id="amodal">
+<div class="amodal" id="amodal" role="dialog" aria-modal="true" aria-labelledby="amTitle">
   <div class="amodal__backdrop"></div>
   <div class="amodal__box">
     <button class="amodal__close" aria-label="Fermer">×</button>
@@ -532,7 +532,7 @@
   </div>
 </div>
 
-<div class="pmodal" id="pmodal">
+<div class="pmodal" id="pmodal" role="dialog" aria-modal="true" aria-labelledby="pmTitle">
   <div class="pmodal__backdrop"></div>
   <div class="pmodal__box">
     <button class="pmodal__close" aria-label="Fermer">×</button>

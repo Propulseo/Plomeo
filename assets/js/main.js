@@ -79,6 +79,27 @@ function toggleMenu(open){const o=open??!mnav.classList.contains('open');mnav.cl
 burger.addEventListener('click',()=>toggleMenu());
 mnav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>toggleMenu(false)));
 
+// ---- Accessibilité : activation clavier + fenêtres modales ----
+// Un élément non natif (article, div) rendu cliquable doit aussi répondre à
+// Entrée/Espace comme le ferait un vrai bouton. Exposé sur window : realisations.js
+// (module différé) rebranche sa propre galerie après remplacement CMS et réutilise
+// ce même helper plutôt que de dupliquer la logique clavier.
+function bindActivate(el,fn){el.addEventListener('click',fn);el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();fn(e);}});}
+// Focus piégé dans la fenêtre ouverte (Tab n'en sort pas) et rendu à l'élément
+// qui l'a ouverte en la fermant — sinon un utilisateur clavier perd sa position
+// sur la page à chaque ouverture/fermeture.
+function focusables(container){return [...container.querySelectorAll('a[href],button:not([disabled]),input:not([disabled]),select:not([disabled]),textarea:not([disabled]),[tabindex]:not([tabindex="-1"])')].filter(el=>el.offsetParent!==null);}
+let modalTrigger=null,modalTrapEl=null;
+function openModal(modal,trigger){modalTrigger=trigger||document.activeElement;modalTrapEl=modal;modal.classList.add('open');const f=focusables(modal);(f[0]||modal).focus();}
+function closeModal(modal){modal.classList.remove('open');if(modalTrapEl===modal){modalTrapEl=null;const t=modalTrigger;modalTrigger=null;t?.focus();}}
+addEventListener('keydown',e=>{
+  if(e.key!=='Tab'||!modalTrapEl)return;
+  const f=focusables(modalTrapEl);if(!f.length)return;
+  const first=f[0],last=f[f.length-1];
+  if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}
+  else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}
+});
+
 // ---- Modal Réalisations ----
 const pm=document.getElementById('pmodal');
 const pmDescs={
@@ -94,10 +115,10 @@ function openPM(p){
   document.getElementById('pmTitle').textContent=p.querySelector('h3').textContent;
   document.getElementById('pmLoc').textContent=p.querySelector('.proj__loc').textContent;
   document.getElementById('pmDesc').textContent=pmDescs[p.dataset.m]||'';
-  pm.classList.add('open');
+  openModal(pm,p);
 }
-function closePM(){pm.classList.remove('open');}
-document.querySelectorAll('.proj').forEach(p=>p.addEventListener('click',()=>openPM(p)));
+function closePM(){closeModal(pm);}
+document.querySelectorAll('.proj').forEach(p=>bindActivate(p,()=>openPM(p)));
 pm.querySelector('.pmodal__backdrop').addEventListener('click',closePM);
 pm.querySelector('.pmodal__close').addEventListener('click',closePM);
 
@@ -127,8 +148,8 @@ const articlesData={
     <p>Plus discret : les unités sont cachées, la diffusion se fait par des grilles. Idéal quand on veut une clim invisible et homogène dans toute la maison.</p>
     <p>Dans les deux cas, on dimensionne selon les volumes et on vous explique l'entretien (filtres, contrôle) pour que ça dure.</p>`}
 };
-function openAM(a){const d=articlesData[a.dataset.a];if(!d)return;document.getElementById('amCat').textContent=d.cat;document.getElementById('amTitle').textContent=d.title;document.getElementById('amBody').innerHTML=d.body;am.classList.add('open');}
-function closeAM(){am.classList.remove('open');}
+function openAM(a){const d=articlesData[a.dataset.a];if(!d)return;document.getElementById('amCat').textContent=d.cat;document.getElementById('amTitle').textContent=d.title;document.getElementById('amBody').innerHTML=d.body;openModal(am,a);}
+function closeAM(){closeModal(am);}
 document.querySelectorAll('.bitem').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();openAM(b);}));
 am.querySelector('.amodal__backdrop').addEventListener('click',closeAM);
 am.querySelector('.amodal__close').addEventListener('click',closeAM);
@@ -143,6 +164,18 @@ function toggleCform(open){
   contactSec.classList.toggle('is-form-open',open);
   cformOpen.setAttribute('aria-expanded',String(open));
   document.body.style.overflow=open?'hidden':'';
+  // Fenêtre modale seulement sur mobile (CSS) : le rôle est posé/retiré ici plutôt
+  // qu'en dur dans le HTML, sinon un lecteur d'écran la croirait modale sur
+  // ordinateur, où elle reste un formulaire affiché en permanence dans la page.
+  const win=contactSec.querySelector('.cform');
+  if(open){
+    win.setAttribute('role','dialog');win.setAttribute('aria-modal','true');
+    modalTrigger=cformOpen;modalTrapEl=win;
+    (win.querySelector('.cform__close')||win).focus();
+  }else{
+    win.removeAttribute('role');win.removeAttribute('aria-modal');
+    if(modalTrapEl===win){modalTrapEl=null;cformOpen.focus();}
+  }
 }
 if(cformOpen){
   cformOpen.addEventListener('click',()=>toggleCform(true));
