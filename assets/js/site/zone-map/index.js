@@ -7,6 +7,7 @@ import { renderCommunes } from '../render.mjs'
 import { ZONES, buildCommunes, FALLBACK, zoneById } from './zones.js'
 import { baseMap, ringLegend, caption, ctaLink, wireHover, VIEW_HERO, VIEW_ZONE } from './map.js'
 import { paint } from './paint.js'
+import { entree, compteurSink } from './fx.js'
 import { el } from './dom.js'
 
 async function chargerCommunes() {
@@ -53,13 +54,14 @@ function monterHero(slot, communes, nbParZone) {
     cap.node,
     ctaLink('Votre commune est-elle couverte ?', '#zone'),
   )
-  const { zone } = wireHover(root, svg, communes, cap)
+  const { zone } = wireHover(root, svg, communes, cap, compteurSink(svg))
   leg.querySelectorAll('.zm-legend__i').forEach((b) => {
     ;['mouseenter', 'focus'].forEach((e) => b.addEventListener(e, () => zone(b.dataset.zone)))
     ;['mouseleave', 'blur'].forEach((e) => b.addEventListener(e, () => zone(null)))
   })
 
   slot.replaceChildren(root)
+  entree(svg)
   parallaxe(svg)
 }
 
@@ -92,6 +94,7 @@ function monterSection(slot, rows, communes, nbParZone) {
   const { svg, zones, over, defs, clip } = baseMap('zmz', communes, { view: VIEW_ZONE, dense: true })
   paint({ svg, zones, over, defs, uid: 'zmz', clip, dense: true })
   slot.replaceChildren(svg)
+  entree(svg)
 
   remplirPreuves(root, communes, nbParZone)
   const lignes = remplirPaliers(root, nbParZone)

@@ -18,10 +18,32 @@
 .zm--dense .zm-land{fill:rgba(0,0,60,.03)}
 .zm-coast{fill:none;stroke:var(--sky);stroke-width:2.4;stroke-linejoin:round;opacity:.55}
 .zm--dense .zm-coast{stroke:var(--navy);stroke-width:1.8;opacity:.2}
+/* ---------- Entrée en scène (déclenchée par fx.js : .is-in quand visible) ----------
+   Contour tracé, puis dégradé et ondes en cascade, puis communes par distance
+   croissante (--d = rang, posé par fx.js). Les keyframes n'ont qu'un from{} :
+   l'arrivée est la valeur calculée au repos, et une fois l'animation finie la
+   valeur se re-résout en continu — les transitions [data-active] restent vivantes. */
 @media(prefers-reduced-motion:no-preference){
-  .zm-coast{stroke-dasharray:1;stroke-dashoffset:1;animation:zmDraw 2.6s var(--ease) .3s forwards}
+  .zm:not(.is-in) .zm-coast{stroke-dasharray:1;stroke-dashoffset:1}
+  .zm.is-in .zm-coast{stroke-dasharray:1;stroke-dashoffset:1;animation:zmDraw 1s var(--ease) forwards}
+  .zm:not(.is-in) .zm-glow,
+  .zm:not(.is-in) .zm-edge,
+  .zm:not(.is-in) .zm-arc{opacity:0}
+  .zm.is-in .zm-glow{animation:zmIn .9s ease .75s both}
+  .zm-edge{transform-box:fill-box;transform-origin:center}
+  .zm.is-in .zm-edge{animation:zmRing .7s var(--ease) both}
+  .zm.is-in .zm-edge[data-zone="r1"]{animation-delay:.85s}
+  .zm.is-in .zm-edge[data-zone="r2"]{animation-delay:1s}
+  .zm.is-in .zm-edge[data-zone="r3"]{animation-delay:1.15s}
+  .zm.is-in .zm-arc{animation:zmIn .5s ease both;animation-delay:1.3s}
+  .zm:not(.is-in) .zm-c{opacity:0}
+  .zm-c{transform-box:fill-box;transform-origin:center}
+  .zm.is-in .zm-c{animation:zmPop .45s var(--ease) both;animation-delay:calc(1.2s + var(--d, 0) * 40ms)}
 }
 @keyframes zmDraw{to{stroke-dashoffset:0}}
+@keyframes zmIn{from{opacity:0}}
+@keyframes zmRing{from{opacity:0;transform:scale(.2)}}
+@keyframes zmPop{from{opacity:0;transform:scale(.5)}}
 .zm-hit{fill:transparent;pointer-events:auto;cursor:pointer}
 
 .zm-glow{transition:opacity .3s var(--ease)}
