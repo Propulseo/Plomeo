@@ -35,12 +35,18 @@ export function copyAssetsPlugin({ outDir = 'dist', assetsDir = 'assets' } = {})
        HTML. Seuls les fichiers réellement présents sont versionnés : un chemin
        qui ne correspond à rien est laissé tel quel plutôt que masqué. */
     async transformIndexHtml(html) {
-      const chemins = [...html.matchAll(/(?:src|href)="(\/assets\/(?:js|css)\/[^"?]+)"/g)]
-        .map((m) => m[1])
+      const chemins = [
+        ...[...html.matchAll(/(?:src|href)="(\/assets\/(?:js|css)\/[^"?]+)"/g)].map((m) => m[1]),
+        // La vidéo du hero est chargée via data-src (voir assets/js/main.js), pas
+        // src/href, SANS le "/" initial des chemins js/css ci-dessus : elle
+        // échappait à la regex précédente et gardait donc une adresse fixe,
+        // jamais rafraîchie par le cache Cloudflare de 4h.
+        ...[...html.matchAll(/data-src="(\/?assets\/video\/[^"?]+)"/g)].map((m) => m[1]),
+      ]
       const vus = new Map()
       for (const chemin of new Set(chemins)) {
         try {
-          const contenu = await fs.readFile(path.resolve('.' + chemin))
+          const contenu = await fs.readFile(path.resolve('.' + (chemin.startsWith('/') ? chemin : '/' + chemin)))
           vus.set(chemin, empreinte(contenu))
         } catch { /* fichier absent : on ne touche pas à son adresse */ }
       }
