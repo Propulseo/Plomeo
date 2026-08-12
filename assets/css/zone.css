@@ -42,6 +42,25 @@
 .zone__palier.is-on{opacity:1;background:color-mix(in oklab,var(--z) 7%,transparent);transform:translateX(2px)}
 @media(max-width:860px){.zone__grid{grid-template-columns:1fr}}
 
+/* ---- Liste des communes sur mobile ----
+   23 puces = près d'un écran et demi de défilement. On les compacte et on
+   n'en montre que 8, le bouton déplie le reste (posé par zone-map/index.js).
+   Les 23 noms restent dans le HTML quel que soit l'état : ils portent le
+   référencement local, on ne touche qu'à ce qui est visible. */
+.zone__more{display:none}
+@media(max-width:780px){
+  .zone__communes{gap:7px;margin-bottom:1rem}
+  .zone__chip{padding:7px 13px;font-size:12.5px}
+  .zone__communes:not(.is-open) .zone__chip:nth-child(n+9){display:none}
+  .zone__more{display:inline-flex;align-items:center;gap:8px;margin:0 auto 1.8rem;
+    background:none;border:1px solid var(--border);border-radius:30px;
+    padding:10px 18px;min-height:44px;cursor:pointer;
+    font:600 13px var(--font-display);color:var(--navy)}
+  .zone__more-arrow{font-style:normal;display:grid;place-items:center;
+    width:20px;height:20px;flex:none;border-radius:50%;
+    background:var(--blue);color:#fff;font-size:11px;line-height:1}
+}
+
 .zone__search{max-width:520px;margin:1.8rem auto .2rem}
 .zone__search-in{width:100%;font:600 15.5px/1 var(--font-body);padding:15px 20px;border-radius:14px;
   border:2px solid var(--border);background:#fff;color:var(--ink);transition:border-color .2s}

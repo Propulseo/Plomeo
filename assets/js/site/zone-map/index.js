@@ -154,7 +154,29 @@ function remplirPuces(root, rows, communes) {
   box.innerHTML = renderCommunes(rows.map((r) => ({ nom: r.nom, zone: parNom[r.nom]?.z })))
   const puces = [...box.querySelectorAll('.zone__chip')]
   puces.forEach((p) => p.classList.add('is-in')) // anim.js n'observe plus : on révèle
+  brancherRepli(box, puces.length)
   return puces
+}
+
+/* Sur mobile, 23 puces occupent près d'un écran et demi. Le CSS n'en montre que
+   les 8 premières et ce bouton déplie le reste. Les 23 noms restent TOUJOURS
+   dans la page — c'est du référencement local (« plombier Sanary »…), on ne
+   joue que sur ce qui est visible. Le bouton est masqué en desktop par le CSS. */
+function brancherRepli(box, total) {
+  box.parentElement.querySelector('.zone__more')?.remove()
+  if (total <= 8) return
+  const btn = el('button', { type: 'button', class: 'zone__more' }, [
+    el('span', { text: `Voir les ${total} communes` }),
+    el('i', { class: 'zone__more-arrow', 'aria-hidden': 'true', text: '↓' }),
+  ])
+  btn.setAttribute('aria-expanded', 'false')
+  btn.addEventListener('click', () => {
+    const ouvert = box.classList.toggle('is-open')
+    btn.setAttribute('aria-expanded', String(ouvert))
+    btn.querySelector('span').textContent = ouvert ? 'Réduire la liste' : `Voir les ${total} communes`
+    btn.querySelector('.zone__more-arrow').textContent = ouvert ? '↑' : '↓'
+  })
+  box.after(btn)
 }
 
 function brancherRecherche(root, communes, commune, clear) {
