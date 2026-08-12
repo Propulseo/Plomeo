@@ -102,3 +102,9 @@ input,select,textarea{font:inherit}
 .adm-toast--ok{background:var(--ok)}
 .adm-toast--err{background:var(--err)}
 .adm-toast.out{opacity:0;transform:translateY(8px)}
+
+/* Communes : coordonnées (latitude / longitude) */
+.adm-grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.adm-help{font-size:12.5px;line-height:1.5;color:var(--mut);margin:2px 0 4px}
+.adm-warn{color:var(--err);font-weight:600}
+@media(max-width:480px){.adm-grid2{grid-template-columns:1fr}}
