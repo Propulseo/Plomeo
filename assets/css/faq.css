@@ -12,4 +12,5 @@
 .faqitem__a{max-height:0;overflow:hidden;transition:max-height .35s var(--ease)}
 .faqitem.open .faqitem__a{max-height:320px}
 .faqitem__a p{padding:0 20px 18px;color:var(--muted);font-size:14.5px;line-height:1.65;margin:0}
+@media(max-width:480px){.faqitem__q{padding:16px}.faqitem__a p{padding:0 16px 16px}}
 
