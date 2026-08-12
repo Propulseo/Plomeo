@@ -34,20 +34,40 @@ export function paint({ svg, defs, zones, over, uid, dense }) {
   ;[...ZONES].reverse().forEach((z) =>
     zones.append(el('circle', { class: 'zm-edge', 'data-zone': z.id, cx: CX, cy: CY, r: R[z.id] })))
 
-  /* Temps posé sur l'arc. Le temps seul : « CŒUR D'AGGLO · 15 min » était plus long
-     que l'arc de 15 min lui-même. Au sommet dans le hero ; décalé vers le haut-gauche
-     dans la section, où le cadre est plus bas et le sommet tomberait dans le fondu. */
-  ZONES.forEach((z) => {
+  /* Hero — temps posé sur l'arc. Le temps seul : « CŒUR D'AGGLO · 15 min » était
+     plus long que l'arc de 15 min lui-même. */
+  if (!dense) ZONES.forEach((z) => {
     const id = `${uid}-arc-${z.id}`
     const [x0, y0] = pt(-168, R[z.id])
     const [x1, y1] = pt(-12, R[z.id])
     defs.append(el('path', { id, fill: 'none', d: `M${x0} ${y0} A${R[z.id]} ${R[z.id]} 0 0 1 ${x1} ${y1}` }))
     const tx = el('text', { class: 'zm-arc', 'data-zone': z.id, 'text-anchor': 'middle' })
-    const tp = el('textPath', { startOffset: dense ? '40%' : '50%', text: z.temps.toUpperCase() })
+    const tp = el('textPath', { startOffset: '50%', text: z.temps.toUpperCase() })
     tp.setAttribute('href', `#${id}`)
     tx.append(tp)
     over.append(tx)
   })
+
+  /* Section — les temps quittent la carte : badges reliés d'un trait fin, angles
+     étagés vers le haut-droit pour que les traits ne se croisent pas. Et deux
+     ondes décalées d'une demi-période : il y a toujours une ondulation en route. */
+  if (dense) {
+    ;[0, 1].forEach((i) =>
+      zones.append(el('circle', { class: 'zm-ripple', cx: CX, cy: CY, r: RMAX, style: `--i:${i}` })))
+    const ANG = { r1: -62, r2: -47, r3: -33 }
+    ZONES.forEach((z) => {
+      const a = (ANG[z.id] * Math.PI) / 180
+      const x1 = CX + Math.cos(a) * R[z.id]
+      const y1 = CY + Math.sin(a) * R[z.id]
+      const x2 = x1 + 34
+      const y2 = y1 - 22
+      over.append(el('g', { class: 'zm-badge', 'data-zone': z.id }, [
+        el('line', { x1, y1, x2, y2 }),
+        el('line', { x1: x2, y1: y2, x2: x2 + 26, y2 }),
+        el('text', { x: x2 + 32, y: y2 + 5, text: `${z.temps} · ${z.nom}` }),
+      ]))
+    })
+  }
 
   /* Hero : une route courbe se trace de Toulon vers la commune survolée, avec
      le temps du palier qui compte (fx.js). Section : le fil droit d'origine,

@@ -36,6 +36,10 @@
   .zm.is-in .zm-edge[data-zone="r2"]{animation-delay:1s}
   .zm.is-in .zm-edge[data-zone="r3"]{animation-delay:1.15s}
   .zm.is-in .zm-arc{animation:zmIn .5s ease both;animation-delay:1.3s}
+  /* Les ondes et badges de la section attendent aussi leur tour. */
+  .zm:not(.is-in) .zm-ripple{animation:none}
+  .zm:not(.is-in) .zm-badge{opacity:0}
+  .zm.is-in .zm-badge{animation:zmIn .5s ease both;animation-delay:1.3s}
   .zm:not(.is-in) .zm-c{opacity:0}
   .zm-c{transform-box:fill-box;transform-origin:center}
   .zm.is-in .zm-c{animation:zmPop .45s var(--ease) both;animation-delay:calc(1.2s + var(--d, 0) * 40ms)}
@@ -55,11 +59,38 @@
 [data-active="r2"] .zm-edge[data-zone="r2"],
 [data-active="r3"] .zm-edge[data-zone="r3"]{opacity:.95;stroke-width:2.6}
 .zm-arc{fill:#fff;font-family:var(--font-display);font-weight:700;font-size:18px;letter-spacing:.18em;opacity:.55;transition:opacity .3s}
-.zm--dense .zm-arc{fill:var(--navy);font-size:17px;letter-spacing:.16em;opacity:.6}
 [data-active] .zm-arc{opacity:.12}
 [data-active="r1"] .zm-arc[data-zone="r1"],
 [data-active="r2"] .zm-arc[data-zone="r2"],
 [data-active="r3"] .zm-arc[data-zone="r3"]{opacity:1}
+
+/* Section : l'onde « goutte d'eau ». Un cercle plein rayon, réduit par transform
+   puis relâché — le stroke épais au départ s'affine en s'étalant, comme une vraie
+   onde. Au survol d'un palier elle se met en pause ET disparaît : une animation
+   en pause continue d'imposer son opacité, l'!important auteur la bat. */
+.zm-ripple{fill:none;stroke:var(--sky);stroke-width:2;opacity:0;
+  transform-box:fill-box;transform-origin:center;pointer-events:none}
+@media(prefers-reduced-motion:no-preference){
+  .zm-ripple{animation:zmDrop 6s ease-out infinite;animation-delay:calc(var(--i, 0) * 3s)}
+}
+@keyframes zmDrop{
+  0%{transform:scale(.04);opacity:.5;stroke-width:26}
+  70%{opacity:.16}
+  100%{transform:scale(1);opacity:0;stroke-width:2}
+}
+[data-active] .zm-ripple{animation-play-state:paused;opacity:0 !important}
+
+/* Section : badges de délai hors carte, reliés d'un trait fin. */
+.zm-badge line{stroke:var(--z);stroke-width:1.2;opacity:.55}
+.zm-badge text{fill:var(--navy);font:700 13px var(--font-display);
+  paint-order:stroke;stroke:#fff;stroke-width:3.5px}
+[data-active] .zm-badge{opacity:.25;transition:opacity .3s}
+[data-active="r1"] .zm-badge[data-zone="r1"],
+[data-active="r2"] .zm-badge[data-zone="r2"],
+[data-active="r3"] .zm-badge[data-zone="r3"]{opacity:1}
+[data-active="r1"] .zm-badge[data-zone="r1"] text,
+[data-active="r2"] .zm-badge[data-zone="r2"] text,
+[data-active="r3"] .zm-badge[data-zone="r3"] text{fill:var(--z)}
 
 /* ---------- Une commune = une cible de survol ---------- */
 .zm-c{cursor:pointer;outline:none;transition:opacity .25s var(--ease)}
