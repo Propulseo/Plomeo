@@ -210,6 +210,20 @@
   /* Le fil et sa distance n'ont pas de sens sans survol : au doigt, on tape. */
   .zm--dense .zm-arc{font-size:26px}
 }
+/* Carte du hero en petit format : elle est là pour situer la zone d'un coup
+   d'œil, pas pour être lue. On ne garde que Toulon et les paliers, on grossit
+   ce qui reste, et on retire la ligne d'info (elle ne se remplit qu'au survol,
+   inexistant au doigt, mais réservait sa hauteur à vide). */
+@media(max-width:900px){
+  .zm:not(.zm--dense) .zm-c:not(.is-hub) .zm-c__lab{display:none}
+  .zm:not(.zm--dense) .zm-c__lab{font-size:34px;stroke-width:6px}
+  .zm:not(.zm--dense) .zm-arc{font-size:30px;letter-spacing:.12em}
+  .zm:not(.zm--dense) .zm-c__dot{r:7}
+  .zm-hero .zm-cap{display:none}
+  .zm-legend{justify-content:center;padding-inline-end:0}
+  .zm-cta{align-self:center;margin-inline-end:0;margin-top:.4rem}
+}
+
 /* Au doigt, la puce d'une commune n'a pas d'état de survol : le curseur main
    promettait une interaction qui n'arrive jamais. */
 @media(hover:none){.zone__chip[data-zone]{cursor:default}}
