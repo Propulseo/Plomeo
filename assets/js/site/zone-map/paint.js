@@ -54,11 +54,11 @@ export function paint({ svg, defs, zones, over, uid, dense }) {
   if (dense) {
     ;[0, 1].forEach((i) =>
       zones.append(el('circle', { class: 'zm-ripple', cx: CX, cy: CY, r: RMAX, style: `--i:${i}` })))
-    const ANG = { r1: -62, r2: -47, r3: -33 }
+    /* Angles resserrés vers le haut : à -33°, le texte du badge r3 finissait dans
+       le fondu du bord droit (viewBox 750, fondu dès 94 %) — à -45° il rentre. */
+    const ANG = { r1: -62, r2: -50, r3: -45 }
     ZONES.forEach((z) => {
-      const a = (ANG[z.id] * Math.PI) / 180
-      const x1 = CX + Math.cos(a) * R[z.id]
-      const y1 = CY + Math.sin(a) * R[z.id]
+      const [x1, y1] = pt(ANG[z.id], R[z.id])
       const x2 = x1 + 34
       const y2 = y1 - 22
       over.append(el('g', { class: 'zm-badge', 'data-zone': z.id }, [
@@ -82,9 +82,14 @@ export function paint({ svg, defs, zones, over, uid, dense }) {
       const dy = y - CY
       const qx = (CX + x) / 2 - dy * 0.14
       const qy = (CY + y) / 2 + dx * 0.14
+      /* Le temps s'affiche au sommet de la courbe (là où vivait le km d'origine) :
+         posé sur la commune, il s'imprimait sur les étiquettes ancrées middle
+         (Bandol, Garéoult). Sommet de Bézier à t=0,5 : (P0 + 2Q + P2) / 4. */
+      const bx = (CX + 2 * qx + x) / 4
+      const by = (CY + 2 * qy + y) / 4
       g.insertBefore(el('g', { class: 'zm-route' }, [
         el('path', { d: `M${CX} ${CY} Q${qx.toFixed(1)} ${qy.toFixed(1)} ${x} ${y}`, pathLength: '1' }),
-        el('text', { x, y: y - 16, 'text-anchor': 'middle', text: '' }),
+        el('text', { x: bx.toFixed(1), y: (by - 8).toFixed(1), 'text-anchor': 'middle', text: '' }),
       ]), g.firstChild)
     } else {
       g.insertBefore(el('g', { class: 'zm-lead' }, [

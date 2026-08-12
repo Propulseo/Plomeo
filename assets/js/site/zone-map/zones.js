@@ -12,15 +12,15 @@ export const HUB = { nom: 'Toulon', lat: 43.1258, lon: 5.9304 }
 /** Paliers, du plus proche au plus lointain. `km` = rayon extérieur. */
 export const ZONES = [
   {
-    id: 'r1', km: 9, temps: '15 min', nom: "Cœur d'agglo",
+    id: 'r1', km: 9, min: 15, temps: '15 min', nom: "Cœur d'agglo",
     pitch: "Toulon et sa couronne immédiate. Fuite, panne de chaudière : on est chez vous dans le quart d'heure.",
   },
   {
-    id: 'r2', km: 18, temps: '30 min', nom: 'Couronne',
+    id: 'r2', km: 18, min: 30, temps: '30 min', nom: 'Couronne',
     pitch: 'Du littoral de Bandol à Hyères jusqu’à la vallée du Gapeau. Dépannages et chantiers.',
   },
   {
-    id: 'r3', km: 40, temps: '45 min', nom: 'Zone élargie',
+    id: 'r3', km: 40, min: 45, temps: '45 min', nom: 'Zone élargie',
     pitch: 'Le Lavandou et le Haut-Var toulonnais. On s’y déplace pour les chantiers planifiés.',
   },
 ]

@@ -35,14 +35,21 @@
   .zm.is-in .zm-edge[data-zone="r1"]{animation-delay:.85s}
   .zm.is-in .zm-edge[data-zone="r2"]{animation-delay:1s}
   .zm.is-in .zm-edge[data-zone="r3"]{animation-delay:1.15s}
-  .zm.is-in .zm-arc{animation:zmIn .5s ease both;animation-delay:1.3s}
-  /* Les ondes et badges de la section attendent aussi leur tour. */
+  /* Arcs (hero) et badges (section) arrivent ensemble, après les ondes. */
   .zm:not(.is-in) .zm-ripple{animation:none}
   .zm:not(.is-in) .zm-badge{opacity:0}
-  .zm.is-in .zm-badge{animation:zmIn .5s ease both;animation-delay:1.3s}
+  .zm.is-in .zm-arc,.zm.is-in .zm-badge{animation:zmIn .5s ease both;animation-delay:1.3s}
+  /* Cascade bornée (min) : le nombre de communes vient du back-office, l'entrée
+     ne doit pas s'étirer si la liste grossit. Le pop d'échelle est porté par le
+     POINT seul : la boîte du groupe englobe la route invisible jusqu'à Toulon,
+     son centre ferait glisser la commune depuis le milieu du trajet. */
   .zm:not(.is-in) .zm-c{opacity:0}
-  .zm-c{transform-box:fill-box;transform-origin:center}
-  .zm.is-in .zm-c{animation:zmPop .45s var(--ease) both;animation-delay:calc(1.2s + var(--d, 0) * 40ms)}
+  .zm.is-in .zm-c{animation:zmIn .45s var(--ease) both;animation-delay:calc(1.2s + min(var(--d, 0) * 40ms, 1.2s))}
+  .zm-c__dot{transform-box:fill-box;transform-origin:center}
+  .zm.is-in .zm-c__dot{animation:zmPop .45s var(--ease) both;animation-delay:calc(1.2s + min(var(--d, 0) * 40ms, 1.2s))}
+  /* Tant que la carte n'est pas dessinée, elle n'est pas survolable : sinon la
+     légende et la ligne d'info réagissent à des communes encore invisibles. */
+  .zm:not(.is-in) .zm-hits,.zm:not(.is-in) .zm-pins{pointer-events:none}
 }
 @keyframes zmDraw{to{stroke-dashoffset:0}}
 @keyframes zmIn{from{opacity:0}}
@@ -68,23 +75,30 @@
    puis relâché — le stroke épais au départ s'affine en s'étalant, comme une vraie
    onde. Au survol d'un palier elle se met en pause ET disparaît : une animation
    en pause continue d'imposer son opacité, l'!important auteur la bat. */
-.zm-ripple{fill:none;stroke:var(--sky);stroke-width:2;opacity:0;
+.zm-ripple{fill:none;stroke:var(--sky);stroke-width:2.4;opacity:0;
+  vector-effect:non-scaling-stroke;
   transform-box:fill-box;transform-origin:center;pointer-events:none}
 @media(prefers-reduced-motion:no-preference){
   .zm-ripple{animation:zmDrop 6s ease-out infinite;animation-delay:calc(var(--i, 0) * 3s)}
 }
+/* transform + opacity seulement (compositable) : animer stroke-width forçait un
+   repaint de toute la carte à chaque frame, en boucle. non-scaling-stroke garde
+   le trait constant pendant que le rayon grandit. */
 @keyframes zmDrop{
-  0%{transform:scale(.04);opacity:.5;stroke-width:26}
+  0%{transform:scale(.04);opacity:.5}
   70%{opacity:.16}
-  100%{transform:scale(1);opacity:0;stroke-width:2}
+  100%{transform:scale(1);opacity:0}
 }
 [data-active] .zm-ripple{animation-play-state:paused;opacity:0 !important}
 
-/* Section : badges de délai hors carte, reliés d'un trait fin. */
+/* Section : badges de délai hors carte, reliés d'un trait fin. La transition
+   vit sur la règle de base : déclarée seulement côté actif, la sortie de survol
+   faisait réapparaître les badges d'un coup sec. */
+.zm-badge{transition:opacity .3s}
 .zm-badge line{stroke:var(--z);stroke-width:1.2;opacity:.55}
 .zm-badge text{fill:var(--navy);font:700 13px var(--font-display);
   paint-order:stroke;stroke:#fff;stroke-width:3.5px}
-[data-active] .zm-badge{opacity:.25;transition:opacity .3s}
+[data-active] .zm-badge{opacity:.25}
 [data-active="r1"] .zm-badge[data-zone="r1"],
 [data-active="r2"] .zm-badge[data-zone="r2"],
 [data-active="r3"] .zm-badge[data-zone="r3"]{opacity:1}
@@ -153,9 +167,9 @@
 /* Fil tiré de Toulon à la commune survolée (section), avec sa distance */
 .zm-lead{opacity:0;pointer-events:none;transition:opacity .25s var(--ease)}
 .zm-lead line{stroke:var(--z);stroke-width:1.3;stroke-dasharray:3 4}
-.zm-lead text{fill:#fff;font-family:var(--font-display);font-weight:700;font-size:14px;
-  paint-order:stroke;stroke:rgba(2,2,24,.65);stroke-width:3.5px}
-.zm--dense .zm-lead text{fill:var(--navy);stroke:#fff;stroke-width:4px}
+/* Le fil n'existe plus qu'en section (le hero a ses routes) : encre navy sur clair. */
+.zm-lead text{fill:var(--navy);font-family:var(--font-display);font-weight:700;font-size:14px;
+  paint-order:stroke;stroke:#fff;stroke-width:4px}
 .zm-c:hover .zm-lead,.zm-c:focus-visible .zm-lead,.zm-c.is-focus .zm-lead{opacity:1}
 
 /* ---------- Bloc du hero ---------- */

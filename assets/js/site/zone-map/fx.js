@@ -3,35 +3,36 @@
 import { zoneById } from './zones.js'
 
 /* L'entrée en scène est pilotée par la classe .is-in posée sur le SVG quand il
-   devient visible à 25 %. Le rang de cascade (--d) suit l'ordre du DOM : les
-   communes sont déjà triées par distance dans buildCommunes. */
+   devient visible à 15 %. Le rang de cascade (--d) suit l'ordre du DOM : les
+   communes sont déjà triées par distance dans buildCommunes. Sans
+   IntersectionObserver, la carte s'affiche immédiatement — jamais de carte
+   blanche à vie. */
 export function entree(svg) {
   svg.querySelectorAll('.zm-c').forEach((g, i) => g.style.setProperty('--d', i))
+  if (!('IntersectionObserver' in window)) return svg.classList.add('is-in')
   const obs = new IntersectionObserver((entries) => entries.forEach((e) => {
     if (!e.isIntersecting) return
     svg.classList.add('is-in')
     obs.disconnect()
-  }), { threshold: 0.25 })
+  }), { threshold: 0.15 })
   obs.observe(svg)
 }
 
-/* Compte 0 → minutes du palier (450 ms) dans le texte de la route survolée.
-   Branché comme sink de wireHover : la commune peut donc aussi être allumée
-   par la légende ou la ligne d'info. Reduced-motion : la valeur s'affiche
-   directement, sans défilement. */
+/* Compte 0 → minutes du palier (450 ms) dans le texte de route de la commune
+   allumée (.is-focus, posé par wireHover AVANT d'appeler les sinks). Le
+   reduced-motion est relu à chaque survol : un basculement OS en cours de
+   session est respecté. reset() coupe le compte quand le curseur sort. */
 export function compteurSink(svg) {
-  const RM = matchMedia('(prefers-reduced-motion: reduce)').matches
-  const textes = {}
-  svg.querySelectorAll('.zm-c:not(.is-hub) .zm-route text').forEach((t) => {
-    textes[t.closest('.zm-c').dataset.n] = t
-  })
   let raf = 0
   const compter = (c) => {
-    const t = textes[c.n]
-    if (!t) return
-    const fin = parseInt(zoneById(c.z).temps, 10) || 45
-    if (RM) { t.textContent = `≤ ${fin} min`; return }
     cancelAnimationFrame(raf)
+    const t = svg.querySelector('.zm-c.is-focus .zm-route text')
+    if (!t) return
+    const fin = zoneById(c.z).min
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      t.textContent = `≤ ${fin} min`
+      return
+    }
     const t0 = performance.now()
     const tick = (now) => {
       const p = Math.min(1, (now - t0) / 450)
@@ -40,5 +41,5 @@ export function compteurSink(svg) {
     }
     raf = requestAnimationFrame(tick)
   }
-  return { showCommune: compter }
+  return { showCommune: compter, reset: () => cancelAnimationFrame(raf) }
 }

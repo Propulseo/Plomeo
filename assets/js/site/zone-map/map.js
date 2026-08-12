@@ -103,9 +103,11 @@ export function caption(nbParZone) {
     if (!z) return reset()
     node.className = 'zm-cap is-on'
     node.dataset.zone = z.id
+    /* Nom + nombre seulement : le descriptif complet vit dans les paliers de la
+       section. Ici il débordait la ligne réservée et se faisait tronquer. */
     node.replaceChildren(
       el('b', { text: z.nom }), el('em', { text: z.temps }),
-      el('span', { text: `${nbParZone[z.id] || 0} communes — ${z.pitch}` }),
+      el('span', { text: `${nbParZone[z.id] || 0} communes desservies` }),
     )
   }
   const showCommune = (c) => {
