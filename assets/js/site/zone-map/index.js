@@ -31,6 +31,10 @@ export async function mountZoneMap() {
   if (!communes.length) {
     const inner = mapSlot?.closest('.zone__inner')
     if (inner) remplirPuces(inner, rows, [])
+    // Pas de coordonnées exploitables : pas de carte, mais le compteur doit
+    // quand même refléter le vrai total de la base plutôt que de rester bloqué
+    // sur la valeur cuite au build (aucune autre occasion de le corriger).
+    majCompteur(rows.length)
     return
   }
   const nbParZone = Object.fromEntries(ZONES.map((z) => [z.id, communes.filter((c) => c.z === z.id).length]))
