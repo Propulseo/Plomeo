@@ -23,7 +23,6 @@
 .proj__loc{color:rgba(255,255,255,.8);font-size:12.5px}
 .proj.hide{display:none}
 @media(max-width:860px){.work__grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:540px){.work__grid{grid-template-columns:1fr}}
 
 
 /* ===== Modal Réalisations ===== */
